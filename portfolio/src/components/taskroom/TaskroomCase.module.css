@@ -1,0 +1,18 @@
+.card { margin-top: 2rem; }
+.card img, .proof img { display: block; width: 100%; height: auto; }
+.proof { background: var(--surface); border: 1px solid var(--mist); border-radius: var(--radius-lg); overflow: hidden; }
+.proof figcaption { color: var(--stone); padding: 1rem 1.25rem; font-size: var(--text-small); }
+.cta { display: flex; justify-content: flex-start; }
+.body { max-width: 68ch; line-height: 1.7; color: var(--graphite); }
+
+.metricsIntro { margin-block: 1.25rem; color: var(--graphite); }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin-block: 2rem; }
+.metrics > div { border-top: 1px solid var(--mist); padding-top: 1rem; }
+.metrics dt { color: var(--ink); font-weight: 700; margin-bottom: .5rem; }
+.metrics dd { color: var(--graphite); line-height: 1.6; margin: 0; }
+
+.research { display: grid; grid-template-columns: minmax(6rem, 12rem) minmax(0, 42rem); gap: 1.5rem; margin-block: 2rem; border-top: 1px solid var(--mist); padding-top: 1.5rem; }
+.research strong { font-size: clamp(4rem, 10vw, 8rem); line-height: .9; letter-spacing: -.06em; }
+.research p { margin-bottom: 1rem; line-height: 1.65; color: var(--graphite); }
+.research a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 600px) { .research { grid-template-columns: 1fr; } }

@@ -64,7 +64,7 @@ const en = {
   work: {
     label: "Selected work",
     title: "Work in focus.",
-    caption: "One published research prototype. Decisions, interface evidence and open questions.",
+    caption: "Independent product prototypes. Decisions, working interfaces and open questions.",
     meta: "01 / Relay · Independent product / 2026",
     projectTitle: "Relay",
     projectTitleEmphasis: "Order exceptions.",
@@ -305,7 +305,7 @@ const fr = {
   work: {
     label: "Sélection de projets",
     title: "Travaux en focus.",
-    caption: "Un prototype de recherche publié. Décisions, interface et questions ouvertes.",
+    caption: "Prototypes de produits indépendants. Décisions, interfaces fonctionnelles et questions ouvertes.",
     meta: "01 / Relay · Produit indépendant / 2026",
     projectTitle: "Relay",
     projectTitleEmphasis: "Exceptions de commande.",

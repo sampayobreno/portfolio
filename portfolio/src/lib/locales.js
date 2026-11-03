@@ -1,6 +1,6 @@
 export const SUPPORTED_LANGS = ["en", "fr"];
 
-const HUBS = new Set(["/", "/work", "/labs", "/about"]);
+const HUBS = new Set(["/", "/work", "/labs", "/about", "/work/taskroom"]);
 
 function splitHash(pathname) {
   const [path, hash = ""] = pathname.split("#");

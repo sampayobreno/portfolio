@@ -1,6 +1,6 @@
 # Taskroom — primeira entrega para o portfólio
 
-Proposta para revisão · 3 de novembro de 2026
+Design aprovado por Breno · 3 de novembro de 2026
 
 ## Intenção
 
