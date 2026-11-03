@@ -129,6 +129,22 @@ export function TaskroomCase({ lang = "en" }) {
           <p className={proofStyles.body}>{body}</p>
         </CaseSection>
       ))}
+      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-tradeoff">
+        <p className="eyebrow eyebrow--accent">{fr ? "Une décision de conception" : "A design decision"}</p>
+        <h2 id="taskroom-tradeoff">{fr ? "Quand un brief est-il prêt ?" : "When is a brief ready?"}</h2>
+        <p className={proofStyles.storyLead}>{fr
+          ? "Le responsable peut être inconnu à l’arrivée d’une demande. La règle doit permettre de la saisir sans donner l’impression qu’elle est prête à produire."
+          : "The owner may be unknown when a request arrives. The rule needs to let someone capture it without implying it is ready for production."}</p>
+        <div className={proofStyles.tradeoff}>
+          <div><span>01</span><h3>{fr ? "Exiger tout à la saisie" : "Require everything upfront"}</h3><p>{fr
+            ? "Un brief complet dès le départ, mais la personne qui reçoit la demande peut être bloquée avant de l’enregistrer."
+            : "Every new brief starts complete, but the person receiving the request can be blocked before it is recorded."}</p></div>
+          <div><span>02</span><h3>{fr ? "Saisir, puis clarifier" : "Capture, then clarify"}</h3><p>{fr
+            ? "Le prototype retient ce modèle : titre, origine et description à la création, puis responsable et informations résolues avant Ready."
+            : "The prototype uses this model: title, origin and description at creation, then an owner and resolved details before Ready."}</p></div>
+        </div>
+        <p className={proofStyles.visualNote}>{fr ? "Comparaison conceptuelle · à valider avec des utilisateurs" : "Concept comparison · awaiting participant validation"}</p>
+      </section>
       <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-alternatives">
         <p className="eyebrow eyebrow--accent">{fr ? "Périmètre et alternatives" : "Scope and alternatives"}</p>
         <h2 id="taskroom-alternatives">{fr ? "Pourquoi un outil de plus ?" : "Why another tool?"}</h2>

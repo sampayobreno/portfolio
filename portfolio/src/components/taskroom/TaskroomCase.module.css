@@ -33,3 +33,11 @@
 .comparison p { color: var(--graphite); line-height: 1.65; }
 .comparison a { display: inline-block; color: var(--ink); text-decoration: underline; margin-top: 1rem; }
 @media (max-width: 760px) { .storyGrid, .comparison { grid-template-columns: 1fr; } .designStory { padding-block: 3rem; } }
+
+.storyLead { max-width: 58ch; color: var(--graphite); line-height: 1.7; }
+.tradeoff { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-block: 2.5rem 1.5rem; }
+.tradeoff > div { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+.tradeoff span { font: .7rem var(--font-mono); color: var(--clay); }
+.tradeoff h3 { margin: 1.1rem 0 .75rem; font-size: 1.2rem; }
+.tradeoff p { max-width: 38ch; color: var(--graphite); line-height: 1.65; }
+@media (max-width: 760px) { .tradeoff { grid-template-columns: 1fr; } }

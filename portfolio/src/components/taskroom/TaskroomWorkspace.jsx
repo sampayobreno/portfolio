@@ -42,7 +42,7 @@ function Workspace({ frenchCase }) {
   const focusTarget = useRef(null);
   const previousScreen = useRef("inbox");
   const dialog = useRef(null);
-  const leavingWorkspace = useRef(false);
+  const pendingDestination = useRef(null);
   const request = data.requests.find(item => item.id === selectedId);
   const filtered = data.requests.filter(item => (
     (status === "All requests" || item.status === status)
@@ -63,6 +63,23 @@ function Workspace({ frenchCase }) {
     }
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+
+  useEffect(() => {
+    if (!dirty) return;
+    function guardNavigation(event) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = event.target.closest?.("a[href]");
+      if (!link || link.target || link.hasAttribute("download")) return;
+      const destination = new URL(link.href, window.location.href);
+      if (destination.origin !== window.location.origin || destination.pathname === window.location.pathname) return;
+      event.preventDefault();
+      event.stopPropagation();
+      pendingDestination.current = destination.pathname + destination.search + destination.hash;
+      if (!dialog.current.open) dialog.current.showModal();
+    }
+    document.addEventListener("click", guardNavigation, true);
+    return () => document.removeEventListener("click", guardNavigation, true);
   }, [dirty]);
 
   function go(next) {
@@ -151,7 +168,10 @@ function Workspace({ frenchCase }) {
   }
 
   function closeEditor() {
-    if (dirty) dialog.current.showModal();
+    if (dirty) {
+      pendingDestination.current = null;
+      dialog.current.showModal();
+    }
     else go(screen === "new" ? "inbox" : "detail");
   }
 
@@ -171,12 +191,7 @@ function Workspace({ frenchCase }) {
   return (
     <article lang="en-GB" className={`container ${s.workspace}`}>
       <div className={s.utility}>
-        <Link href={caseHref} lang={frenchCase ? "fr-CA" : undefined} onNavigate={event => {
-          if (!dirty) return;
-          event.preventDefault();
-          leavingWorkspace.current = true;
-          dialog.current.showModal();
-        }}>
+        <Link href={caseHref} lang={frenchCase ? "fr-CA" : undefined}>
           {frenchCase ? "← Retour à l’étude de cas" : "← Back to case study"}
         </Link>
         <span>Fictional data · Stored in this browser</span>
@@ -302,16 +317,16 @@ function Workspace({ frenchCase }) {
           </section>
         </div>
       )}
-      <dialog ref={dialog} className={s.dialog} aria-labelledby="discard-title" onClose={() => { leavingWorkspace.current = false; }}>
+      <dialog ref={dialog} className={s.dialog} aria-labelledby="discard-title" onCancel={() => { pendingDestination.current = null; }}>
         <h2 id="discard-title">Discard unsaved changes?</h2>
         <p>Changes since your last save will be lost.</p>
         <div className={s.actions}>
-          <button className={s.primary} onClick={() => dialog.current.close()}>Keep editing</button>
+          <button className={s.primary} onClick={() => { pendingDestination.current = null; dialog.current.close(); }}>Keep editing</button>
           <button onClick={() => {
-            const leave = leavingWorkspace.current;
+            const destination = pendingDestination.current;
             dialog.current.close();
             go(screen === "new" ? "inbox" : "detail");
-            if (leave) router.push(caseHref);
+            if (destination) router.push(destination);
           }}>Discard changes</button>
         </div>
       </dialog>
