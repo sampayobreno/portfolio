@@ -67,11 +67,6 @@ const copy = {
   },
 };
 
-function TaskroomArtwork({ alt }) {
-  return <Image src="/images/taskroom/taskroom-editorial.png" alt={alt} width={1672} height={941}
-    sizes="(max-width: 760px) 90vw, 1000px" />;
-}
-
 function TaskroomImage({ alt }) {
   return <Image src="/images/taskroom/request-inbox.png" alt={alt} width={998} height={560}
     sizes="(max-width: 760px) 90vw, 60vw" />;
@@ -82,8 +77,8 @@ export function TaskroomCard({ lang }) {
   return (
     <article className={`${styles.projectCard} ${proofStyles.card}`} aria-labelledby="taskroom-card-title">
       <figure className={styles.projectMedia}>
-        <TaskroomArtwork alt={c.artwork} />
-        <figcaption>{c.artwork}</figcaption>
+        <TaskroomImage alt={c.alt} />
+        <figcaption>{c.caption}</figcaption>
       </figure>
       <div className={styles.projectCopy}>
         <p className={styles.projectMeta}>{c.stage} · 2026</p>
@@ -105,20 +100,51 @@ export function TaskroomCase({ lang = "en" }) {
     <article className={styles.shell}>
       <CaseHero backHref={fr ? "/fr/work" : "/work"} backLabel={c.back}
         title="Taskroom" lead={c.lead} tags={[c.stage, "2026"]}
-        visual={<figure className={proofStyles.proof}><TaskroomArtwork alt={c.artwork} /><figcaption>{c.artwork}</figcaption></figure>}>
+        visual={<figure className={proofStyles.proof}><TaskroomImage alt={c.alt} /><figcaption>{c.caption}</figcaption></figure>}>
         <div className={proofStyles.cta}><Link className={styles.projectLink} href={demo}>{c.cta} <span aria-hidden="true">↗</span></Link></div>
         <CaseSnapshot items={c.facts} />
       </CaseHero>
-      <section className="container section case-section" aria-labelledby="taskroom-interface">
-        <p className="eyebrow eyebrow--accent">{fr ? "L’interface" : "The interface"}</p>
-        <h2 id="taskroom-interface">{fr ? "Le prototype en action" : "The prototype in use"}</h2>
-        <figure className={proofStyles.proof}><TaskroomImage alt={c.alt} /><figcaption>{c.caption}</figcaption></figure>
+      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-choices">
+        <div className={proofStyles.storyIntro}>
+          <p className="eyebrow eyebrow--accent">{fr ? "Décisions d’interaction" : "Interaction decisions"}</p>
+          <h2 id="taskroom-choices">{fr ? "Un brief incomplet reste visible" : "An incomplete brief stays visible"}</h2>
+          <p>{fr
+            ? "Deux vues du prototype montrent comment une demande bloquée garde son contexte et la prochaine action."
+            : "Two views from the prototype show how a blocked request keeps its context and next action visible."}</p>
+        </div>
+        <div className={proofStyles.storyGrid}>
+          <figure>
+            <Image src="/images/taskroom/request-detail.png" width={1004} height={655} sizes="(max-width: 760px) 90vw, 48vw" alt={fr ? "Détail d’une demande avec état, responsable et historique." : "Request detail showing status, owner and activity history."} />
+            <figcaption><span>01 / {fr ? "Contexte" : "Context"}</span><p>{fr ? "L’état Needs details indique qui agit ensuite, tandis que l’historique conserve les décisions." : "Needs details identifies what happens next while the activity log preserves the request’s history."}</p></figcaption>
+          </figure>
+          <figure>
+            <Image src="/images/taskroom/request-clarification.png" width={768} height={690} sizes="(max-width: 760px) 90vw, 48vw" alt={fr ? "Formulaire permettant de préciser les informations manquantes." : "Form for selecting missing information and adding a clarification note."} />
+            <figcaption><span>02 / {fr ? "Clarification" : "Clarification"}</span><p>{fr ? "Une liste ciblée et une note indiquent ce qu’il faut fournir avant de commencer." : "A focused checklist and a note specify what needs to be provided before work can begin."}</p></figcaption>
+          </figure>
+        </div>
+        <p className={proofStyles.visualNote}>{fr ? "Captures du prototype · données fictives" : "Prototype captures · fictional sample data"}</p>
       </section>
       {c.sections.map(([id, label, heading, body], index) => (
         <CaseSection id={id} label={label} number={`0${index + 1} · ${label}`} heading={heading} key={id}>
           <p className={proofStyles.body}>{body}</p>
         </CaseSection>
       ))}
+      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-alternatives">
+        <p className="eyebrow eyebrow--accent">{fr ? "Périmètre et alternatives" : "Scope and alternatives"}</p>
+        <h2 id="taskroom-alternatives">{fr ? "Pourquoi un outil de plus ?" : "Why another tool?"}</h2>
+        <div className={proofStyles.comparison}>
+          <div><h3>{fr ? "Outils existants" : "Existing tools"}</h3><p>{fr
+            ? "Un formulaire et un projet Asana peuvent déjà structurer les demandes créatives et leur suivi. Une nouvelle application doit démontrer une valeur suffisante face à cette solution."
+            : "An Asana form and project can already structure creative requests and track work. A new product needs to demonstrate enough value against that established option."}</p>
+            <a href="https://asana.com/resources/how-manage-creative-requests">{fr ? "Guide Asana sur les demandes créatives" : "Asana’s guide to creative requests"} ↗</a></div>
+          <div><h3>{fr ? "Hypothèse du prototype" : "Prototype hypothesis"}</h3><p>{fr
+            ? "Tester un parcours réduit centré sur le passage d’un brief incomplet à un brief prêt, avec un responsable et une prochaine action explicites."
+            : "Test a narrow path from an incomplete request to a ready brief, with ownership and the next action made explicit."}</p></div>
+          <div><h3>{fr ? "Question ouverte" : "Open question"}</h3><p>{fr
+            ? "Est-ce assez utile pour justifier un outil distinct ? Une comparaison avec le processus réel des équipes reste nécessaire."
+            : "Is that useful enough to justify a separate tool? A comparison with teams’ existing workflows is still needed."}</p></div>
+        </div>
+      </section>
       <section className="container section case-section" aria-labelledby="taskroom-research">
         <p className="eyebrow eyebrow--accent">{c.researchLabel}</p>
         <h2 id="taskroom-research">{fr ? "Le contexte plus large" : "The broader context"}</h2>

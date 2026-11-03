@@ -16,3 +16,20 @@
 .research p { margin-bottom: 1rem; line-height: 1.65; color: var(--graphite); }
 .research a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
 @media (max-width: 600px) { .research { grid-template-columns: 1fr; } }
+
+.designStory { padding-top: 5rem; padding-bottom: 5rem; }
+.storyIntro { max-width: 48rem; margin-bottom: 2rem; }
+.designStory h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.08; letter-spacing: -.035em; margin-block: 1rem; max-width: 20ch; }
+.storyIntro > p:last-child { color: var(--graphite); max-width: 60ch; line-height: 1.6; }
+.storyGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+.storyGrid figure { margin: 0; min-width: 0; }
+.storyGrid img { display: block; width: 100%; height: auto; border: 1px solid var(--mist); }
+.storyGrid figcaption { padding-block: 1rem; max-width: 42ch; }
+.storyGrid figcaption span, .visualNote { font: .7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--graphite); }
+.storyGrid figcaption p { margin-top: .6rem; line-height: 1.6; color: var(--graphite); }
+.comparison { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+.comparison > div { border-top: 1px solid var(--mist); padding-top: 1rem; }
+.comparison h3 { font-size: 1.1rem; margin-bottom: .8rem; }
+.comparison p { color: var(--graphite); line-height: 1.65; }
+.comparison a { display: inline-block; color: var(--ink); text-decoration: underline; margin-top: 1rem; }
+@media (max-width: 760px) { .storyGrid, .comparison { grid-template-columns: 1fr; } .designStory { padding-block: 3rem; } }
