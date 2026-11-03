@@ -1,3 +1,4 @@
+import { TaskroomCard } from "@/components/taskroom/TaskroomCase";
 import { FeaturedCaseCard } from "@/components/site/FeaturedCaseCard";
 import { Reveal } from "@/components/site/Reveal";
 import { Scramble } from "@/components/site/Scramble";
@@ -20,6 +21,7 @@ export function WorkContent({ lang = "en" }) {
         </div>
 
         <FeaturedCaseCard copy={c.work} lang={lang} headingLevel="h2" />
+        <TaskroomCard lang={lang} />
       </section>
     </article>
   );

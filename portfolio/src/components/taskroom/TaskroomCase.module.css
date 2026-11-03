@@ -1,0 +1,43 @@
+.card { margin-top: 2rem; }
+.card img, .proof img { display: block; width: 100%; height: auto; }
+.proof { background: var(--surface); border: 1px solid var(--mist); border-radius: var(--radius-lg); overflow: hidden; }
+.proof figcaption { color: var(--stone); padding: 1rem 1.25rem; font-size: var(--text-small); }
+.cta { display: flex; justify-content: flex-start; }
+.body { max-width: 68ch; line-height: 1.7; color: var(--graphite); }
+
+.metricsIntro { margin-block: 1.25rem; color: var(--graphite); }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; margin-block: 2rem; }
+.metrics > div { border-top: 1px solid var(--mist); padding-top: 1rem; }
+.metrics dt { color: var(--ink); font-weight: 700; margin-bottom: .5rem; }
+.metrics dd { color: var(--graphite); line-height: 1.6; margin: 0; }
+
+.research { display: grid; grid-template-columns: minmax(6rem, 12rem) minmax(0, 42rem); gap: 1.5rem; margin-block: 2rem; border-top: 1px solid var(--mist); padding-top: 1.5rem; }
+.research strong { font-size: clamp(4rem, 10vw, 8rem); line-height: .9; letter-spacing: -.06em; }
+.research p { margin-bottom: 1rem; line-height: 1.65; color: var(--graphite); }
+.research a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 600px) { .research { grid-template-columns: 1fr; } }
+
+.designStory { padding-top: 5rem; padding-bottom: 5rem; }
+.storyIntro { max-width: 48rem; margin-bottom: 2rem; }
+.designStory h2 { font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.08; letter-spacing: -.035em; margin-block: 1rem; max-width: 20ch; }
+.storyIntro > p:last-child { color: var(--graphite); max-width: 60ch; line-height: 1.6; }
+.storyGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+.storyGrid figure { margin: 0; min-width: 0; }
+.storyGrid img { display: block; width: 100%; height: auto; border: 1px solid var(--mist); }
+.storyGrid figcaption { padding-block: 1rem; max-width: 42ch; }
+.storyGrid figcaption span, .visualNote { font: .7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--graphite); }
+.storyGrid figcaption p { margin-top: .6rem; line-height: 1.6; color: var(--graphite); }
+.comparison { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+.comparison > div { border-top: 1px solid var(--mist); padding-top: 1rem; }
+.comparison h3 { font-size: 1.1rem; margin-bottom: .8rem; }
+.comparison p { color: var(--graphite); line-height: 1.65; }
+.comparison a { display: inline-block; color: var(--ink); text-decoration: underline; margin-top: 1rem; }
+@media (max-width: 760px) { .storyGrid, .comparison { grid-template-columns: 1fr; } .designStory { padding-block: 3rem; } }
+
+.storyLead { max-width: 58ch; color: var(--graphite); line-height: 1.7; }
+.tradeoff { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-block: 2.5rem 1.5rem; }
+.tradeoff > div { border-top: 1px solid var(--ink); padding-top: 1.1rem; }
+.tradeoff span { font: .7rem var(--font-mono); color: var(--clay); }
+.tradeoff h3 { margin: 1.1rem 0 .75rem; font-size: 1.2rem; }
+.tradeoff p { max-width: 38ch; color: var(--graphite); line-height: 1.65; }
+@media (max-width: 760px) { .tradeoff { grid-template-columns: 1fr; } }

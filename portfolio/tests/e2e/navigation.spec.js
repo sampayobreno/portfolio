@@ -82,12 +82,12 @@ test("contact submit labels remain on one line at desktop widths", async ({ page
   }
 });
 
-test("hero presents identity and real destinations without a decorative image band", async ({ page }) => {
+test("hero presents identity, portrait and real destinations", async ({ page }) => {
   for (const width of [1440, 768, 390, 320]) {
     await page.setViewportSize({ width, height: 844 });
     await page.goto("/");
     await expect(page.locator("#top h1")).toBeVisible();
-    await expect(page.locator("#top img")).toHaveCount(0);
+    await expect(page.locator("#top img")).toHaveAttribute("alt", /Breno Sampaio/i);
     await expect(page.locator(".hero__actions a").first()).toHaveAttribute("href", "/work");
     await expect(page.locator(".hero__actions a").nth(1)).toHaveAttribute("href", "/about");
   }
@@ -141,7 +141,7 @@ test("desktop code reveal stays hidden over foreground content", async ({ page }
   const veil = page.locator(".code-veil");
 
   for (const selector of [
-    ".hero__media--art svg",
+    "#top img",
     "#contact-title",
     ".contact-form select",
     ".contact-form textarea",
@@ -381,7 +381,7 @@ test("editorial surfaces and meaningful text use the shared design scale", async
         heroTitle: parseFloat(style("heroTitle").fontSize),
         projectDescription: parseFloat(style("projectDescription").fontSize),
         projectCardRadius: style("projectCard").borderTopLeftRadius,
-        heroCanvasRadius: style("mineralCanvas").borderTopLeftRadius,
+        heroCanvasRadius: style("heroPortrait").borderTopLeftRadius,
         skillsDescription: parseFloat(style("cardDesc").fontSize),
         skillsCardRadius: style("activeCard").borderTopLeftRadius,
         skillsTabHeight: rect("segBtn").height,

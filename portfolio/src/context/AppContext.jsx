@@ -37,7 +37,8 @@ export function Providers({ children, initialLang = "en" }) {
 
   useLayoutEffect(() => {
     if (isLocalizedHub(pathname) || languageFromPath(pathname) === "fr") return;
-    const savedLang = localStorage.getItem("lang");
+    let savedLang;
+    try { savedLang = localStorage.getItem("lang"); } catch {}
     if (savedLang && SUPPORTED_LANGS.includes(savedLang)) {
       setLang(savedLang);
     } else if (navigator.language.toLowerCase().startsWith("fr")) {
@@ -61,7 +62,7 @@ export function Providers({ children, initialLang = "en" }) {
   useEffect(() => {
     document.documentElement.lang = lang === "fr" ? "fr-CA" : "en-CA";
     document.documentElement.dataset.lang = lang;
-    localStorage.setItem("lang", lang);
+    try { localStorage.setItem("lang", lang); } catch {}
   }, [lang]);
 
   const chooseTheme = useCallback((preference) => {
