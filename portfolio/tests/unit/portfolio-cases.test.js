@@ -9,7 +9,7 @@ import {
 import { relayResearchSources } from "@/lib/relayResearch";
 
 describe("canonical portfolio case contract", () => {
-  it("keeps draft projects out of the public home and work hub while preserving the case routes", () => {
+  it("keeps retired test projects out of the site and removes their routes", () => {
     const workHub = readFileSync(resolve(process.cwd(), "src/components/site/WorkContent.jsx"), "utf8");
     const home = readFileSync(resolve(process.cwd(), "src/components/site/HomeContent.jsx"), "utf8");
     const englishRoute = resolve(process.cwd(), "src/app/(en)/work/taskroom/page.jsx");
@@ -24,10 +24,11 @@ describe("canonical portfolio case contract", () => {
     expect(home).not.toContain("Clearflow");
     expect(home).not.toContain("First Value");
     expect(workHub).not.toContain("/work/relay");
-    expect(existsSync(englishRoute)).toBe(true);
-    expect(existsSync(frenchRoute)).toBe(true);
-    expect(readFileSync(englishRoute, "utf8")).toContain("TaskroomCase");
-    expect(readFileSync(frenchRoute, "utf8")).toContain('lang="fr"');
+    expect(existsSync(englishRoute)).toBe(false);
+    expect(existsSync(frenchRoute)).toBe(false);
+    for (const retired of ["(en)/labs", "fr/labs", "(en)/work/relay", "fr/work/relay", "(en)/work/triageai", "(en)/work/service-operations"]) {
+      expect(existsSync(resolve(process.cwd(), `src/app/${retired}/page.jsx`))).toBe(false);
+    }
   });
 
   it.each([

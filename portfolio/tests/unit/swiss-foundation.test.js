@@ -197,9 +197,9 @@ describe("portfolio visual foundation", () => {
   it("aligns localized discovery metadata and social sharing with Product Design", () => {
     const english = read("src/app/(en)/layout.jsx");
     const french = read("src/app/fr/layout.jsx");
-    const englishPages = ["page.jsx", "work/page.jsx", "labs/page.jsx", "about/page.jsx"]
+    const englishPages = ["page.jsx", "work/page.jsx", "about/page.jsx"]
       .map((file) => read(`src/app/(en)/${file}`)).join("\n");
-    const frenchPages = ["page.jsx", "work/page.jsx", "labs/page.jsx", "about/page.jsx"]
+    const frenchPages = ["page.jsx", "work/page.jsx", "about/page.jsx"]
       .map((file) => read(`src/app/fr/${file}`)).join("\n");
     const social = read("src/app/opengraph-image/route.js");
     const document = read("src/components/site/SiteDocument.jsx");
@@ -208,8 +208,6 @@ describe("portfolio visual foundation", () => {
     expect(english).toContain("Product Designer for complex products");
     expect(french).toContain("Designer produit · Produits complexes");
     expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
-    expect(englishPages).toContain("Systems Lab — Product interface experiments");
-    expect(frenchPages).toContain("Systems Lab — Expériences d’interface produit");
     // Palette A "Marfim & argila" (chosen 10 Nov 2026) for browser chrome and social image.
     expect(english).toContain('themeColor: "#F8F7F3"');
     expect(french).toContain('themeColor: "#F8F7F3"');

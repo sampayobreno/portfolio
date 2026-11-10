@@ -4,8 +4,14 @@ import { getAssistantKnowledgeResult, SYSTEM_KNOWLEDGE } from "@/lib/portfolioAs
 describe("current portfolio assistant", () => {
   it("identifies the assistant and keeps unvalidated claims out of its instructions", () => {
     expect(SYSTEM_KNOWLEDGE).toContain("automated assistant");
-    expect(SYSTEM_KNOWLEDGE).toContain("no case studies are currently public");
+    expect(SYSTEM_KNOWLEDGE).toContain("example projects");
+    expect(SYSTEM_KNOWLEDGE).toContain("fictional");
     expect(SYSTEM_KNOWLEDGE).not.toContain("Relay");
+  });
+  it("presents the example projects as fictional in every language", () => {
+    for (const [query, lang, word] of [["Tell me about your projects", "en", "fictional"], ["Parle-moi de tes projets", "fr", "fictifs"], ["Me conta dos projetos", "pt", "fictícios"], ["Háblame de tus proyectos", "es", "ficticios"]]) {
+      expect(getAssistantKnowledgeResult(query, lang).reply).toContain(word);
+    }
   });
   it("reports the confirmed language levels without suggesting legacy cases", () => {
     const answer = getAssistantKnowledgeResult("Quais idiomas Breno fala?", "pt");
