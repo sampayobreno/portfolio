@@ -1,0 +1,81 @@
+/* Case study template — palette A, foundation spacing, Sessions-style side guide + mobile TOC pill. */
+.page { color: var(--c-ink); background: transparent; }
+.inner { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+.srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.intro { padding: var(--space-page-top) 0 var(--space-7); }
+.label { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); margin: 0; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+.back { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; color: var(--c-ink); text-decoration: none; }
+.back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.back:focus-visible, .all:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
+.badge { padding: 4px 10px; border-radius: var(--radius-pill); background: var(--c-accent-soft); color: var(--c-accent); }
+
+.introGrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: end; margin-top: var(--space-6); padding: var(--space-7) 0; border-top: 1px solid var(--c-rule-strong); }
+.introGrid h1 { margin: 0; font: var(--display-weight) var(--fs-display)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); }
+.lead { max-width: var(--measure); margin: 0; color: var(--c-ink-2); font-size: var(--fs-body-lg); line-height: var(--body-leading); }
+
+.snapshot { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; border-top: 1px solid var(--c-rule-strong); border-bottom: 1px solid var(--c-rule-strong); }
+.snapshot div { padding: var(--space-5) var(--space-5) var(--space-5) 0; }
+.snapshot div + div { padding-left: var(--space-5); border-left: 1px solid var(--c-rule); }
+.snapshot dt { color: var(--c-ink-3); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+.snapshot dd { margin: var(--space-2) 0 0; font-size: var(--fs-body); }
+
+.cover { margin: 0 0 var(--space-section); }
+.cover figcaption { padding-top: var(--space-3); color: var(--c-ink-3); font-size: var(--fs-label); }
+
+.body { display: grid; grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr); gap: clamp(2rem, 6vw, 7rem); align-items: start; }
+
+.guide { position: sticky; top: 8rem; display: grid; grid-template-columns: 2px 1fr; gap: var(--space-4); }
+.guideTrack { position: relative; border-radius: 2px; background: var(--c-rule); overflow: hidden; }
+.guideTrack span { position: absolute; inset: 0; background: var(--c-accent); transform-origin: top; transition: transform var(--dur-slow) var(--ease-out); }
+.guideList { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.guideList a { display: flex; gap: var(--space-3); align-items: center; min-height: 36px; padding: 0 var(--space-2); border-radius: var(--radius-sm); color: var(--c-ink-3); font-size: var(--fs-small); text-decoration: none; transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
+.guideList a span { font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+.guideList a:hover { color: var(--c-ink); background: var(--c-hover); }
+.guideList a:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 2px; }
+.guideList .guideActive { color: var(--c-ink); font-weight: 600; }
+.guideList .guideActive span { color: var(--c-accent); }
+
+.sections { min-width: 0; }
+.section { padding: var(--space-8) 0; border-top: 1px solid var(--c-rule-strong); scroll-margin-top: 7rem; }
+.section:first-child { padding-top: 0; border-top: 0; }
+.sectionLabel { margin: 0 0 var(--space-5); color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+.sectionTitle { margin: 0 0 var(--space-7); font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); }
+.text { max-width: 42rem; margin: 0; color: var(--c-ink-2); font-size: var(--fs-body-lg); line-height: var(--body-leading); }
+.textLead { color: var(--c-ink); font-size: var(--fs-lead); line-height: 1.4; letter-spacing: var(--subhead-tracking); }
+
+.decisions { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--c-rule); }
+.decisions li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: var(--space-4); padding: var(--space-6) 0; border-bottom: 1px solid var(--c-rule); }
+.decisions li > span { padding-top: .35rem; color: var(--c-accent); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+.decisions h3 { margin: 0; font: var(--display-weight) var(--fs-h3)/1.2 var(--font-display); letter-spacing: var(--subhead-tracking); }
+.decisions p { max-width: var(--measure); margin: var(--space-3) 0 0; color: var(--c-ink-2); line-height: var(--body-leading); }
+
+.next { padding: var(--space-section) 0; background: transparent; border-top: 1px solid var(--c-rule-strong); }
+.nextHead { display: flex; justify-content: space-between; align-items: end; gap: var(--space-5); padding-bottom: var(--space-heading); }
+.nextHead h2 { margin: 0; font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); }
+.all { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; color: var(--c-ink); font-size: var(--fs-small); font-weight: 600; text-decoration: none; }
+
+/* Mobile TOC pill (hidden on desktop, where the side guide is visible). */
+.pillWrap { display: none; }
+
+@media (max-width: 900px) {
+  .introGrid { grid-template-columns: 1fr; gap: var(--space-5); }
+  .snapshot { grid-template-columns: 1fr 1fr; }
+  .snapshot div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .snapshot div:nth-child(n + 3) { border-top: 1px solid var(--c-rule); }
+  .body { display: block; }
+  .guide { display: none; }
+  .pillWrap { display: grid; justify-items: center; gap: var(--space-2); position: fixed; z-index: 95; left: 50%; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 76px); width: min(calc(100vw - 32px), 360px); transform: translateX(-50%); }
+  .pill { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: 8px 16px 10px; border: 1px solid color-mix(in srgb, var(--c-ink) 14%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--c-paper) 92%, transparent); box-shadow: var(--shadow-1); backdrop-filter: blur(16px); color: var(--c-ink); font: 500 var(--fs-small)/1.2 var(--font-sans); text-align: left; cursor: pointer; }
+  .pill:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+  .pillCount { color: var(--c-accent); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+  .pillLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pillProgress { grid-column: 1 / -1; height: 2px; border-radius: 2px; background: var(--c-rule); overflow: hidden; }
+  .pillProgress span { display: block; height: 100%; background: var(--c-accent); transform-origin: left; transition: transform var(--dur-slow) var(--ease-out); }
+  .pillPanel { width: 100%; padding: var(--space-2); border: 1px solid var(--c-rule); border-radius: var(--radius-lg); background: var(--c-paper); box-shadow: var(--shadow-2); animation: pillIn var(--dur-base) var(--ease-out); }
+  .pillPanel .guideList a { min-height: 44px; }
+  .nextHead { flex-direction: column; align-items: start; }
+}
+@media (max-width: 560px) { .snapshot { grid-template-columns: 1fr; } .snapshot div { padding-left: 0 !important; border-left: 0 !important; } .snapshot div + div { border-top: 1px solid var(--c-rule); } }
+@keyframes pillIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .guideTrack span, .pillProgress span, .guideList a { transition: none; } .pillPanel { animation: none; } }

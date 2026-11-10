@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useLang, useTheme } from "@/context/AppContext";
 import { getT } from "@/lib/i18n";
-import { getAssistantKnowledgeResult, detectQueryLanguage } from "@/lib/assistantKnowledge";
+import { getAssistantKnowledgeResult, detectQueryLanguage } from "@/lib/portfolioAssistant";
 import styles from "./AssistantDock.module.css";
 
 function SparkleIcon({ className }) {
@@ -100,19 +100,18 @@ const LOCALIZED_ASSISTANT_STRINGS = {
     dockAria: "Chat directly with Breno",
     dockPlaceholder: "Ask me anything...",
     dockMobilePlaceholder: "Ask me anything",
-    inputPlaceholder: "Ask me anything... (e.g. 'How do you work?' or 'Tell me about Relay')",
+    inputPlaceholder: "Ask me anything... (e.g. 'How do you work?')",
     inputPlaceholderMobile: "Ask me anything...",
     newQuestion: "New question",
     suggestedFollowUps: "Continue exploring",
-    suggestedHeading: "Topics to explore with me",
+    suggestedHeading: "Topics to explore",
     thinking: "Thinking...",
     emptyState: "Hey! Ask me anything about my design philosophy, React 19 prototypes, 8 years in frontline operations, or let's talk directly.",
     suggestions: [
       "How do you work? (Way of Working)",
-      "Tell me about your Relay case study",
-      "What are your core design principles?",
+      "What languages does Breno speak?",
       "What are your core skills?",
-      "How can I get in touch with you?"
+      "How can I contact Breno?"
     ]
   },
   pt: {
@@ -122,19 +121,18 @@ const LOCALIZED_ASSISTANT_STRINGS = {
     dockAria: "Conversar direto com o Breno",
     dockPlaceholder: "Pergunte algo...",
     dockMobilePlaceholder: "Pergunte algo",
-    inputPlaceholder: "Me pergunte qualquer coisa... (ex.: 'Como você trabalha?' ou 'Me conte sobre o Relay')",
+    inputPlaceholder: "Me pergunte qualquer coisa... (ex.: 'Como você trabalha?')",
     inputPlaceholderMobile: "Me pergunte qualquer coisa...",
     newQuestion: "Nova pergunta",
     suggestedFollowUps: "Continuar explorando",
-    suggestedHeading: "Temas para explorar comigo",
+    suggestedHeading: "Temas para explorar",
     thinking: "Pensando...",
     emptyState: "E aí! Me pergunte sobre minha metodologia de trabalho, meus protótipos em React 19, meus 8 anos em operações, ou bora trocar uma ideia.",
     suggestions: [
       "Como você trabalha? (Way of Working)",
-      "Conte sobre o protótipo do Relay",
-      "Quais princípios de design você gosta mais?",
+      "Quais idiomas Breno fala?",
       "Quais são suas principais habilidades?",
-      "Como falar direto com você?"
+      "Como entrar em contato com Breno?"
     ]
   },
   fr: {
@@ -144,17 +142,16 @@ const LOCALIZED_ASSISTANT_STRINGS = {
     dockAria: "Échanger directement avec Breno",
     dockPlaceholder: "Posez-moi une question...",
     dockMobilePlaceholder: "Poser une question",
-    inputPlaceholder: "Pose-moi une question... (ex. « Comment travailles-tu ? » ou « Parle-moi de Relay »)",
+    inputPlaceholder: "Pose-moi une question... (ex. « Comment travailles-tu ? »)",
     inputPlaceholderMobile: "Pose-moi une question...",
     newQuestion: "Nouvelle question",
     suggestedFollowUps: "Poursuivre l'exploration",
-    suggestedHeading: "Sujets à explorer avec moi",
+    suggestedHeading: "Sujets à explorer",
     thinking: "Réflexion...",
     emptyState: "Salut ! Pose-moi des questions sur ma méthode de design, mes prototypes React, mes 8 ans en opérations, ou échangeons directement.",
     suggestions: [
       "Comment travailles-tu ? (Démarche)",
-      "Parle-moi de ton étude de cas Relay",
-      "Quels sont tes principes de design préférés ?",
+      "Quelles langues parle Breno ?",
       "Quelles sont tes compétences clés ?",
       "Comment te contacter directement ?"
     ]
@@ -166,17 +163,16 @@ const LOCALIZED_ASSISTANT_STRINGS = {
     dockAria: "Hablar directamente con Breno",
     dockPlaceholder: "Pregúntame algo...",
     dockMobilePlaceholder: "Pregúntame algo",
-    inputPlaceholder: "Pregúntame lo que quieras... (ej. '¿Cómo trabajas?' o 'Háblame de Relay')",
+    inputPlaceholder: "Pregúntame lo que quieras... (ej. '¿Cómo trabajas?')",
     inputPlaceholderMobile: "Pregúntame cualquier cosa...",
     newQuestion: "Nueva pregunta",
     suggestedFollowUps: "Continuar explorando",
-    suggestedHeading: "Temas para explorar conmigo",
+    suggestedHeading: "Temas para explorar",
     thinking: "Pensando...",
     emptyState: "¡Hola! Pregúntame sobre mi método de diseño, prototipos en React 19, mis 8 años en operaciones, o hablemos directamente.",
     suggestions: [
       "¿Cómo trabajas? (Metodología)",
-      "Háblame sobre el caso Relay",
-      "¿Cuáles son tus principios de diseño favoritos?",
+      "¿Qué idiomas habla Breno?",
       "¿Cuáles son tus habilidades clave?",
       "¿Cómo puedo contactar contigo?"
     ]
@@ -222,64 +218,33 @@ export function AssistantDock() {
 
   const currentStrings = {
     ...strings,
-    ...(LOCALIZED_ASSISTANT_STRINGS[conversationLang] || LOCALIZED_ASSISTANT_STRINGS[lang] || {})
+    ...(LOCALIZED_ASSISTANT_STRINGS[conversationLang] || LOCALIZED_ASSISTANT_STRINGS[lang] || {}),
+    ...({
+      en: { modalTitle: "Portfolio assistant", dockBadge: "Automated", emptyState: "Explore Breno’s portfolio, approach and prototypes with this automated assistant.", sourcesNote: "Automated responses may be incomplete. For direct contact, use the contact section." },
+      fr: { modalTitle: "Assistant du portfolio", dockBadge: "Automatisé", emptyState: "Explorez le portfolio, la démarche et les prototypes de Breno avec cet assistant automatisé.", sourcesNote: "Les réponses automatisées peuvent être incomplètes. Pour un contact direct, utilisez la section contact." },
+      pt: { modalTitle: "Assistente do portfólio", dockBadge: "Automatizado", emptyState: "Explore o portfólio, a abordagem e os protótipos de Breno com este assistente automatizado.", sourcesNote: "As respostas automáticas podem estar incompletas. Para contato direto, use a seção de contato." },
+      es: { modalTitle: "Asistente del portafolio", dockBadge: "Automatizado", emptyState: "Explora el portafolio, el enfoque y los prototipos de Breno con este asistente automatizado.", sourcesNote: "Las respuestas automáticas pueden estar incompletas. Para contacto directo, usa la sección de contacto." },
+    }[conversationLang] || {})
   };
 
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState([]);
   const [isThinking, setIsThinking] = useState(false);
-  const [surface, setSurface] = useState("light");
 
-  const pillRef = useRef(null);
+  const returnFocusRef = useRef(null);
   const inputRef = useRef(null);
   const bodyRef = useRef(null);
   const streamIntervalRef = useRef(null);
   const userScrolledUpRef = useRef(false);
 
-  // Surface adaptation logic for the bottom dock pill
   useEffect(() => {
-    const dockEl = pillRef.current;
-    if (!dockEl) return undefined;
-
-    let frame;
-    const updateSurface = () => {
-      frame = undefined;
-      const box = dockEl.getBoundingClientRect();
-      let currentSurface = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
-      let largestOverlap = 0;
-
-      document.querySelectorAll("[data-header-tone], [data-nav-dark]").forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const overlap =
-          Math.max(0, Math.min(box.right, rect.right) - Math.max(box.left, rect.left)) *
-          Math.max(0, Math.min(box.bottom, rect.bottom) - Math.max(box.top, rect.top));
-
-        if (overlap > largestOverlap && overlap > box.width * box.height * 0.28) {
-          largestOverlap = overlap;
-          currentSurface = element.dataset.headerTone || "dark";
-        }
-      });
-
-      setSurface(currentSurface);
+    const openFromDock = () => {
+      returnFocusRef.current = document.activeElement;
+      setIsOpen(true);
     };
-
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(updateSurface);
-    };
-
-    const observer = new MutationObserver(schedule);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    updateSurface();
-
-    return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-    };
+    window.addEventListener("portfolio:assistant-open", openFromDock);
+    return () => window.removeEventListener("portfolio:assistant-open", openFromDock);
   }, []);
 
   // Keyboard shortcut ⌘K / Ctrl+K and Escape
@@ -287,6 +252,7 @@ export function AssistantDock() {
     function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
         event.preventDefault();
+        if (!isOpen) returnFocusRef.current = document.activeElement;
         setIsOpen((prev) => !prev);
       } else if (event.key === "Escape" && isOpen) {
         event.preventDefault();
@@ -315,6 +281,7 @@ export function AssistantDock() {
         document.body.style.overflow = prevBodyOverflow;
         document.documentElement.style.overflow = prevHtmlOverflow;
         clearTimeout(timer);
+        if (returnFocusRef.current?.isConnected) returnFocusRef.current.focus();
       };
     }
   }, [isOpen]);
@@ -598,7 +565,7 @@ export function AssistantDock() {
   };
 
   // Determine if dark mode is active (via theme context or surface detection)
-  const isDark = theme === "dark" || surface === "dark";
+  const isDark = theme === "dark";
 
   return (
     <>
@@ -825,25 +792,7 @@ export function AssistantDock() {
         </>
       )}
 
-      {/* Floating Bottom Glass Pill with Ambient Contrast Pulse */}
-      <button
-        ref={pillRef}
-        type="button"
-        className={`${styles.dockPill} ${isDark ? styles.dockPillDark : ""} ${isOpen ? styles.dockPillHidden : ""}`}
-        onClick={() => setIsOpen((prev) => !prev)}
-        aria-expanded={isOpen}
-        aria-label={currentStrings.dockAria || strings.dockAria || "Chat with Breno"}
-      >
-        <div className={styles.iconWrapper}>
-          <SparkleIcon className={styles.sparkleIcon} />
-        </div>
-        <span className={styles.placeholderText}>
-          {isMobile
-            ? (currentStrings.dockMobilePlaceholder || currentStrings.dockPlaceholder || "Ask me anything")
-            : (currentStrings.dockPlaceholder || "Ask me anything...")}
-        </span>
-        <span className={styles.shortcutBadge}>{strings.shortcutHint || "⌘K"}</span>
-      </button>
+
     </>
   );
 }

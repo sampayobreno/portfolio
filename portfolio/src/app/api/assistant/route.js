@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { SYSTEM_KNOWLEDGE, getAssistantKnowledgeResult } from "@/lib/assistantKnowledge";
+import { SYSTEM_KNOWLEDGE, getAssistantKnowledgeResult } from "@/lib/portfolioAssistant";
 
 export async function POST(request) {
   try {

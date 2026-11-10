@@ -172,19 +172,19 @@ const INTENTS = [
     actions: {
       en: [
         { label: "See Relay Exception Queue", href: "/work/relay", type: "navigate" },
-        { label: "Capabilities Explorer", href: "#capabilities", type: "anchor" }
+        { label: "Capabilities Explorer", href: "#approach", type: "anchor" }
       ],
       fr: [
         { label: "Voir la file d'exceptions Relay", href: "/fr/work/relay", type: "navigate" },
-        { label: "Explorer les compétences", href: "#capabilities", type: "anchor" }
+        { label: "Explorer les compétences", href: "#approach", type: "anchor" }
       ],
       pt: [
         { label: "Ver fila de exceções do Relay", href: "/work/relay", type: "navigate" },
-        { label: "Mapa de competências", href: "#capabilities", type: "anchor" }
+        { label: "Mapa de competências", href: "#approach", type: "anchor" }
       ],
       es: [
         { label: "Ver cola de excepciones de Relay", href: "/work/relay", type: "navigate" },
-        { label: "Mapa de competencias", href: "#capabilities", type: "anchor" }
+        { label: "Mapa de competencias", href: "#approach", type: "anchor" }
       ]
     },
     followUps: {
@@ -358,19 +358,19 @@ const INTENTS = [
     actions: {
       en: [
         { label: "Systems Lab Preview", href: "/labs", type: "navigate" },
-        { label: "Capabilities Explorer", href: "#capabilities", type: "anchor" }
+        { label: "Capabilities Explorer", href: "#approach", type: "anchor" }
       ],
       fr: [
         { label: "Laboratoire systèmes", href: "/fr/labs", type: "navigate" },
-        { label: "Explorer les compétences", href: "#capabilities", type: "anchor" }
+        { label: "Explorer les compétences", href: "#approach", type: "anchor" }
       ],
       pt: [
         { label: "Ver laboratório de sistemas", href: "/labs", type: "navigate" },
-        { label: "Mapa de competências", href: "#capabilities", type: "anchor" }
+        { label: "Mapa de competências", href: "#approach", type: "anchor" }
       ],
       es: [
         { label: "Laboratorio de sistemas", href: "/labs", type: "navigate" },
-        { label: "Mapa de competencias", href: "#capabilities", type: "anchor" }
+        { label: "Mapa de competencias", href: "#approach", type: "anchor" }
       ]
     },
     followUps: {
@@ -432,19 +432,19 @@ const INTENTS = [
     actions: {
       en: [
         { label: "Jump to 'Way of Working' section", href: "#approach", type: "anchor" },
-        { label: "See Capabilities Explorer", href: "#capabilities", type: "anchor" }
+        { label: "See Capabilities Explorer", href: "#approach", type: "anchor" }
       ],
       fr: [
         { label: "Voir la section 'Ma démarche'", href: "#approach", type: "anchor" },
-        { label: "Explorer les compétences", href: "#capabilities", type: "anchor" }
+        { label: "Explorer les compétences", href: "#approach", type: "anchor" }
       ],
       pt: [
         { label: "Ir para seção 'Como trabalho'", href: "#approach", type: "anchor" },
-        { label: "Ver mapa de competências", href: "#capabilities", type: "anchor" }
+        { label: "Ver mapa de competências", href: "#approach", type: "anchor" }
       ],
       es: [
         { label: "Ir a la sección 'Cómo trabajo'", href: "#approach", type: "anchor" },
-        { label: "Ver mapa de competencias", href: "#capabilities", type: "anchor" }
+        { label: "Ver mapa de competencias", href: "#approach", type: "anchor" }
       ]
     },
     followUps: {
@@ -598,19 +598,19 @@ const INTENTS = [
     es: "Mi perfil une dos mundos que a menudo chocan: **Product Design y Prototipado en código**:\n\n• **Diseño**: Diseño de interacción, sistemas de diseño y tokens, accesibilidad real (WCAG 2.1 AA), arquitectura de información.\n• **Código / Frontend**: React 19, Next.js 16 (App Router), CSS Moderno, HTML semántico, JavaScript, Git, pruebas automatizadas (Vitest/Playwright).\n• **Producto y Operaciones**: Mapeo de flujos reales, análisis de casos límite y colaboración directa con ingeniería sin pérdida de contexto.",
     actions: {
       en: [
-        { label: "Explore Capabilities Map", href: "#capabilities", type: "anchor" },
+        { label: "Explore Capabilities Map", href: "#approach", type: "anchor" },
         { label: "Systems Lab preview", href: "/labs", type: "navigate" }
       ],
       fr: [
-        { label: "Explorer mes compétences", href: "#capabilities", type: "anchor" },
+        { label: "Explorer mes compétences", href: "#approach", type: "anchor" },
         { label: "Laboratoire systèmes", href: "/fr/labs", type: "navigate" }
       ],
       pt: [
-        { label: "Ver mapa de competências", href: "#capabilities", type: "anchor" },
+        { label: "Ver mapa de competências", href: "#approach", type: "anchor" },
         { label: "Ver laboratório de sistemas", href: "/labs", type: "navigate" }
       ],
       es: [
-        { label: "Explorar mapa de competencias", href: "#capabilities", type: "anchor" },
+        { label: "Explorar mapa de competencias", href: "#approach", type: "anchor" },
         { label: "Laboratorio de sistemas", href: "/labs", type: "navigate" }
       ]
     },

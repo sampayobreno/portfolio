@@ -1,0 +1,97 @@
+.section { background: transparent; border-top: 1px solid var(--c-rule-strong); color: var(--c-ink); padding: var(--space-section) var(--gutter); }
+.inner { max-width: var(--container); margin: auto; }
+.heading { display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: var(--space-7); padding-bottom: var(--space-heading); }
+.eyebrow { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); margin: 0 0 var(--space-6); }
+.heading h2 { font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
+.heading > p { max-width: 27rem; margin: 0 0 .3rem auto; padding: .25rem 0 .25rem var(--space-5); border-left: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
+ .story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; border-top: 1px solid var(--c-rule-strong); }
+.textOnly { display: block; }
+.visual { position: sticky; top: calc(50vh - 12rem); margin: 0; padding: var(--space-6) 0; }
+.frame { position: relative; width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--c-rule); border-radius: var(--radius-md); overflow: hidden; background-color: var(--c-paper); background-image: radial-gradient(circle, var(--c-rule-strong) 1px, transparent 1.2px); background-size: 18px 18px; background-position: 9px 9px; }
+.visual figcaption { display: flex; justify-content: space-between; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); margin-top: 1rem; }
+.steps { min-width: 0; }
+.step { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; min-height: 15rem; padding: 2.5rem 0; border-bottom: 1px solid var(--c-rule-strong); align-content: center; }
+.number { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); padding-top: .35rem; }
+.step h3 { font: var(--display-weight) clamp(1.35rem, 2vw, 1.9rem)/1.2 var(--font-display); letter-spacing: var(--subhead-tracking); margin: 0; }
+.step p { max-width: var(--measure); margin: var(--space-4) 0 0; color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
+@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .story { display: block; } .visual { display: none; } .step { min-height: 0; padding: 1.5rem 0; } }
+/* The heading is a <header>; keep the eyebrow rhythm against global header rules. */
+.heading .eyebrow { margin: 0 0 var(--space-6); }
+/* Text-only story: editorial rows — number · kicker + title · description + tags. */
+.kicker, .tags { display: block; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; line-height: 1.5; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+.kicker { margin-bottom: var(--space-3); color: var(--c-accent); }
+.tags { margin-top: var(--space-5); }
+.textOnly .step { grid-template-columns: 4rem 1fr; min-height: 0; padding: var(--space-7) 0; }
+.textOnly .step > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--space-6); align-items: start; }
+.textOnly .step h3 { font-size: var(--fs-h3); }
+.textOnly .step p { margin: 0; }
+@media (max-width: 760px) { .textOnly .step { grid-template-columns: 2rem 1fr; padding: var(--space-6) 0; } .textOnly .step > div { display: block; } .textOnly .step p { margin-top: var(--space-4); } }
+
+/* ── Scroll narrative: "From complexity to clarity" ───────────────────────── */
+.narrative .step { min-height: clamp(18rem, 52vh, 30rem); }
+.narrative .stepBody { margin-top: var(--space-4); }
+:global(.motion) .narrative .step { transition: opacity var(--dur-slow) var(--ease-out); }
+:global(.motion) .narrative .step:not(.stepActive) { opacity: .32; }
+
+.fig { display: block; width: 100%; height: 100%; overflow: visible; }
+.fig line, .fig polyline { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+.dot {
+  fill: var(--c-ink);
+  transform: translate(calc(var(--x0) * 1px), calc(var(--y0) * 1px)) scale(var(--s0));
+  opacity: var(--o0);
+  transition: transform 1100ms var(--ease-in-out), opacity 700ms var(--ease-out), fill var(--dur-slow) var(--ease-out);
+  transition-delay: calc(var(--i) * 22ms);
+}
+.dotAccent { fill: var(--c-accent); }
+.fig[data-state="1"] .dot { transform: translate(calc(var(--x1) * 1px), calc(var(--y1) * 1px)) scale(var(--s1)); opacity: var(--o1); }
+.fig[data-state="2"] .dot { transform: translate(calc(var(--x2) * 1px), calc(var(--y2) * 1px)) scale(var(--s2)); opacity: var(--o2); }
+.fig[data-state="2"] .dotAccent { fill: var(--c-on-ink); }
+
+.tangle { stroke: var(--c-ink-3); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 0; opacity: .5; transition: stroke-dashoffset 1400ms var(--ease-in-out), opacity 600ms var(--ease-out); }
+.fig:not([data-state="0"]) .tangle { stroke-dashoffset: 1; opacity: 0; }
+
+.structure line { stroke: var(--c-rule-strong); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--ease-out); transition-delay: calc(var(--i) * 60ms); }
+.fig[data-state="1"] .structure line { stroke-dashoffset: 0; transition-delay: calc(300ms + var(--i) * 60ms); }
+
+.interface > * { opacity: 0; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); }
+.window { fill: var(--c-raised); stroke: var(--c-rule-strong); stroke-width: 1; vector-effect: non-scaling-stroke; transform: scale(.96); transform-origin: 200px 154px; }
+.divider { stroke: var(--c-rule); stroke-width: 1; }
+.row { fill: color-mix(in srgb, var(--c-ink) 14%, var(--c-raised)); transform: translateX(-8px); }
+.action { fill: var(--c-accent); transform: scale(.6); transform-origin: 288px 224px; }
+.fig[data-state="2"] .interface > * { opacity: 1; transform: none; transition-delay: 250ms; }
+.fig[data-state="2"] .row { transition-delay: calc(450ms + var(--i) * 80ms); }
+.fig[data-state="2"] .action { transition-delay: 700ms; }
+
+/* Figma language (Ilse Moreno reference): selection with handles and size tag, named cursor. */
+.selection { opacity: 0; transform: scale(.96); transform-origin: 200px 150px; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); }
+.selectionBox { fill: color-mix(in srgb, var(--c-accent) 4%, transparent); stroke: var(--c-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.handle { fill: var(--c-raised); stroke: var(--c-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tag { fill: var(--c-accent); }
+.tagText, .cursor text { fill: var(--c-on-ink); font: 600 8px/1 var(--font-sans); letter-spacing: .02em; }
+.fig[data-state="1"] .selection { opacity: 1; transform: none; transition-delay: 500ms; }
+
+.cursor { opacity: 0; transform: translate(300px, 232px); transition: opacity 500ms var(--ease-out); }
+.cursor path { fill: var(--c-ink); stroke: var(--c-paper); stroke-width: 1.2; stroke-linejoin: round; }
+.cursor rect { fill: var(--c-accent); }
+.fig[data-state="2"] .cursor { opacity: 1; transition-delay: 900ms; }
+
+.ripple { fill: none; stroke: var(--c-accent); stroke-width: 1.5; opacity: 0; transform-origin: 288px 224px; }
+.fig[data-state="2"]:not(.scrubbed) .ripple, .rippleOn { animation: ripple 1100ms var(--ease-out) 1; }
+.fig[data-state="2"]:not(.scrubbed) .ripple { animation-delay: 1200ms; }
+@keyframes ripple { from { opacity: .7; transform: scale(.5); } to { opacity: 0; transform: scale(1.7); } }
+
+/* Scroll-scrubbed mode: JS writes positions each frame, so CSS stops tweening. */
+.fig.scrubbed .dot, .fig.scrubbed .tangle, .fig.scrubbed .structure line, .fig.scrubbed .selection, .fig.scrubbed .cursor { transition: none; }
+.fig.scrubbed[data-state] .interface > * { transition: none; opacity: var(--reveal, 0); }
+.fig.scrubbed[data-state] .window { transform: scale(calc(.96 + .04 * var(--reveal, 0))); }
+.fig.scrubbed[data-state] .row { transform: translateX(calc((1 - var(--reveal, 0)) * -8px)); }
+.fig.scrubbed[data-state] .action { transform: scale(calc(.6 + .4 * var(--reveal, 0))); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dot, .tangle, .structure line, .interface > *, .selection, .cursor, :global(.motion) .narrative .step { transition: none !important; }
+  .ripple { animation: none !important; }
+}
+@media (max-width: 760px) {
+  .narrative .step { min-height: 0; }
+  :global(.motion) .narrative .step:not(.stepActive) { opacity: 1; }
+}

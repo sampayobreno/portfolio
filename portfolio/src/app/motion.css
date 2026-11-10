@@ -1,0 +1,114 @@
+/* Remodel 2026 — motion.
+   Entrances inspired by Leo Marlowe (soft rise, word-by-word blur), kept subtle and fired once.
+   Start states exist only under html.motion: set before paint when the visitor has not asked
+   for reduced motion. Blur is reserved for headings (few elements) to keep scrolling smooth. */
+
+.motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+
+.motion [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Headings: words rise out of a light blur, one after another. */
+.motion [data-reveal="words"] {
+  opacity: 1;
+  transform: none;
+}
+
+.motion [data-reveal="words"] .w {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(0.25em);
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out),
+    filter var(--dur-reveal) var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms + var(--i, 0) * 55ms);
+}
+
+.motion [data-reveal="words"].is-revealed .w {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+/* Rules draw in from the left. */
+.motion [data-reveal="rule"] {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1200ms var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+
+.motion [data-reveal="rule"].is-revealed { transform: none; }
+
+/* Line system — structural dividers draw themselves in (tagged by MotionObserver or in markup).
+   The border keeps its geometry; a border-image gradient reveals it along --lp. */
+@property --lp { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+[data-lines] {
+  --line-color: var(--c-rule-strong);
+  border-image: var(--line-grad) 1;
+}
+[data-lines="x"] { --line-grad: linear-gradient(to right, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="x-rev"] { --line-grad: linear-gradient(to left, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="x-center"] { --line-grad: linear-gradient(to right, transparent calc(50% - var(--lp) / 2), var(--line-color) calc(50% - var(--lp) / 2), var(--line-color) calc(50% + var(--lp) / 2), transparent calc(50% + var(--lp) / 2)); }
+[data-lines="y"] { --line-grad: linear-gradient(to bottom, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="y-rev"] { --line-grad: linear-gradient(to top, var(--line-color) var(--lp), transparent var(--lp)); }
+.motion [data-lines] { transition: --lp 1600ms var(--ease-out); transition-delay: calc(var(--ld, 120) * 1ms); }
+.motion [data-lines]:not(.is-revealed) { --lp: 0%; }
+
+/* Images open behind a mask and settle from a slight zoom (cinematic entrance). */
+.motion [data-reveal="mask"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1300ms var(--ease-out);
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+.motion [data-reveal="mask"] img { transform: scale(1.12); }
+.motion [data-reveal="mask"].is-revealed { clip-path: inset(0); }
+.motion [data-reveal="mask"].is-revealed img { transform: none; }
+
+/* Rolling label: each letter swaps for its twin on hover/focus (Leo Marlowe text roll). */
+.roll { position: relative; display: inline-flex; align-items: center; }
+.roll > span[aria-hidden="true"] { display: flex; }
+.roll__sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.roll__char { display: inline-block; height: 1.25em; overflow: hidden; line-height: 1.25; vertical-align: top; }
+.roll__char > span { display: block; transition: transform 650ms var(--ease-out); transition-delay: calc(var(--i, 0) * 12ms); }
+a:hover .roll__char > span,
+a:focus-visible .roll__char > span { transform: translateY(-100%); }
+
+/* Arrow glyphs nudge toward where the link goes. */
+a > span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+a:hover > span[aria-hidden="true"]:last-child { transform: translate(2px, -2px); }
+a[href^="#"]:hover > span[aria-hidden="true"]:last-child { transform: translateY(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .motion [data-reveal],
+  .motion [data-reveal] .w {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  a > span[aria-hidden="true"], .roll__char > span { transition: none; }
+  a:hover .roll__char > span, a:focus-visible .roll__char > span { transform: none; }
+  .motion [data-reveal="mask"], .motion [data-reveal="mask"] img { clip-path: none !important; }
+  .motion [data-lines] { --lp: 100% !important; transition: none !important; }
+  a:hover > span[aria-hidden="true"]:last-child { transform: none; }
+}

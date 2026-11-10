@@ -1,26 +1,35 @@
-import { FeaturedCaseCard } from "@/components/site/FeaturedCaseCard";
-import { Reveal } from "@/components/site/Reveal";
-import { Scramble } from "@/components/site/Scramble";
-import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
-import styles from "./EditorialShell.module.css";
+import shell from "./EditorialShell.module.css";
+import styles from "./WorkPage.module.css";
+import { Words } from "@/components/site/Words";
+import { ProjectCard } from "@/components/site/ProjectCard";
+import { getExampleProjects } from "@/lib/exampleProjects";
 
 export function WorkContent({ lang = "en" }) {
-  const c = getPortfolioEditorial(lang);
+  const fr = lang === "fr";
+  const projects = getExampleProjects(lang);
   return (
-    <article className={styles.shell}>
-      <section className={`container ${styles.pageIntro}`} id="work-overview" data-label={c.labels.work} aria-labelledby="work-page-title">
-        <div className={styles.workHeader}>
-          <div>
-            <p className={styles.eyebrow}><Scramble text={c.work.label} /></p>
-            <Reveal mask>
-              <h1 id="work-page-title" className={styles.pageTitle}>{c.work.title}</h1>
-            </Reveal>
+    <article className={shell.shell}>
+      <div className={styles.page}>
+        <header className={styles.intro}>
+          <div className={styles.inner}>
+            <p className={styles.label} data-reveal style={{ "--d": 100 }}>{fr ? "PROJETS CHOISIS" : "SELECTED WORK"} · PRODUCT DESIGN</p>
+            <div className={styles.introGrid} data-lines="x" style={{ "--ld": 100 }}>
+              <h1 data-reveal="words" style={{ "--d": 200 }}><Words lines={fr ? ["Le travail,", "en pratique."] : ["Selected work,", "in practice."]} /></h1>
+              <p data-reveal style={{ "--d": 450 }}>{fr ? "Chaque projet suit le même fil : le problème, ce qui a été observé, les décisions et ce qui a changé." : "Each project follows the same thread: the problem, what was observed, the decisions and what changed."}</p>
+            </div>
+            <div className={styles.introFoot} data-lines="x-rev" data-reveal style={{ "--ld": 500, "--d": 600 }}><span>{fr ? `${projects.length} PROJETS D’EXEMPLE` : `${projects.length} EXAMPLE PROJECTS`}</span><span>{fr ? "DIRECTION DE DESIGN" : "DESIGN DIRECTION"}</span></div>
           </div>
-          <p className={styles.sectionCaption}>{c.work.caption}</p>
-        </div>
-
-        <FeaturedCaseCard copy={c.work} lang={lang} headingLevel="h2" />
-      </section>
+        </header>
+        <section className={styles.projects} aria-labelledby="projects-title">
+          <div className={styles.inner}>
+            <h2 id="projects-title" className={styles.srOnly}>{fr ? "Projets" : "Projects"}</h2>
+            <div className={styles.grid}>
+              {projects.map((project, i) => <ProjectCard key={project.slug} project={project} index={i} lang={lang} priority={i < 2} />)}
+            </div>
+            <p className={styles.note}>{fr ? "Projets d’exemple pour la direction de design — produits, rôles et résultats fictifs. Photos : Unsplash." : "Example projects for design direction — fictional products, roles and outcomes. Photos: Unsplash."}</p>
+          </div>
+        </section>
+      </div>
     </article>
   );
 }

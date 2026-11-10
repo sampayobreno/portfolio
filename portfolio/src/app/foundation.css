@@ -1,0 +1,186 @@
+/* Remodel 2026 — foundation tokens.
+   One source for colour, type, spacing, radius and motion used by the new sections.
+   Type: Newsreader (display) + Inter Tight (text), chosen by Breno on 10 Nov 2026.
+   Colour: palette A "Marfim & argila" (ivory paper, terracotta accent), chosen by Breno on 10 Nov 2026. */
+
+:root {
+  /* Type families */
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter-tight), -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* Type scale — fluid, 360px → 1440px */
+  --fs-display: clamp(2.75rem, 1.7rem + 4.4vw, 5.5rem);
+  --fs-h2: clamp(2.375rem, 1.6rem + 3.3vw, 4.5rem);
+  --fs-h3: clamp(1.375rem, 1.15rem + 0.95vw, 1.875rem);
+  --fs-lead: clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem);
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.75rem;
+
+  --display-weight: 400;
+  --display-leading: 1.02;
+  --display-tracking: -0.03em;
+  --subhead-tracking: -0.015em;
+  --body-leading: 1.65;
+  --label-tracking: 0.08em;
+
+  /* Spacing — 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-section: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --space-page-top: clamp(6rem, 4rem + 9vw, 12rem); /* clears the floating dock above the first rule */
+  --space-heading: clamp(3rem, 2rem + 3vw, 5rem);   /* section heading → content */
+  --measure: 36rem;                                 /* longest comfortable text column */
+  --gutter: clamp(1.25rem, 0.5rem + 4vw, 5rem);
+  --container: 1540px;
+
+  /* Radius — one corner language for the whole site (Apple "roundrects everywhere").
+     Every surface, control, image and badge uses --radius. Elements nested inside a padded
+     rounded container use --radius-inner so both curves share a centre (concentric corners). */
+  --radius: 14px;
+  --radius-inset: 6px;
+  --radius-inner: max(4px, calc(var(--radius) - var(--radius-inset)));
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-pill: var(--radius);
+  /* Legacy design-system aliases resolve to the same corner. */
+  --radius-xs: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-full: var(--radius);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out — Leo Marlowe reference */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 1000ms;
+
+  /* Colour — light */
+  --c-paper: #f8f7f3;
+  --c-surface: #f0eee7;
+  --c-surface-2: #e8e5dc;
+  --c-raised: #ffffff;
+  --c-ink: #1b1a17;
+  --c-ink-hover: #3a3833;
+  --c-ink-2: #4d4b45;
+  --c-ink-3: #686660;
+  --c-rule: #dedbd2;
+  --c-rule-strong: #c6c2b7;
+  --c-field-border: #b4b0a5;
+  --c-hover: #e9e6dd;
+  --c-on-ink: #f8f7f3;
+  --c-accent: #a44a28;
+  --c-accent-hover: #8a3c1f;
+  --c-dot: rgb(27 26 23 / 0.085);
+  --c-accent-soft: #f1e3d9;
+  --c-focus: #a44a28;
+  --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
+  --shadow-2: 0 14px 36px rgb(27 26 23 / 0.14);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --c-paper: #151513;
+  --c-surface: #1c1b19;
+  --c-surface-2: #24231f;
+  --c-raised: #22211e;
+  --c-ink: #efede6;
+  --c-ink-hover: #d6d3ca;
+  --c-ink-2: #bdb9af;
+  --c-ink-3: #959188;
+  --c-rule: #2e2d29;
+  --c-rule-strong: #43413b;
+  --c-field-border: #57554e;
+  --c-hover: #2a2925;
+  --c-on-ink: #151513;
+  --c-accent: #e3916b;
+  --c-accent-hover: #eca986;
+  --c-dot: rgb(239 237 230 / 0.065);
+  --c-accent-soft: #3a2a22;
+  --c-focus: #e3916b;
+  --shadow-1: 0 10px 36px rgb(0 0 0 / 0.35);
+  --shadow-2: 0 14px 36px rgb(0 0 0 / 0.45);
+
+  color-scheme: dark;
+}
+
+/* ── Legacy design-system bridge ────────────────────────────────────────────
+   Older components (form, dock, menus, assistant, case pages) read the original
+   design-system primitives. Re-pointing those primitives at palette A makes every
+   surface follow one palette in light and dark; the remodel tokens stay the source. */
+:root,
+:root[data-theme="dark"] {
+  --paper: var(--c-paper);
+  --silk: var(--c-surface);
+  --mist: var(--c-rule);
+  --pebble: var(--c-ink-3);
+  --stone: var(--c-ink-2);
+  --graphite: var(--c-ink-hover);
+  --ink: var(--c-ink);
+  --vermilion: var(--c-accent);
+  --vermilion-dark: var(--c-accent-hover);
+  --vermilion-light: color-mix(in srgb, var(--c-accent) 55%, var(--c-paper));
+  --on-accent: var(--c-paper);
+  --bg-page: var(--c-paper);
+  --surface-card: var(--c-surface);
+  --border: var(--c-rule);
+  --focus: var(--c-focus);
+}
+
+/* Continuous (squircle) corners where supported — Apple's smooth curvature. Squircles read
+   tighter than circular arcs, so the shared radius grows to keep the same visual softness. */
+@supports (corner-shape: squircle) {
+  :root { --radius: 20px; --radius-inset: 7px; }
+  *, *::before, *::after { corner-shape: squircle; }
+}
+
+.language-switcher__thumb, .language-switcher__option { border-radius: calc(var(--radius) - 2px); }
+
+/* Accent moments: section numbers and step kickers. */
+.eyebrow-num { color: var(--c-accent); }
+
+/* The floating dock overlays the page; each page intro owns its top clearance. */
+html:root #main { padding-top: 0; }
+
+/* Site-wide dot grid (Leo Marlowe / Ilse Moreno reference): painted on the page canvas, so it
+   scrolls with the content like paper. Every section is transparent; sections are separated by
+   drawn lines rather than tone changes, so the grid is never interrupted. */
+html:root {
+  background-color: var(--c-paper);
+  background-image: radial-gradient(circle at center, var(--c-dot) 0.9px, transparent 1.2px);
+  background-size: 22px 22px;
+  background-position: 11px 11px;
+}
+html:root body { background: transparent; }
+html:root body::before { display: none; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--c-ink);
+}
+
+::selection {
+  background: var(--c-accent-soft);
+  color: var(--c-ink);
+}
+
+/* Back-to-top button on foundation tokens */
+.to-top {
+  border-color: var(--c-rule-strong);
+  background: color-mix(in srgb, var(--c-paper) 90%, transparent);
+  color: var(--c-ink);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.to-top:hover { border-color: var(--c-ink); background: var(--c-paper); }
+.to-top:focus-visible { outline-color: var(--c-focus); }

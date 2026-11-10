@@ -30,18 +30,62 @@ function contrastRatio(foreground, background) {
 }
 
 describe("portfolio visual foundation", () => {
-  it("loads the original DM Sans and Cormorant families at the document boundary", () => {
+  it("loads the remodel Newsreader + Inter Tight pairing at the document boundary", () => {
     const fontsPath = pathFor("src/lib/fonts.js");
     expect(existsSync(fontsPath)).toBe(true);
 
     const loader = read("src/lib/fonts.js");
     const document = read("src/components/site/SiteDocument.jsx");
-    expect(loader).toContain("DM_Sans");
-    expect(loader).toContain("Cormorant_Garamond");
-    expect(loader).toContain("--font-dm-sans");
-    expect(loader).toContain("--font-cormorant");
-    expect(document).toContain("dmSans.variable");
-    expect(document).toContain("cormorant.variable");
+    const foundation = read("src/app/foundation.css");
+    expect(loader).toContain("Newsreader");
+    expect(loader).toContain("Inter_Tight");
+    expect(loader).toContain("--font-newsreader");
+    expect(loader).toContain("--font-inter-tight");
+    expect(document).toContain("fontVariables");
+    expect(document).toContain("foundation.css");
+    expect(foundation).toMatch(/--font-display:\s*var\(--font-newsreader\)/);
+    expect(foundation).toMatch(/--font-sans:\s*var\(--font-inter-tight\)/);
+  });
+
+  it("keeps remodel foundation text colours at WCAG AA in light and dark", () => {
+    const foundation = read("src/app/foundation.css");
+    for (const selector of [":root", ':root[data-theme="dark"]']) {
+      const block = cssBlock(foundation, selector);
+      const paper = cssVariable(block, "c-paper");
+      const surface = cssVariable(block, "c-surface");
+      for (const token of ["c-ink", "c-ink-2", "c-ink-3"]) {
+        const ink = cssVariable(block, token);
+        expect(contrastRatio(ink, paper), `${selector} ${token} on paper`).toBeGreaterThanOrEqual(4.5);
+        expect(contrastRatio(ink, surface), `${selector} ${token} on surface`).toBeGreaterThanOrEqual(4.5);
+      }
+      expect(contrastRatio(cssVariable(block, "c-on-ink"), cssVariable(block, "c-ink"))).toBeGreaterThanOrEqual(4.5);
+      const accent = cssVariable(block, "c-accent");
+      expect(contrastRatio(accent, paper), `${selector} accent on paper`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(accent, surface), `${selector} accent on surface`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(cssVariable(block, "c-focus"), paper), `${selector} focus`).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it("routes legacy design-system and shell colours through the palette A tokens", () => {
+    const foundation = read("src/app/foundation.css");
+    const shellStyles = read("src/components/site/EditorialShell.module.css");
+    for (const [legacy, token] of [["paper", "c-paper"], ["ink", "c-ink"], ["stone", "c-ink-2"], ["vermilion", "c-accent"], ["silk", "c-surface"], ["mist", "c-rule"]]) {
+      expect(foundation).toMatch(new RegExp(`--${legacy}:\\s*var\\(--${token}\\)`));
+    }
+    expect(shellStyles).toMatch(/--paper:\s*var\(--c-paper\)/);
+    expect(shellStyles).toMatch(/--ink:\s*var\(--c-ink\)/);
+    expect(shellStyles).not.toMatch(/#222320|#f7f6f2|#595852/i);
+  });
+
+  it("keeps one concentric corner language across the site", () => {
+    const foundation = read("src/app/foundation.css");
+    for (const alias of ["radius-sm", "radius-md", "radius-lg", "radius-pill", "radius-xs", "radius-xl", "radius-full"]) {
+      expect(foundation).toMatch(new RegExp(`--${alias}:\\s*var\\(--radius\\)`));
+    }
+    expect(foundation).toMatch(/--radius-inner:\s*max\(4px, calc\(var\(--radius\) - var\(--radius-inset\)\)\)/);
+    const modules = ["NavigationDock", "ProjectCard", "ProjectCover", "CasePage", "HomeIntro", "HomeContact", "AssistantDock"]
+      .map((name) => read(`src/components/site/${name}.module.css`)).join("\n");
+    expect(modules).not.toMatch(/border-radius:\s*(9999px|999px|22px|18px|14px|12px)/);
   });
 
   it("does not duplicate font loading through remote stylesheets", () => {
@@ -166,16 +210,17 @@ describe("portfolio visual foundation", () => {
     expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
     expect(englishPages).toContain("Systems Lab — Product interface experiments");
     expect(frenchPages).toContain("Systems Lab — Expériences d’interface produit");
-    expect(english).toContain('themeColor: "#FFFFFF"');
-    expect(french).toContain('themeColor: "#FFFFFF"');
-    expect(providers).toContain('theme === "dark" ? "#0F0F0E" : "#FFFFFF"');
+    // Palette A "Marfim & argila" (chosen 10 Nov 2026) for browser chrome and social image.
+    expect(english).toContain('themeColor: "#F8F7F3"');
+    expect(french).toContain('themeColor: "#F8F7F3"');
+    expect(providers).toContain('theme === "dark" ? "#151513" : "#F8F7F3"');
 
     expect(social).toContain("Complex products, made clear.");
     expect(social).toContain("Des produits complexes, rendus clairs.");
     expect(social).toContain("PRODUCT DESIGNER · DESIGNER PRODUIT");
-    expect(social).toContain('backgroundColor: "#FFFFFF"');
-    expect(social).toContain('color: "#1F1C1B"');
-    expect(social).toContain('color: "#C74624"');
+    expect(social).toContain('backgroundColor: "#F8F7F3"');
+    expect(social).toContain('color: "#1B1A17"');
+    expect(social).toContain('color: "#A44A28"');
     expect(social).not.toMatch(/fonts\.googleapis\.com|loadFont\(|await fetch\(/);
 
     expect(document).toContain('jobTitle: "Product Designer"');
