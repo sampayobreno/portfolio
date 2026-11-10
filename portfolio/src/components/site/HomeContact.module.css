@@ -45,3 +45,6 @@
 .form :global(.contact-form__submit) { border-radius: var(--radius-pill); min-height: 48px; }
 @media (prefers-reduced-motion: reduce) { .form :global(.contact-field input), .form :global(.contact-field select), .form :global(.contact-field textarea) { transition: none; } }
 @media (max-width: 760px) { .heading, .grid { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .details { padding: 1.75rem 0; gap: 1.75rem; } .form { border-left: 0; border-top: 1px solid var(--c-rule); padding: 1.75rem 0 0; } }
+
+/* Hand-drawn handover illustration closing the contact details column. */
+.illustration { width: min(100%, 20rem); margin-top: auto; }

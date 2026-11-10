@@ -1,80 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styles from "./HomeProcess.module.css";
 
 /*
- * "From complexity to clarity" — scroll narrative (Anthropic reference, refined 10 Nov 2026).
- * One sticky illustration follows the three steps and is scrubbed by scroll position:
- *   Understand → a scattered field of points (the accent point is the decision that matters)
- *   Design     → the points settle into a structure, framed by a Figma-style selection
- *   Prototype  → they resolve into an interface; a named cursor clicks the one clear action
- * GSAP ScrollTrigger drives progress (smoothed by Lenis); without it — reduced motion, no JS
- * or load failure — the figure falls back to discrete CSS states keyed to the active step.
+ * "From complexity to clarity" — How I work. A sticky hand-drawn illustration follows the steps:
+ * Understand → the tangle, Design → the hands untangling, Prototype → the woven grid.
  */
 
-const SCATTERED = [[214, 150], [262, 70], [300, 184], [84, 214], [190, 236], [338, 112], [150, 160], [236, 118], [58, 128], [276, 244], [204, 46], [120, 262], [322, 232], [170, 96], [248, 196], [94, 52], [352, 170], [118, 92]];
-// [x, y, scale, opacity] for each point in each state.
-const STATES = [
-  SCATTERED.map(([x, y], i) => [x, y, i === 0 ? 1.15 : 0.7 + ((i * 7) % 5) / 10, i === 0 ? 1 : 0.45 + ((i * 3) % 5) / 10]),
-  SCATTERED.map((_, i) => [110 + (i % 3) * 90, 65 + Math.floor(i / 3) * 34, i === 0 ? 1.15 : 0.8, 1]),
-  SCATTERED.map((_, i) => {
-    if (i === 0) return [288, 224, 1.6, 1];
-    if (i <= 3) return [70 + i * 12, 74, 0.55, 1];
-    if (i <= 7) return [92, 88 + (i - 3) * 30, 0.7, 1];
-    return [288, 224, 0.4, 0];
-  }),
-];
-const TANGLE = SCATTERED.map(([x, y]) => `${x},${y}`).join(" ");
-const ROW_WIDTHS = [150, 118, 172, 96];
-const HANDLES = [[94, 48], [306, 48], [94, 252], [306, 252]];
-const CURSOR_FROM = [352, 104];
-const CURSOR_TO = [300, 232];
-
-const clamp = (v) => Math.min(1, Math.max(0, v));
-const smooth = (t) => t * t * (3 - 2 * t);
-const lerp = (a, b, t) => a + (b - a) * t;
-
-function ClarityFigure({ active, caption, figRef }) {
+// Hand-drawn thread illustration (style test, 10 Nov 2026): tangle → hands → weave. Each step
+// reveals its third of the drawing; the rest stays as a faint pencil hint of what comes next.
+function ThreadFigure({ active, caption }) {
   return (
     <figure className={styles.visual} aria-hidden="true">
-      <div className={styles.frame}>
-        <svg ref={figRef} className={styles.fig} data-state={active} viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet">
-          <polyline className={styles.tangle} data-layer="tangle" points={TANGLE} pathLength="1" />
-          <g className={styles.structure} data-layer="structure">
-            {[0, 1, 2, 3, 4, 5].map((row) => <line key={row} x1="110" x2="290" y1={65 + row * 34} y2={65 + row * 34} pathLength="1" style={{ "--i": row }} />)}
-            <line x1="155" x2="155" y1="50" y2="250" pathLength="1" style={{ "--i": 6 }} />
-            <line x1="245" x2="245" y1="50" y2="250" pathLength="1" style={{ "--i": 7 }} />
-          </g>
-          <g className={styles.selection} data-layer="selection">
-            <rect className={styles.selectionBox} x="94" y="48" width="212" height="204" />
-            {HANDLES.map(([x, y]) => <rect key={`${x}-${y}`} className={styles.handle} x={x - 3} y={y - 3} width="6" height="6" />)}
-            <rect className={styles.tag} x="94" y="30" width="58" height="14" rx="3" />
-            <text className={styles.tagText} x="100" y="40">Structure</text>
-            <rect className={styles.tag} x="173" y="258" width="54" height="14" rx="3" />
-            <text className={styles.tagText} x="179" y="268">212 × 204</text>
-          </g>
-          <g className={styles.interface} data-layer="interface">
-            <rect className={styles.window} x="56" y="52" width="288" height="204" rx="12" />
-            <line className={styles.divider} x1="56" x2="344" y1="94" y2="94" />
-            {ROW_WIDTHS.map((width, row) => <rect key={row} className={styles.row} x="106" y={114 + row * 30} width={width} height="8" rx="4" style={{ "--i": row }} />)}
-            <rect className={styles.action} x="248" y="212" width="80" height="24" rx="12" />
-          </g>
-          {STATES[0].map((_, i) => {
-            const vars = { "--i": i };
-            STATES.forEach((state, s) => {
-              const [x, y, scale, opacity] = state[i];
-              vars[`--x${s}`] = x; vars[`--y${s}`] = y; vars[`--s${s}`] = scale; vars[`--o${s}`] = opacity;
-            });
-            return <circle key={i} data-dot={i} className={i === 0 ? `${styles.dot} ${styles.dotAccent}` : styles.dot} r="5" style={vars} />;
-          })}
-          <circle className={styles.ripple} data-layer="ripple" cx="288" cy="224" r="14" />
-          <g className={styles.cursor} data-layer="cursor">
-            <path d="M0 0 L0 15 L4 11 L7 18 L10 17 L7 10 L12 10 Z" />
-            <rect x="12" y="16" width="38" height="14" rx="7" />
-            <text x="20" y="26">Breno</text>
-          </g>
-        </svg>
+      <div className={styles.threadFrame} data-step={active}>
+        <div className={`illustration ${styles.threadGhost}`}><Image src="/images/illustrations/thread.webp" alt="" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 50vw" /></div>
+        <div className={`illustration ${styles.threadInk}`}><Image src="/images/illustrations/thread.webp" alt="" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 50vw" /></div>
       </div>
       <figcaption><span>{caption}</span><span>0{active + 1} / 03</span></figcaption>
     </figure>
@@ -85,7 +27,6 @@ export function ProcessStory({ lang, showVisual = true }) {
   const [active, setActive] = useState(0);
   const rows = useRef([]);
   const steps = useRef(null);
-  const fig = useRef(null);
   const french = lang === "fr";
   // [kicker, title, description, tags] — merged "Design & Build" + "How I work" (10 Nov 2026).
   const content = french ? [
@@ -110,94 +51,9 @@ export function ProcessStory({ lang, showVisual = true }) {
     return () => observer.disconnect();
   }, []);
 
-  // Scroll-scrubbed figure.
-  useEffect(() => {
-    const svg = fig.current;
-    if (!svg || !showVisual) return undefined;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
-
-    let trigger;
-    let cancelled = false;
-    const dots = [...svg.querySelectorAll("[data-dot]")];
-    const layer = (name) => svg.querySelector(`[data-layer="${name}"]`);
-    const tangle = layer("tangle");
-    const structure = [...layer("structure").children];
-    const selection = layer("selection");
-    const ui = layer("interface");
-    const cursor = layer("cursor");
-    const ripple = layer("ripple");
-    const stepRows = [...steps.current.querySelectorAll("[data-step]")];
-
-    const render = (progress) => {
-      // Each change is driven by where its step actually is: it plays while the step rises
-      // from 75% to 45% of the viewport, so timing holds whatever the section heights are.
-      const vh = window.innerHeight;
-      const rise = (row) => (row ? clamp((vh * 0.75 - row.getBoundingClientRect().top) / (vh * 0.3)) : 0);
-      const a = rise(stepRows[1]);
-      const b = rise(stepRows[2]);
-      dots.forEach((dot, i) => {
-        // A slight per-point offset turns the morph into a wave rather than a block move.
-        const wave = i * 0.012;
-        const ta = smooth(clamp((a - wave) / (1 - 0.22)));
-        const tb = smooth(clamp((b - wave) / (1 - 0.22)));
-        const [x0, y0, s0, o0] = STATES[0][i];
-        const [x1, y1, s1, o1] = STATES[1][i];
-        const [x2, y2, s2, o2] = STATES[2][i];
-        // Complexity drifts; the drift calms as structure forms (Anthropic-style living drawing).
-        const calm = 1 - Math.max(ta, tb);
-        const drift = 7 * calm;
-        const x = lerp(lerp(x0, x1, ta), x2, tb) + Math.sin(progress * 9 + i * 1.7) * drift;
-        const y = lerp(lerp(y0, y1, ta), y2, tb) + Math.cos(progress * 7 + i * 2.3) * drift;
-        const s = lerp(lerp(s0, s1, ta), s2, tb);
-        dot.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
-        dot.style.opacity = lerp(lerp(o0, o1, ta), o2, tb);
-      });
-      tangle.style.strokeDashoffset = smooth(a);
-      tangle.style.opacity = 0.5 * (1 - smooth(a));
-      structure.forEach((line, i) => {
-        const draw = smooth(clamp(a * 1.3 - i * 0.04));
-        line.style.strokeDashoffset = 1 - draw;
-        line.style.opacity = 1 - smooth(b);
-      });
-      const framed = smooth(clamp((a - 0.6) / 0.4)) * (1 - smooth(clamp(b / 0.45)));
-      selection.style.opacity = framed;
-      selection.style.transform = `scale(${0.96 + 0.04 * framed})`;
-      ui.style.setProperty("--reveal", smooth(clamp((b - 0.25) / 0.6)));
-      const travel = smooth(clamp((b - 0.55) / 0.4));
-      cursor.style.opacity = smooth(clamp((b - 0.45) / 0.2));
-      cursor.style.transform = `translate(${lerp(CURSOR_FROM[0], CURSOR_TO[0], travel)}px, ${lerp(CURSOR_FROM[1], CURSOR_TO[1], travel)}px)`;
-      ripple.classList.toggle(styles.rippleOn, b >= 0.98);
-      // The whole drawing travels with the reader: a slow lift, tilt and breath across the section.
-      svg.style.transform = `translate3d(0, ${(0.5 - progress) * 7}%, 0) rotate(${(progress - 0.5) * -5}deg) scale(${0.94 + 0.08 * Math.sin(progress * Math.PI)})`;
-    };
-
-    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([{ gsap }, stModule]) => {
-      if (cancelled || !steps.current) return;
-      const ScrollTrigger = stModule.ScrollTrigger || stModule.default;
-      gsap.registerPlugin(ScrollTrigger);
-      svg.classList.add(styles.scrubbed);
-      trigger = ScrollTrigger.create({
-        trigger: steps.current,
-        start: "top 85%",
-        end: "bottom 40%",
-        onUpdate: (self) => render(self.progress),
-        onRefresh: (self) => render(self.progress),
-      });
-      if (window.__lenis) window.__lenis.on("scroll", ScrollTrigger.update);
-      render(trigger.progress);
-    }).catch(() => {});
-
-    return () => {
-      cancelled = true;
-      if (trigger) trigger.kill();
-      svg.classList.remove(styles.scrubbed);
-      svg.style.transform = "";
-    };
-  }, [showVisual]);
-
   return (
     <div className={`${styles.story} ${showVisual ? styles.narrative : styles.textOnly}`}>
-      {showVisual && <ClarityFigure active={active} caption={content[active][0].toUpperCase()} figRef={fig} />}
+      {showVisual && <ThreadFigure active={active} caption={content[active][0].toUpperCase()} />}
       <div className={styles.steps} ref={steps}>
         {content.map(([kicker, title, description, tags], i) => (
           <article className={`${styles.step} ${active === i ? styles.stepActive : ""}`} data-step={i} key={title} ref={(element) => { rows.current[i] = element; }}>

@@ -100,3 +100,13 @@
   .visual figcaption { display: none; }
   .narrative .step { min-height: 58vh; align-content: start; }
 }
+
+/* Thread illustration (style test): each step reveals its third; the rest is a faint pencil hint. */
+.threadFrame { position: relative; width: 112%; margin-left: -6%; align-self: center; }
+.threadGhost { opacity: .14; }
+.threadInk { position: absolute; inset: 0; }
+.threadInk :global(img) { clip-path: inset(0 64% 0 0); transition: clip-path 1400ms var(--ease-out); }
+.threadFrame[data-step="1"] .threadInk :global(img) { clip-path: inset(0 30% 0 0); }
+.threadFrame[data-step="2"] .threadInk :global(img) { clip-path: inset(0 0 0 0); }
+@media (prefers-reduced-motion: reduce) { .threadInk :global(img) { transition: none; } }
+@media (max-width: 760px) { .threadFrame { width: 100%; margin-left: 0; } }

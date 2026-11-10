@@ -4,6 +4,7 @@ import { ProcessStory } from "@/components/site/ProcessStory";
 import { Words } from "@/components/site/Words";
 import { RollText } from "@/components/site/RollText";
 import { ProjectCard } from "@/components/site/ProjectCard";
+import { Illustration } from "@/components/site/Illustration";
 import { getExampleProjects } from "@/lib/exampleProjects";
 import { ContactForm } from "@/components/site/ContactForm";
 import { getT } from "@/lib/i18n";
@@ -123,6 +124,7 @@ export function HomeContent({ lang = "en" }) {
               <div><span className={contact.label}>{c.contact.directLabel}</span><a className={contact.email} href={`mailto:${links.email}`}>{links.email}<span aria-hidden="true">↗</span></a></div>
               <div className={contact.links}><span className={contact.label}>{c.contact.docsLabel}</span><a href={links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href={links.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={t.resume.href} download={t.resume.fileName}>{c.contact.resume} ↓</a></div>
               <div><span className={contact.label}>{c.contact.baseLabel}</span><p>{c.contact.baseValue}</p></div>
+              <Illustration src="/images/illustrations/handover.webp" width={1024} height={1024} className={contact.illustration} sizes="320px" />
             </div>
             <div className={contact.form} data-reveal style={{ "--d": 150 }}><div className={contact.formHead}><h3>{c.contact.form}</h3><span>↗</span></div><ContactForm lang={lang} /></div>
           </div>

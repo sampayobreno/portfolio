@@ -5,6 +5,7 @@ import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
 import shell from "./EditorialShell.module.css";
 import styles from "./AboutPage.module.css";
 import { CaseGuide } from "@/components/site/CaseGuide";
+import { Illustration } from "@/components/site/Illustration";
 import { RollText } from "@/components/site/RollText";
 import { Words } from "@/components/site/Words";
 
@@ -72,6 +73,7 @@ export function AboutContent({ lang = "en" }) {
               <div><p className={styles.label} data-reveal><Eyebrow text={a.perspectiveEyebrow} /></p><h2 id="perspective-title" data-reveal="words"><Words lines={[a.perspective]} /></h2></div>
               <p className={styles.sectionLead} data-reveal style={{ "--d": 200 }}>{a.perspectiveBody}</p>
             </div>
+            <Illustration src="/images/illustrations/between.webp" width={1536} height={1024} className={styles.sectionIllustration} sizes="(max-width: 760px) 100vw, 760px" />
             <ol className={styles.principles}>
               {principles.map(([title, body], i) => (
                 <li key={title} data-reveal style={{ "--d": i * 120 }}>
