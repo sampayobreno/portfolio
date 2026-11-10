@@ -19,7 +19,7 @@ export const metadata = {
   twitter: { card: "summary_large_image", title, description, images: ["https://brenosampaio.vercel.app/opengraph-image"] },
 };
 
-export const viewport = { themeColor: "#F8F7F3", width: "device-width", initialScale: 1 };
+export const viewport = { themeColor: "#F6F6F4", width: "device-width", initialScale: 1 };
 
 export default function EnglishRootLayout({ children }) {
   return <SiteDocument lang="en">{children}</SiteDocument>;

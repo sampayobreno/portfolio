@@ -209,14 +209,14 @@ describe("portfolio visual foundation", () => {
     expect(french).toContain("Designer produit · Produits complexes");
     expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
     // Palette A "Marfim & argila" (chosen 10 Nov 2026) for browser chrome and social image.
-    expect(english).toContain('themeColor: "#F8F7F3"');
-    expect(french).toContain('themeColor: "#F8F7F3"');
-    expect(providers).toContain('theme === "dark" ? "#151513" : "#F8F7F3"');
+    expect(english).toContain('themeColor: "#F6F6F4"');
+    expect(french).toContain('themeColor: "#F6F6F4"');
+    expect(providers).toContain('theme === "dark" ? "#151513" : "#F6F6F4"');
 
     expect(social).toContain("Complex products, made clear.");
     expect(social).toContain("Des produits complexes, rendus clairs.");
     expect(social).toContain("PRODUCT DESIGNER · DESIGNER PRODUIT");
-    expect(social).toContain('backgroundColor: "#F8F7F3"');
+    expect(social).toContain('backgroundColor: "#F6F6F4"');
     expect(social).toContain('color: "#1B1A17"');
     expect(social).toContain('color: "#A44A28"');
     expect(social).not.toMatch(/fonts\.googleapis\.com|loadFont\(|await fetch\(/);

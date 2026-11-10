@@ -18,7 +18,7 @@ export function GET() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F8F7F3",
+          backgroundColor: "#F6F6F4",
           color: "#1B1A17",
           padding: "76px 84px",
           fontFamily: "sans-serif",
