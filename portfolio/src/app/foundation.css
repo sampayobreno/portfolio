@@ -36,6 +36,9 @@
   --space-8: 4rem;
   --space-9: 6rem;
   --space-section: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --space-page-top: clamp(6rem, 4rem + 9vw, 12rem); /* clears the floating dock above the first rule */
+  --space-heading: clamp(3rem, 2rem + 3vw, 5rem);   /* section heading → content */
+  --measure: 36rem;                                 /* longest comfortable text column */
   --gutter: clamp(1.25rem, 0.5rem + 4vw, 5rem);
   --container: 1540px;
 
@@ -46,12 +49,12 @@
   --radius-pill: 999px;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out — Leo Marlowe reference */
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 160ms;
   --dur-base: 280ms;
   --dur-slow: 600ms;
-  --dur-reveal: 900ms;
+  --dur-reveal: 1000ms;
 
   /* Colour — light */
   --c-paper: #f8f7f3;
@@ -68,6 +71,7 @@
   --c-hover: #e9e6dd;
   --c-on-ink: #f8f7f3;
   --c-accent: #a44a28;
+  --c-accent-hover: #8a3c1f;
   --c-accent-soft: #f1e3d9;
   --c-focus: #a44a28;
   --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
@@ -91,6 +95,7 @@
   --c-hover: #2a2925;
   --c-on-ink: #151513;
   --c-accent: #e3916b;
+  --c-accent-hover: #eca986;
   --c-accent-soft: #3a2a22;
   --c-focus: #e3916b;
   --shadow-1: 0 10px 36px rgb(0 0 0 / 0.35);
@@ -99,8 +104,34 @@
   color-scheme: dark;
 }
 
+/* ── Legacy design-system bridge ────────────────────────────────────────────
+   Older components (form, dock, menus, assistant, case pages) read the original
+   design-system primitives. Re-pointing those primitives at palette A makes every
+   surface follow one palette in light and dark; the remodel tokens stay the source. */
+:root,
+:root[data-theme="dark"] {
+  --paper: var(--c-paper);
+  --silk: var(--c-surface);
+  --mist: var(--c-rule);
+  --pebble: var(--c-ink-3);
+  --stone: var(--c-ink-2);
+  --graphite: var(--c-ink-hover);
+  --ink: var(--c-ink);
+  --vermilion: var(--c-accent);
+  --vermilion-dark: var(--c-accent-hover);
+  --vermilion-light: color-mix(in srgb, var(--c-accent) 55%, var(--c-paper));
+  --on-accent: var(--c-paper);
+  --bg-page: var(--c-paper);
+  --surface-card: var(--c-surface);
+  --border: var(--c-rule);
+  --focus: var(--c-focus);
+}
+
 /* Accent moments: section numbers and step kickers. */
 .eyebrow-num { color: var(--c-accent); }
+
+/* The floating dock overlays the page; each page intro owns its top clearance. */
+html:root #main { padding-top: 0; }
 
 html:root,
 html:root body {

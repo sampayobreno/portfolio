@@ -7,32 +7,33 @@
   --radius-subcard: var(--radius-md);
   --card-border: color-mix(in srgb, var(--rule) 65%, transparent);
   --subcard-border: color-mix(in srgb, var(--rule) 50%, transparent);
-  --paper: #f7f6f2;
-  --silk: #efeee8;
-  --surface: #efeee8;
-  --editorial-wash: #efeee8;
-  --mist: #ddddd5;
-  --rule: #ddddd5;
-  --pebble: #8b8a83;
-  --stone: #595852;
-  --muted: #595852;
-  --ink: #222320;
-  --clay: #222320;
-  --clay-dark: #3a3b36;
-  --clay-light: #d5d4cc;
-  --on-accent: #f7f6f2;
-  --accent: #8a5640;
-  --focus: #222320;
-  --screen: #f7f6f2;
-  --ui-fill: #e8e7e0;
-  --ui-line: #d6d5cd;
-  --ui-ink: #8c8b84;
-  --ui-accent: #dfC5B5;
-  --ui-tint: #f1e6dc;
-  --wash-sage: #d5d7ca;
-  --wash-clay: #dfc4b4;
-  --wash-blue: #c3cfd0;
-  --grid-dot: color-mix(in srgb, #222320 2.2%, transparent);
+  /* Palette A via foundation tokens (light and dark switch at the token level). */
+  --paper: var(--c-paper);
+  --silk: var(--c-surface);
+  --surface: var(--c-surface);
+  --editorial-wash: var(--c-surface);
+  --mist: var(--c-rule);
+  --rule: var(--c-rule);
+  --pebble: var(--c-ink-3);
+  --stone: var(--c-ink-2);
+  --muted: var(--c-ink-2);
+  --ink: var(--c-ink);
+  --clay: var(--c-ink);
+  --clay-dark: var(--c-ink-hover);
+  --clay-light: var(--c-rule-strong);
+  --on-accent: var(--c-paper);
+  --accent: var(--c-accent);
+  --focus: var(--c-focus);
+  --screen: var(--c-raised);
+  --ui-fill: var(--c-surface-2);
+  --ui-line: var(--c-rule-strong);
+  --ui-ink: var(--c-ink-3);
+  --ui-accent: color-mix(in srgb, var(--c-accent) 35%, var(--c-paper));
+  --ui-tint: var(--c-accent-soft);
+  --wash-sage: var(--c-surface-2);
+  --wash-clay: var(--c-accent-soft);
+  --wash-blue: var(--c-surface-2);
+  --grid-dot: color-mix(in srgb, var(--c-ink) 2.2%, transparent);
 }
 
 .shell {
@@ -43,32 +44,6 @@
 
 :global(html[data-theme="dark"]):has(.shell),
 :global([data-theme="dark"]) .shell {
-  --paper: #171715;
-  --silk: #21211e;
-  --surface: #21211e;
-  --editorial-wash: #21211e;
-  --mist: #34342f;
-  --rule: #34342f;
-  --pebble: #8e8d85;
-  --stone: #b8b7af;
-  --muted: #b8b7af;
-  --ink: #efeee9;
-  --clay: #efeee9;
-  --clay-dark: #d5d4cc;
-  --clay-light: #efeee9;
-  --on-accent: #171715;
-  --accent: #deb09c;
-  --focus: #efeee9;
-  --screen: #292925;
-  --ui-fill: #353530;
-  --ui-line: #45453e;
-  --ui-ink: #8a897f;
-  --ui-accent: #9a7060;
-  --ui-tint: #463830;
-  --wash-sage: #353830;
-  --wash-clay: #48362e;
-  --wash-blue: #2d383a;
-  --grid-dot: color-mix(in srgb, #efeee9 2.2%, transparent);
   background: var(--paper);
 }
 
@@ -193,7 +168,7 @@
 }
 :global(html[data-theme="dark"] body):has(.shell) :global(.to-top) {
   background: color-mix(in srgb, var(--surface) 80%, transparent);
-  border-color: color-mix(in srgb, #ffffff 16%, transparent);
+  border-color: color-mix(in srgb, var(--c-ink) 16%, transparent);
   box-shadow:
     0 12px 30px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.14);
@@ -208,9 +183,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.20);
 }
 :global(html[data-theme="dark"] body):has(.shell) :global(.to-top:hover) {
-  background: #ffffff;
-  color: #171715;
-  border-color: #ffffff;
+  background: var(--c-ink);
+  color: var(--c-paper);
+  border-color: var(--c-ink);
 }
 :global(body):has(.shell) :global(.to-top:active) {
   transform: translateY(0) scale(0.94);
@@ -1052,7 +1027,7 @@
   top: -10px;
   bottom: 15px;
   border-radius: inherit;
-  background: #e9e8e1;
+  background: var(--c-surface-2);
   transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .artifact::after {
@@ -1064,14 +1039,14 @@
   top: -20px;
   bottom: 30px;
   border-radius: inherit;
-  background: #f0ede5;
+  background: var(--c-surface);
   transition: transform 440ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 :global([data-theme="dark"]) .artifact::before {
-  background: #2b2b27;
+  background: var(--c-surface-2);
 }
 :global([data-theme="dark"]) .artifact::after {
-  background: #36302a;
+  background: var(--c-surface);
 }
 @keyframes panelEnter {
   from {
@@ -1233,7 +1208,7 @@
 .demoDot {
   width: 6px;
   height: 6px;
-  background: #a2b2a4;
+  background: var(--c-ink-3);
   border-radius: 50%;
 }
 .demoDetails summary {

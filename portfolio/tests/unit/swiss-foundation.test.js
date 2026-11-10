@@ -66,6 +66,17 @@ describe("portfolio visual foundation", () => {
     }
   });
 
+  it("routes legacy design-system and shell colours through the palette A tokens", () => {
+    const foundation = read("src/app/foundation.css");
+    const shellStyles = read("src/components/site/EditorialShell.module.css");
+    for (const [legacy, token] of [["paper", "c-paper"], ["ink", "c-ink"], ["stone", "c-ink-2"], ["vermilion", "c-accent"], ["silk", "c-surface"], ["mist", "c-rule"]]) {
+      expect(foundation).toMatch(new RegExp(`--${legacy}:\\s*var\\(--${token}\\)`));
+    }
+    expect(shellStyles).toMatch(/--paper:\s*var\(--c-paper\)/);
+    expect(shellStyles).toMatch(/--ink:\s*var\(--c-ink\)/);
+    expect(shellStyles).not.toMatch(/#222320|#f7f6f2|#595852/i);
+  });
+
   it("does not duplicate font loading through remote stylesheets", () => {
     const fontTokens = read("design-system/tokens/fonts.css");
     const document = read("src/components/site/SiteDocument.jsx");
@@ -188,16 +199,17 @@ describe("portfolio visual foundation", () => {
     expect(`${english}\n${french}\n${englishPages}\n${frenchPages}`).not.toMatch(/building with code|frontend learning|apprentissage frontend|product design and frontend|design produit et le frontend|design produit et frontend/i);
     expect(englishPages).toContain("Systems Lab — Product interface experiments");
     expect(frenchPages).toContain("Systems Lab — Expériences d’interface produit");
-    expect(english).toContain('themeColor: "#FFFFFF"');
-    expect(french).toContain('themeColor: "#FFFFFF"');
-    expect(providers).toContain('theme === "dark" ? "#0F0F0E" : "#FFFFFF"');
+    // Palette A "Marfim & argila" (chosen 10 Nov 2026) for browser chrome and social image.
+    expect(english).toContain('themeColor: "#F8F7F3"');
+    expect(french).toContain('themeColor: "#F8F7F3"');
+    expect(providers).toContain('theme === "dark" ? "#151513" : "#F8F7F3"');
 
     expect(social).toContain("Complex products, made clear.");
     expect(social).toContain("Des produits complexes, rendus clairs.");
     expect(social).toContain("PRODUCT DESIGNER · DESIGNER PRODUIT");
-    expect(social).toContain('backgroundColor: "#FFFFFF"');
-    expect(social).toContain('color: "#1F1C1B"');
-    expect(social).toContain('color: "#C74624"');
+    expect(social).toContain('backgroundColor: "#F8F7F3"');
+    expect(social).toContain('color: "#1B1A17"');
+    expect(social).toContain('color: "#A44A28"');
     expect(social).not.toMatch(/fonts\.googleapis\.com|loadFont\(|await fetch\(/);
 
     expect(document).toContain('jobTitle: "Product Designer"');

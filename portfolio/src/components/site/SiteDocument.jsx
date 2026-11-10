@@ -2,6 +2,7 @@ import "../../../design-system/styles.css";
 import "../../app/globals.css";
 import "../../app/signature.css";
 import "../../app/foundation.css";
+import "../../app/motion.css";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
@@ -11,6 +12,7 @@ import { SkipLink } from "@/components/site/SkipLink";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ToTop } from "@/components/site/ToTop";
 import { AssistantDock } from "@/components/site/AssistantDock";
+import { MotionObserver } from "@/components/site/MotionObserver";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
 import { fontVariables } from "@/lib/fonts";
@@ -30,7 +32,7 @@ export function SiteDocument({ children, lang }) {
       {/* The two locale root layouts delegate their complete document shell here. */}
       {/* eslint-disable-next-line @next/next/no-head-element */}
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement;var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;d.setAttribute('data-theme',s==='light'||s==='dark'?s:(p?'dark':'light'));}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var d=document.documentElement;var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches;d.setAttribute('data-theme',s==='light'||s==='dark'?s:(p?'dark':'light'));if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('motion-live'))d.classList.remove('motion');},3000);}}catch(e){}})();` }} />
       </head>
       <body>
         <script id="person-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -56,6 +58,7 @@ export function SiteDocument({ children, lang }) {
           <Footer />
           <ToTop />
           <AssistantDock />
+          <MotionObserver />
         </Providers>
       </body>
     </html>

@@ -1,178 +1,8 @@
 /* AssistantDock.module.css — Apple Liquid Glass Spotlight Experience */
 
-/* ── COLLAPSED FLOATING DOCK PILL (APPLE LIQUID GLASS WITH CLAY BORDER PULSE) ────── */
-.dockPill {
-  position: fixed;
-  bottom: max(24px, env(safe-area-inset-bottom, 24px));
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 44px;
-  padding: 0 16px 0 12px;
-  border-radius: 9999px;
-  cursor: pointer;
-  user-select: none;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
-  transition:
-    opacity 220ms ease,
-    background 240ms ease,
-    border-color 240ms ease,
-    box-shadow 240ms ease,
-    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Light Apple Glass: Specular top highlight, refined clay contrast border pulse */
-  background: rgba(255, 255, 255, 0.88);
-  -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(105%);
-  backdrop-filter: blur(28px) saturate(200%) brightness(105%);
-  border: 1px solid color-mix(in srgb, var(--c-accent) 30%, transparent);
-  box-shadow:
-    0 16px 40px rgba(28, 26, 24, 0.08),
-    0 4px 12px rgba(28, 26, 24, 0.04),
-    0 0 0 1px color-mix(in srgb, var(--c-accent) 18%, transparent),
-    0 0 12px color-mix(in srgb, var(--c-accent) 14%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  color: var(--c-ink);
-  animation: appleClayPulseLight 3s ease-in-out infinite;
-}
-
-.dockPill::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.40) 0%,
-    rgba(255, 255, 255, 0.06) 40%,
-    transparent 70%
-  );
-  pointer-events: none;
-}
-
 /* Light Mode: Visibly pulsing borders in contrast color with Apple elegance */
-@keyframes appleClayPulseLight {
-  0%, 100% {
-    border-color: color-mix(in srgb, var(--c-accent) 26%, transparent);
-    box-shadow:
-      0 16px 40px rgba(28, 26, 24, 0.08),
-      0 4px 12px rgba(28, 26, 24, 0.04),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 18%, transparent),
-      0 0 10px color-mix(in srgb, var(--c-accent) 12%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.90);
-  }
-  50% {
-    border-color: color-mix(in srgb, var(--c-accent) 72%, transparent);
-    box-shadow:
-      0 18px 44px rgba(28, 26, 24, 0.11),
-      0 5px 14px rgba(28, 26, 24, 0.05),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 45%, transparent),
-      0 0 16px color-mix(in srgb, var(--c-accent) 28%, transparent),
-      inset 0 1px 0 #ffffff;
-  }
-}
-
-/* Dark Mode Apple Obsidian Glass */
-.dockPillDark {
-  background: rgba(22, 21, 20, 0.82);
-  -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(102%);
-  backdrop-filter: blur(28px) saturate(190%) brightness(102%);
-  border: 1px solid color-mix(in srgb, var(--c-accent) 34%, transparent);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.45),
-    0 4px 12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px color-mix(in srgb, var(--c-accent) 22%, transparent),
-    0 0 14px color-mix(in srgb, var(--c-accent) 18%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  color: var(--c-ink);
-  animation: appleClayPulseDark 3s ease-in-out infinite;
-}
-
-.dockPillDark::before {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.04) 40%,
-    transparent 70%
-  );
-}
 
 /* Dark Mode: Visibly pulsing borders in contrast color with Apple elegance */
-@keyframes appleClayPulseDark {
-  0%, 100% {
-    border-color: color-mix(in srgb, var(--c-accent) 30%, transparent);
-    box-shadow:
-      0 16px 40px rgba(0, 0, 0, 0.45),
-      0 4px 12px rgba(0, 0, 0, 0.25),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 20%, transparent),
-      0 0 12px color-mix(in srgb, var(--c-accent) 15%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  }
-  50% {
-    border-color: color-mix(in srgb, var(--c-accent) 78%, transparent);
-    box-shadow:
-      0 20px 48px rgba(0, 0, 0, 0.52),
-      0 5px 16px rgba(0, 0, 0, 0.28),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 50%, transparent),
-      0 0 18px color-mix(in srgb, var(--c-accent) 32%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  }
-}
-
-.dockPill:hover {
-  animation-play-state: paused;
-  transform: translateX(-50%) translateY(-2px);
-  border-color: color-mix(in srgb, var(--c-accent) 90%, transparent);
-  box-shadow:
-    0 22px 50px rgba(28, 26, 24, 0.14),
-    0 6px 16px rgba(28, 26, 24, 0.08),
-    0 0 0 2px color-mix(in srgb, var(--c-accent) 55%, transparent),
-    0 0 28px color-mix(in srgb, var(--c-accent) 42%, transparent),
-    inset 0 1px 0 #ffffff;
-}
-
-.dockPillDark:hover {
-  animation-play-state: paused;
-  transform: translateX(-50%) translateY(-2px);
-  border-color: color-mix(in srgb, var(--c-accent) 98%, transparent);
-  box-shadow:
-    0 22px 52px rgba(0, 0, 0, 0.60),
-    0 6px 16px rgba(0, 0, 0, 0.35),
-    0 0 0 2px color-mix(in srgb, var(--c-accent) 65%, transparent),
-    0 0 30px color-mix(in srgb, var(--c-accent) 50%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.34);
-}
-
-.dockPill:focus-visible {
-  outline: none;
-  border-color: color-mix(in srgb, var(--c-accent) 95%, transparent);
-  box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--c-accent) 32%, transparent),
-    0 16px 40px rgba(28, 26, 24, 0.12);
-}
-
-.dockPillDark:focus-visible {
-  outline: none;
-  border-color: color-mix(in srgb, var(--c-accent) 98%, transparent);
-  box-shadow:
-    0 0 0 3px color-mix(in srgb, var(--c-accent) 35%, transparent),
-    0 16px 40px rgba(0, 0, 0, 0.55);
-}
-
-.dockPill:active {
-  transform: translateX(-50%) translateY(0) scale(0.98);
-}
-
-/* Dock Pill Hidden when modal is active */
-.dockPillHidden {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(-50%) translateY(10px) scale(0.96);
-}
 
 .iconWrapper {
   position: relative;
@@ -188,20 +18,6 @@
   transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background 200ms ease;
 }
 
-.dockPillDark .iconWrapper {
-  background: color-mix(in srgb, var(--c-accent) 18%, transparent);
-  color: var(--c-accent);
-}
-
-.dockPill:hover .iconWrapper {
-  transform: scale(1.08);
-  background: color-mix(in srgb, var(--c-accent) 20%, transparent);
-}
-
-.dockPillDark:hover .iconWrapper {
-  background: color-mix(in srgb, var(--c-accent) 28%, transparent);
-}
-
 .sparkleIcon {
   width: 15px;
   height: 15px;
@@ -213,36 +29,6 @@
   height: 12px;
   display: inline-block;
   opacity: 0.75;
-}
-
-.placeholderText {
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  opacity: 0.95;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.shortcutBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: inherit;
-  opacity: 0.75;
-  letter-spacing: 0.02em;
-}
-
-.dockPillDark .shortcutBadge {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: var(--c-ink-2);
 }
 
 /* ── MODAL BACKDROP ──────────────────────────────────────────────── */
@@ -587,11 +373,6 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.chipBullet {
-  font-size: 9px;
-  opacity: 0.6;
 }
 
 .chipButton:hover {
@@ -1017,38 +798,6 @@
 
 /* ── MOBILE BREAKPOINT (<= 640px) ────────────────────────────────── */
 @media (max-width: 640px) {
-  .dockPill {
-    bottom: max(14px, env(safe-area-inset-bottom, 14px));
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    max-width: calc(100vw - 110px);
-    height: 38px;
-    padding: 0 14px 0 8px;
-    gap: 8px;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid color-mix(in srgb, var(--c-accent) 28%, transparent);
-    box-shadow:
-      0 8px 20px rgba(28, 26, 24, 0.08),
-      0 2px 6px rgba(28, 26, 24, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
-    animation: appleClayPulseLightMobile 3s ease-in-out infinite;
-  }
-
-  .dockPillDark {
-    border-color: color-mix(in srgb, var(--c-accent) 32%, transparent);
-    box-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.40),
-      0 2px 6px rgba(0, 0, 0, 0.20),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
-    animation: appleClayPulseDarkMobile 3s ease-in-out infinite;
-  }
-
-  .dockPill:hover,
-  .dockPill:active {
-    transform: translateX(-50%) scale(0.97);
-  }
 
   .iconWrapper {
     width: 22px;
@@ -1058,16 +807,6 @@
   .sparkleIcon {
     width: 12px;
     height: 12px;
-  }
-
-  .placeholderText {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  .shortcutBadge {
-    display: none;
   }
 
   .modalWrapper {
@@ -1167,41 +906,5 @@
   .sendButton {
     width: 40px;
     height: 40px;
-  }
-}
-
-@keyframes appleClayPulseLightMobile {
-  0%, 100% {
-    border-color: color-mix(in srgb, var(--c-accent) 24%, transparent);
-    box-shadow:
-      0 8px 20px rgba(28, 26, 24, 0.08),
-      0 2px 6px rgba(28, 26, 24, 0.03),
-      inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  }
-  50% {
-    border-color: color-mix(in srgb, var(--c-accent) 58%, transparent);
-    box-shadow:
-      0 10px 24px rgba(28, 26, 24, 0.10),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 28%, transparent),
-      0 0 10px color-mix(in srgb, var(--c-accent) 16%, transparent),
-      inset 0 1px 0 #ffffff;
-  }
-}
-
-@keyframes appleClayPulseDarkMobile {
-  0%, 100% {
-    border-color: color-mix(in srgb, var(--c-accent) 26%, transparent);
-    box-shadow:
-      0 10px 24px rgba(0, 0, 0, 0.40),
-      0 2px 6px rgba(0, 0, 0, 0.20),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  }
-  50% {
-    border-color: color-mix(in srgb, var(--c-accent) 68%, transparent);
-    box-shadow:
-      0 12px 28px rgba(0, 0, 0, 0.48),
-      0 0 0 1px color-mix(in srgb, var(--c-accent) 32%, transparent),
-      0 0 12px color-mix(in srgb, var(--c-accent) 18%, transparent),
-      inset 0 1px 0 rgba(255, 255, 255, 0.26);
   }
 }

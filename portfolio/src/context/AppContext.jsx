@@ -56,7 +56,7 @@ export function Providers({ children, initialLang = "en" }) {
     document.documentElement.setAttribute("data-theme", theme);
 
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = theme === "dark" ? "#0F0F0E" : "#FFFFFF";
+    if (meta) meta.content = theme === "dark" ? "#151513" : "#F8F7F3";
   }, [theme]);
 
   useEffect(() => {

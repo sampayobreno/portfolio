@@ -17,7 +17,8 @@ describe("canonical portfolio case contract", () => {
 
     expect(workHub).not.toContain("/work/taskroom");
     expect(home).not.toContain("/work/taskroom");
-    expect(home).toContain("showVisual={false}");
+    const processStory = readFileSync(resolve(process.cwd(), "src/components/site/ProcessStory.jsx"), "utf8");
+    expect(processStory).not.toMatch(/taskroom/i);
     expect(workHub).not.toContain("Clearflow");
     expect(workHub).not.toContain("First Value");
     expect(home).not.toContain("Clearflow");
