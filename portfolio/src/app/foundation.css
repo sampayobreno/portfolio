@@ -1,7 +1,7 @@
 /* Remodel 2026 — foundation tokens.
    One source for colour, type, spacing, radius and motion used by the new sections.
    Type: Newsreader (display) + Inter Tight (text), chosen by Breno on 10 Nov 2026.
-   Colour: palette A "Marfim & argila" (ivory paper, terracotta accent), chosen by Breno on 10 Nov 2026. */
+   Colour: palette A (terracotta accent) on the "Pedra" neutral paper, chosen by Breno on 10 Nov 2026. */
 
 :root {
   /* Type families */
@@ -66,19 +66,19 @@
   --dur-reveal: 1000ms;
 
   /* Colour — light */
-  --c-paper: #f8f7f3;
-  --c-surface: #f0eee7;
-  --c-surface-2: #e8e5dc;
+  --c-paper: #f6f6f4;
+  --c-surface: #eeeeeb;
+  --c-surface-2: #e5e5e1;
   --c-raised: #ffffff;
   --c-ink: #1b1a17;
   --c-ink-hover: #3a3833;
   --c-ink-2: #4d4b45;
   --c-ink-3: #686660;
-  --c-rule: #dedbd2;
-  --c-rule-strong: #c6c2b7;
-  --c-field-border: #b4b0a5;
-  --c-hover: #e9e6dd;
-  --c-on-ink: #f8f7f3;
+  --c-rule: #dededa;
+  --c-rule-strong: #c6c6c1;
+  --c-field-border: #b1b1ab;
+  --c-hover: #ebebe8;
+  --c-on-ink: #f6f6f4;
   --c-accent: #a44a28;
   --c-accent-hover: #8a3c1f;
   --c-dot: rgb(27 26 23 / 0.085);
@@ -113,21 +113,6 @@
   --shadow-2: 0 14px 36px rgb(0 0 0 / 0.45);
 
   color-scheme: dark;
-}
-
-/* ── Paper study (10 Nov 2026): lighter, less yellow backgrounds for the light theme.
-   Compared live via data-paper on <html>; removed once one is chosen. */
-:root[data-paper="pedra"]:not([data-theme="dark"]) {
-  --c-paper: #f6f6f4; --c-surface: #eeeeeb; --c-surface-2: #e5e5e1; --c-hover: #ebebe8;
-  --c-rule: #dededa; --c-rule-strong: #c6c6c1; --c-field-border: #b1b1ab; --c-on-ink: #f6f6f4;
-}
-:root[data-paper="gelo"]:not([data-theme="dark"]) {
-  --c-paper: #f6f7f8; --c-surface: #eef0f2; --c-surface-2: #e4e7ea; --c-hover: #eaecee;
-  --c-rule: #dcdfe3; --c-rule-strong: #c3c7cc; --c-field-border: #adb2b8; --c-on-ink: #f6f7f8;
-}
-:root[data-paper="branco"]:not([data-theme="dark"]) {
-  --c-paper: #ffffff; --c-surface: #f5f5f5; --c-surface-2: #ececec; --c-hover: #f2f2f2;
-  --c-rule: #e4e4e4; --c-rule-strong: #cdcdcd; --c-field-border: #b5b5b5; --c-on-ink: #ffffff;
 }
 
 /* ── Legacy design-system bridge ────────────────────────────────────────────

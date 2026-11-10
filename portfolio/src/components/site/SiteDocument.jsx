@@ -13,7 +13,6 @@ import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ToTop } from "@/components/site/ToTop";
 import { AssistantDock } from "@/components/site/AssistantDock";
 import { MotionObserver } from "@/components/site/MotionObserver";
-import { PaperStudy } from "@/components/site/PaperStudy";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
 import { fontVariables } from "@/lib/fonts";
@@ -60,7 +59,6 @@ export function SiteDocument({ children, lang }) {
           <ToTop />
           <AssistantDock />
           <MotionObserver />
-          <PaperStudy />
         </Providers>
       </body>
     </html>
