@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 /*
  * Lenis smooth scroll — light, no parallax, no scroll-jacking.
@@ -11,6 +12,19 @@ import { useEffect } from "react";
 const HEADER_OFFSET = 88;
 
 export function SmoothScroll() {
+  const pathname = usePathname();
+  const previous = useRef(pathname);
+
+  // New page → start at the top. Lenis keeps its own scroll position and would otherwise
+  // restore the previous page's offset after a client-side navigation. Hash targets win.
+  useEffect(() => {
+    if (previous.current === pathname) return;
+    previous.current = pathname;
+    if (window.location.hash) return;
+    if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true, force: true });
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   useEffect(() => {
     const reduce =
       typeof window !== "undefined" &&
