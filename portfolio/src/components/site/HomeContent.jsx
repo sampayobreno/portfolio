@@ -53,7 +53,7 @@ export function HomeContent({ lang = "en" }) {
             </div>
           </div>
           <figure className={hero.portrait} data-lines="y-rev" style={{ "--line-color": "var(--c-rule)", "--ld": 600 }}>
-            <div className={hero.photo} data-reveal="mask" style={{ "--d": 300 }}><Image src="/images/breno-hero-portrait.jpeg" alt="Breno Sampaio" width={486} height={420} priority sizes="(max-width: 760px) 100vw, 32vw" /></div>
+            <div className={hero.photo} data-reveal="mask" style={{ "--d": 300 }}><Image src="/images/breno-editorial.webp" alt="Breno Sampaio" width={1122} height={1402} priority sizes="(max-width: 760px) 100vw, 32vw" /></div>
             <figcaption data-reveal style={{ "--d": 900 }}><span>Breno Sampaio</span><span>Valencia, Spain</span></figcaption>
           </figure>
         </div>
@@ -99,7 +99,13 @@ export function HomeContent({ lang = "en" }) {
         <div className={about.inner}>
           <div className={about.heading}><div><p className={about.eyebrow} data-reveal><span className="eyebrow-num">{order(3)}</span> / {lang === "fr" ? "À PROPOS" : "ABOUT"}</p><h2 id="about-title" data-reveal="words"><Words lines={lang === "fr" ? ["Un regard humain", "sur la complexité."] : ["A human lens", "on complexity."]} /></h2></div><p data-reveal style={{ "--d": 250 }}>{lang === "fr" ? "Designer produit basé à Valence, avec un parcours dans les opérations multilingues." : "A product designer based in Valencia, with a background in multilingual operations."}</p></div>
           <div className={about.grid}>
-            <div className={about.label}>{lang === "fr" ? "PARCOURS & PERSPECTIVE" : "BACKGROUND & PERSPECTIVE"}</div>
+            <div className={about.label}>
+              <span>{lang === "fr" ? "PARCOURS & PERSPECTIVE" : "BACKGROUND & PERSPECTIVE"}</span>
+              <figure className={about.photo}>
+                <div className={about.photoFrame} data-reveal="mask" style={{ "--d": 150 }}><Image src="/images/breno-hero-portrait.jpeg" alt={lang === "fr" ? "Breno Sampaio au travail" : "Breno Sampaio at work"} width={1792} height={2400} sizes="(max-width: 760px) 50vw, 240px" /></div>
+                <figcaption data-reveal style={{ "--d": 400 }}>Breno Sampaio · Valencia</figcaption>
+              </figure>
+            </div>
             <div className={about.story} data-reveal style={{ "--d": 100 }}><p className={about.lead}>{c.about.col1Body}</p><p>{c.about.col2Body}</p><Link href={`${prefix}/about`} className={about.link}><RollText>{c.about.link}</RollText><span aria-hidden="true">↗</span></Link></div>
             <div className={about.facts} data-reveal style={{ "--d": 200 }}><div><span>{lang === "fr" ? "BASE" : "BASED IN"}</span><strong>Valencia, Spain</strong></div><div><span>{lang === "fr" ? "PRATIQUE" : "PRACTICE"}</span><strong>Product Design<br />Frontend prototyping</strong></div></div>
           </div>

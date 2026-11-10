@@ -7,7 +7,14 @@
 .heading > p { max-width: 27rem; margin: 0 0 .3rem auto; padding: .25rem 0 .25rem var(--space-5); border-left: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
 .grid { display: grid; grid-template-columns: .85fr 1.45fr .7fr; border-top: 1px solid var(--c-rule-strong); border-bottom: 1px solid var(--c-rule-strong); }
 .label, .story, .facts { padding: clamp(2rem, 3vw, 3.5rem) 0; }
-.label { padding-right: 2rem; }
+.label { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-7); padding-right: 2rem; }
+/* Editorial portrait tucked into the column corner (decision log: "foto editorial num canto"). */
+.photo { width: min(100%, 15rem); margin: 0; }
+.photoFrame { overflow: hidden; border-radius: var(--radius); background: var(--c-surface-2); }
+.photoFrame img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 55% 45%; transition: transform 1800ms var(--ease-out); }
+.photo figcaption { margin-top: var(--space-3); color: var(--c-ink-3); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+@media (hover: hover) { .photo:hover .photoFrame img, :global(.motion) .photo:hover .photoFrame[data-reveal] img { transform: scale(1.04); } }
+@media (prefers-reduced-motion: reduce) { .photoFrame img { transition: none; } .photo:hover .photoFrame img { transform: none !important; } }
 .story { border-left: 1px solid var(--c-rule); padding-left: clamp(1.5rem, 3vw, 3rem); padding-right: clamp(1.5rem, 3vw, 3rem); }
 .story p { max-width: var(--measure); color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); margin: 0 0 var(--space-5); }
 .story .lead { color: var(--c-ink); font-size: var(--fs-lead); line-height: 1.4; letter-spacing: var(--subhead-tracking); }
@@ -18,4 +25,4 @@
 .facts { border-left: 1px solid var(--c-rule); padding-left: clamp(1.5rem, 3vw, 3rem); display: flex; flex-direction: column; gap: var(--space-7); }
 .facts span, .facts strong { display: block; }
 .facts strong { margin-top: var(--space-3); font-size: var(--fs-body); font-weight: 500; line-height: 1.6; }
-@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .grid { display: block; } .label { padding: 1.5rem 0; } .story, .facts { border-left: 0; border-top: 1px solid var(--c-rule); padding: 1.5rem 0; } .facts { flex-direction: row; flex-wrap: wrap; gap: 2rem 3rem; } }
+@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .grid { display: block; } .label { padding: 1.5rem 0; gap: var(--space-5); } .photo { width: 50%; } .story, .facts { border-left: 0; border-top: 1px solid var(--c-rule); padding: 1.5rem 0; } .facts { flex-direction: row; flex-wrap: wrap; gap: 2rem 3rem; } }
