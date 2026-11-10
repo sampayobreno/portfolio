@@ -44,7 +44,7 @@
 
 :global(html[data-theme="dark"]):has(.shell),
 :global([data-theme="dark"]) .shell {
-  background: var(--paper);
+  background-color: var(--paper);
 }
 
 :global(body):has(.shell) {
@@ -730,7 +730,7 @@
   width: 22%;
   height: 70%;
   border: 3px solid var(--ink);
-  border-radius: 18px;
+  border-radius: var(--radius);
   background: var(--screen);
   padding: 14px 9px 12px;
   box-shadow: 0 12px 22px -14px #24241e66;
@@ -1966,7 +1966,7 @@
   }
   .mobileUi {
     border-width: 2px;
-    border-radius: 12px;
+    border-radius: var(--radius);
     height: 68%;
     width: 24%;
     padding: 9px 5px;

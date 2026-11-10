@@ -42,11 +42,20 @@
   --gutter: clamp(1.25rem, 0.5rem + 4vw, 5rem);
   --container: 1540px;
 
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-pill: 999px;
+  /* Radius — one corner language for the whole site (Apple "roundrects everywhere").
+     Every surface, control, image and badge uses --radius. Elements nested inside a padded
+     rounded container use --radius-inner so both curves share a centre (concentric corners). */
+  --radius: 14px;
+  --radius-inset: 6px;
+  --radius-inner: max(4px, calc(var(--radius) - var(--radius-inset)));
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-pill: var(--radius);
+  /* Legacy design-system aliases resolve to the same corner. */
+  --radius-xs: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-full: var(--radius);
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* expo-out — Leo Marlowe reference */
@@ -72,6 +81,8 @@
   --c-on-ink: #f8f7f3;
   --c-accent: #a44a28;
   --c-accent-hover: #8a3c1f;
+  --c-dot: rgb(27 26 23 / 0.085);
+  --c-surface-glass: color-mix(in srgb, var(--c-surface) 78%, transparent);
   --c-accent-soft: #f1e3d9;
   --c-focus: #a44a28;
   --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
@@ -96,6 +107,8 @@
   --c-on-ink: #151513;
   --c-accent: #e3916b;
   --c-accent-hover: #eca986;
+  --c-dot: rgb(239 237 230 / 0.065);
+  --c-surface-glass: color-mix(in srgb, var(--c-surface) 80%, transparent);
   --c-accent-soft: #3a2a22;
   --c-focus: #e3916b;
   --shadow-1: 0 10px 36px rgb(0 0 0 / 0.35);
@@ -127,16 +140,32 @@
   --focus: var(--c-focus);
 }
 
+/* Continuous (squircle) corners where supported — Apple's smooth curvature. Squircles read
+   tighter than circular arcs, so the shared radius grows to keep the same visual softness. */
+@supports (corner-shape: squircle) {
+  :root { --radius: 20px; --radius-inset: 7px; }
+  *, *::before, *::after { corner-shape: squircle; }
+}
+
+.language-switcher__thumb, .language-switcher__option { border-radius: calc(var(--radius) - 2px); }
+
 /* Accent moments: section numbers and step kickers. */
 .eyebrow-num { color: var(--c-accent); }
 
 /* The floating dock overlays the page; each page intro owns its top clearance. */
 html:root #main { padding-top: 0; }
 
-html:root,
-html:root body {
-  background: var(--c-paper);
+/* Site-wide dot grid (Leo Marlowe / Ilse Moreno reference): painted on the page canvas, so it
+   scrolls with the content like paper. Paper sections are transparent and "surface" sections
+   translucent so the grid reads through everywhere. */
+html:root {
+  background-color: var(--c-paper);
+  background-image: radial-gradient(circle at center, var(--c-dot) 0.9px, transparent 1.2px);
+  background-size: 22px 22px;
+  background-position: 11px 11px;
 }
+html:root body { background: transparent; }
+html:root body::before { display: none; }
 
 body {
   font-family: var(--font-sans);

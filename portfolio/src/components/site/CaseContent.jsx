@@ -27,7 +27,7 @@ export function CaseContent({ project, lang = "en" }) {
               <span className={styles.badge}>{fr ? "Projet d’exemple" : "Example project"}</span>
               <span>{project.sector}</span>
             </p>
-            <div className={styles.introGrid}>
+            <div className={styles.introGrid} data-lines="x" style={{ "--ld": 100 }}>
               <h1 data-reveal="words" style={{ "--d": 200 }}><Words lines={[project.title]} /></h1>
               <p className={styles.lead} data-reveal style={{ "--d": 400 }}>{project.headline} {project.summary}</p>
             </div>

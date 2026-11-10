@@ -77,6 +77,17 @@ describe("portfolio visual foundation", () => {
     expect(shellStyles).not.toMatch(/#222320|#f7f6f2|#595852/i);
   });
 
+  it("keeps one concentric corner language across the site", () => {
+    const foundation = read("src/app/foundation.css");
+    for (const alias of ["radius-sm", "radius-md", "radius-lg", "radius-pill", "radius-xs", "radius-xl", "radius-full"]) {
+      expect(foundation).toMatch(new RegExp(`--${alias}:\\s*var\\(--radius\\)`));
+    }
+    expect(foundation).toMatch(/--radius-inner:\s*max\(4px, calc\(var\(--radius\) - var\(--radius-inset\)\)\)/);
+    const modules = ["NavigationDock", "ProjectCard", "ProjectCover", "CasePage", "HomeIntro", "HomeContact", "AssistantDock"]
+      .map((name) => read(`src/components/site/${name}.module.css`)).join("\n");
+    expect(modules).not.toMatch(/border-radius:\s*(9999px|999px|22px|18px|14px|12px)/);
+  });
+
   it("does not duplicate font loading through remote stylesheets", () => {
     const fontTokens = read("design-system/tokens/fonts.css");
     const document = read("src/components/site/SiteDocument.jsx");

@@ -52,6 +52,21 @@
 
 .motion [data-reveal="rule"].is-revealed { transform: none; }
 
+/* Line system — structural dividers draw themselves in (tagged by MotionObserver or in markup).
+   The border keeps its geometry; a border-image gradient reveals it along --lp. */
+@property --lp { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
+[data-lines] {
+  --line-color: var(--c-rule-strong);
+  border-image: var(--line-grad) 1;
+}
+[data-lines="x"] { --line-grad: linear-gradient(to right, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="x-rev"] { --line-grad: linear-gradient(to left, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="x-center"] { --line-grad: linear-gradient(to right, transparent calc(50% - var(--lp) / 2), var(--line-color) calc(50% - var(--lp) / 2), var(--line-color) calc(50% + var(--lp) / 2), transparent calc(50% + var(--lp) / 2)); }
+[data-lines="y"] { --line-grad: linear-gradient(to bottom, var(--line-color) var(--lp), transparent var(--lp)); }
+[data-lines="y-rev"] { --line-grad: linear-gradient(to top, var(--line-color) var(--lp), transparent var(--lp)); }
+.motion [data-lines] { transition: --lp 1600ms var(--ease-out); transition-delay: calc(var(--ld, 120) * 1ms); }
+.motion [data-lines]:not(.is-revealed) { --lp: 0%; }
+
 /* Images open behind a mask and settle from a slight zoom (cinematic entrance). */
 .motion [data-reveal="mask"] {
   opacity: 1;
@@ -65,7 +80,8 @@
 .motion [data-reveal="mask"].is-revealed img { transform: none; }
 
 /* Rolling label: each letter swaps for its twin on hover/focus (Leo Marlowe text roll). */
-.roll { position: relative; display: inline-flex; }
+.roll { position: relative; display: inline-flex; align-items: center; }
+.roll > span[aria-hidden="true"] { display: flex; }
 .roll__sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .roll__char { display: inline-block; height: 1.25em; overflow: hidden; line-height: 1.25; vertical-align: top; }
 .roll__char > span { display: block; transition: transform 650ms var(--ease-out); transition-delay: calc(var(--i, 0) * 12ms); }
@@ -93,5 +109,6 @@ a[href^="#"]:hover > span[aria-hidden="true"]:last-child { transform: translateY
   a > span[aria-hidden="true"], .roll__char > span { transition: none; }
   a:hover .roll__char > span, a:focus-visible .roll__char > span { transform: none; }
   .motion [data-reveal="mask"], .motion [data-reveal="mask"] img { clip-path: none !important; }
+  .motion [data-lines] { --lp: 100% !important; transition: none !important; }
   a:hover > span[aria-hidden="true"]:last-child { transform: none; }
 }

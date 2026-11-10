@@ -1,4 +1,4 @@
-.page { color: var(--c-ink); background: var(--c-paper); }
+.page { color: var(--c-ink); background: transparent; }
 .emptyTitle { margin: 0; padding: var(--space-6) 0; border-top: 1px solid var(--c-rule-strong); border-bottom: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: 1.1rem; line-height: 1.6; font-weight: 400; }
 :global(body):has(.page) :global(.rail), :global(body):has(.page) :global(.case-dock), :global(body):has(.page) :global(.rail-mini) { display: none !important; }
 .inner { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
@@ -6,7 +6,7 @@
 .label, .number, .status { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
 .introGrid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: end; margin-top: var(--space-6); padding: var(--space-7) 0 var(--space-8); border-top: 1px solid var(--c-rule-strong); }
 .introGrid h1 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-size: var(--fs-display); line-height: var(--display-leading); }
-.introGrid > p { max-width: var(--measure); margin: 0; color: var(--c-ink-2); font-size: var(--fs-body-lg); line-height: var(--body-leading); }
+.introGrid > p { max-width: var(--measure); margin: 0; padding-left: var(--space-5); border-left: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-body-lg); line-height: var(--body-leading); }
 .introFoot { display: flex; justify-content: space-between; gap: 1rem; padding-top: var(--space-4); border-top: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
 .introFoot a { color: inherit; text-decoration: none; }
 .projects { padding: var(--space-section) 0; }

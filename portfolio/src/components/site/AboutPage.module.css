@@ -1,4 +1,4 @@
-.aboutPage { color: var(--c-ink); background: var(--c-paper); }
+.aboutPage { color: var(--c-ink); background: transparent; }
 :global(body):has(.aboutPage) :global(.rail), :global(body):has(.aboutPage) :global(.case-dock), :global(body):has(.aboutPage) :global(.rail-mini) { display: none !important; }
 .inner { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
 .intro { padding: var(--space-page-top) 0 var(--space-6); }
@@ -13,7 +13,7 @@
 .introFoot a { color: inherit; text-decoration: none; }
 .introFoot a:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
 .section { padding: var(--space-section) 0; }
-.wash { background: var(--c-surface); }
+.wash { background: var(--c-surface-glass); }
 .sectionGrid { margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--c-rule-strong); }
 .sectionGrid h2 { max-width: 16ch; margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-size: var(--fs-h2); line-height: var(--display-leading); }
 .rows { margin-top: var(--space-7); }

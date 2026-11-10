@@ -33,13 +33,13 @@ export function HomeContent({ lang = "en" }) {
           01 · HERO
           ==================================================================== */}
       <section className={hero.intro} id="top" data-label={c.labels.top} aria-labelledby="hero-title">
-        <div className={hero.grid}>
+        <div className={hero.grid} data-lines="x-center" style={{ "--line-color": "var(--c-rule)", "--ld": 100 }}>
           <div className={hero.identity}>
             <p className={hero.label} data-reveal style={{ "--d": 100 }}>{lang === "fr" ? "DESIGN PRODUIT · VALENCE, ESPAGNE" : "PRODUCT DESIGN · VALENCIA, SPAIN"}</p>
             <h1 id="hero-title" data-reveal="words" style={{ "--d": 200 }}><Words lines={lang === "fr" ? ["Bonjour,", "je suis Breno."] : ["Hello,", "I’m Breno."]} /></h1>
             <p className={hero.role} data-reveal style={{ "--d": 500 }}>{lang === "fr" ? "Designer produit" : "Product designer"}</p>
           </div>
-          <div className={hero.statement}>
+          <div className={hero.statement} data-lines="y" style={{ "--line-color": "var(--c-rule)", "--ld": 450 }}>
             <p className={hero.statementText} data-reveal style={{ "--d": 350 }}><strong>{lang === "fr" ? "Je rends les expériences complexes plus faciles à comprendre." : "I make complex experiences easier to navigate."}</strong> {lang === "fr" ? "Je relie les besoins des personnes, les décisions produit et les prototypes fonctionnels." : "I connect people’s needs, product decisions and working prototypes."}</p>
             <p className={hero.context} data-reveal style={{ "--d": 450 }}>{c.hero.lead}</p>
             <div className={hero.actions} data-reveal style={{ "--d": 550 }}>
@@ -52,7 +52,7 @@ export function HomeContent({ lang = "en" }) {
               </>}
             </div>
           </div>
-          <figure className={hero.portrait}>
+          <figure className={hero.portrait} data-lines="y-rev" style={{ "--line-color": "var(--c-rule)", "--ld": 600 }}>
             <div className={hero.photo} data-reveal="mask" style={{ "--d": 300 }}><Image src="/images/breno-hero-portrait.jpeg" alt="Breno Sampaio" width={486} height={420} priority sizes="(max-width: 760px) 100vw, 32vw" /></div>
             <figcaption data-reveal style={{ "--d": 900 }}><span>Breno Sampaio</span><span>Valencia, Spain</span></figcaption>
           </figure>

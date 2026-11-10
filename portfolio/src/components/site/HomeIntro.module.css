@@ -5,7 +5,7 @@
   --intro-rule: var(--c-rule);
   position: relative;
   color: var(--intro-ink);
-  background: var(--intro-paper);
+  background: transparent;
   padding: var(--space-page-top) var(--gutter) 0;
 }
 .grid {
