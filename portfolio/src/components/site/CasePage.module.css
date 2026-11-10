@@ -50,7 +50,7 @@
 .decisions h3 { margin: 0; font: var(--display-weight) var(--fs-h3)/1.2 var(--font-display); letter-spacing: var(--subhead-tracking); }
 .decisions p { max-width: var(--measure); margin: var(--space-3) 0 0; color: var(--c-ink-2); line-height: var(--body-leading); }
 
-.next { padding: var(--space-section) 0; background: var(--c-surface-glass); }
+.next { padding: var(--space-section) 0; background: transparent; border-top: 1px solid var(--c-rule-strong); }
 .nextHead { display: flex; justify-content: space-between; align-items: end; gap: var(--space-5); padding-bottom: var(--space-heading); }
 .nextHead h2 { margin: 0; font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); }
 .all { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; color: var(--c-ink); font-size: var(--fs-small); font-weight: 600; text-decoration: none; }

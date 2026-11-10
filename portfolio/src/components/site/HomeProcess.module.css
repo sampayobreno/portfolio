@@ -1,4 +1,4 @@
-.section { background: var(--c-surface-glass); color: var(--c-ink); padding: var(--space-section) var(--gutter); }
+.section { background: transparent; border-top: 1px solid var(--c-rule-strong); color: var(--c-ink); padding: var(--space-section) var(--gutter); }
 .inner { max-width: var(--container); margin: auto; }
 .heading { display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: var(--space-7); padding-bottom: var(--space-heading); }
 .eyebrow { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); margin: 0 0 var(--space-6); }

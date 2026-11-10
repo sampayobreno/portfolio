@@ -82,7 +82,6 @@
   --c-accent: #a44a28;
   --c-accent-hover: #8a3c1f;
   --c-dot: rgb(27 26 23 / 0.085);
-  --c-surface-glass: color-mix(in srgb, var(--c-surface) 78%, transparent);
   --c-accent-soft: #f1e3d9;
   --c-focus: #a44a28;
   --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
@@ -108,7 +107,6 @@
   --c-accent: #e3916b;
   --c-accent-hover: #eca986;
   --c-dot: rgb(239 237 230 / 0.065);
-  --c-surface-glass: color-mix(in srgb, var(--c-surface) 80%, transparent);
   --c-accent-soft: #3a2a22;
   --c-focus: #e3916b;
   --shadow-1: 0 10px 36px rgb(0 0 0 / 0.35);
@@ -156,8 +154,8 @@
 html:root #main { padding-top: 0; }
 
 /* Site-wide dot grid (Leo Marlowe / Ilse Moreno reference): painted on the page canvas, so it
-   scrolls with the content like paper. Paper sections are transparent and "surface" sections
-   translucent so the grid reads through everywhere. */
+   scrolls with the content like paper. Every section is transparent; sections are separated by
+   drawn lines rather than tone changes, so the grid is never interrupted. */
 html:root {
   background-color: var(--c-paper);
   background-image: radial-gradient(circle at center, var(--c-dot) 0.9px, transparent 1.2px);

@@ -13,7 +13,7 @@
 .introFoot a { color: inherit; text-decoration: none; }
 .introFoot a:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
 .section { padding: var(--space-section) 0; }
-.wash { background: var(--c-surface-glass); }
+.wash { background: transparent; border-top: 1px solid var(--c-rule-strong); }
 .sectionGrid { margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--c-rule-strong); }
 .sectionGrid h2 { max-width: 16ch; margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-size: var(--fs-h2); line-height: var(--display-leading); }
 .rows { margin-top: var(--space-7); }
