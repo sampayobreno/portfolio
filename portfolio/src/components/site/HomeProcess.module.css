@@ -6,15 +6,16 @@
 .heading > p { max-width: 27rem; margin: 0 0 .3rem auto; padding: .25rem 0 .25rem var(--space-5); border-left: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
  .story { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; border-top: 1px solid var(--c-rule-strong); }
 .textOnly { display: block; }
-.visual { position: sticky; top: calc(50vh - 12rem); margin: 0; padding: var(--space-6) 0; }
-.frame { position: relative; width: 100%; aspect-ratio: 4 / 3; border: 1px solid var(--c-rule); border-radius: var(--radius-md); overflow: hidden; background-color: var(--c-paper); background-image: radial-gradient(circle, var(--c-rule-strong) 1px, transparent 1.2px); background-size: 18px 18px; background-position: 9px 9px; }
+.visual { position: sticky; top: 5.5rem; height: calc(100vh - 7rem); display: grid; grid-template-rows: minmax(0, 1fr) auto; margin: 0; padding: 0; }
+/* No card: the drawing sits directly on the page and bleeds slightly past its column. */
+.frame { position: relative; width: 116%; height: 100%; margin-left: -8%; min-height: 0; }
 .visual figcaption { display: flex; justify-content: space-between; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); margin-top: 1rem; }
 .steps { min-width: 0; }
 .step { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; min-height: 15rem; padding: 2.5rem 0; border-bottom: 1px solid var(--c-rule-strong); align-content: center; }
 .number { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); padding-top: .35rem; }
 .step h3 { font: var(--display-weight) clamp(1.35rem, 2vw, 1.9rem)/1.2 var(--font-display); letter-spacing: var(--subhead-tracking); margin: 0; }
 .step p { max-width: var(--measure); margin: var(--space-4) 0 0; color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
-@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .story { display: block; } .visual { display: none; } .step { min-height: 0; padding: 1.5rem 0; } }
+@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .story { display: block; } .step { min-height: 0; padding: 1.5rem 0; } }
 /* The heading is a <header>; keep the eyebrow rhythm against global header rules. */
 .heading .eyebrow { margin: 0 0 var(--space-6); }
 /* Text-only story: editorial rows — number · kicker + title · description + tags. */
@@ -29,11 +30,12 @@
 
 /* ── Scroll narrative: "From complexity to clarity" ───────────────────────── */
 .narrative .step { min-height: clamp(18rem, 52vh, 30rem); }
+.narrative .step:last-child { min-height: 78vh; align-content: start; padding-top: 22vh; }
 .narrative .stepBody { margin-top: var(--space-4); }
 :global(.motion) .narrative .step { transition: opacity var(--dur-slow) var(--ease-out); }
 :global(.motion) .narrative .step:not(.stepActive) { opacity: .32; }
 
-.fig { display: block; width: 100%; height: 100%; overflow: visible; }
+.fig { display: block; width: 100%; height: 100%; overflow: visible; transform-origin: 50% 50%; }
 .fig line, .fig polyline { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; }
 .dot {
   fill: var(--c-ink);
@@ -47,14 +49,14 @@
 .fig[data-state="2"] .dot { transform: translate(calc(var(--x2) * 1px), calc(var(--y2) * 1px)) scale(var(--s2)); opacity: var(--o2); }
 .fig[data-state="2"] .dotAccent { fill: var(--c-on-ink); }
 
-.tangle { stroke: var(--c-ink-3); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 0; opacity: .5; transition: stroke-dashoffset 1400ms var(--ease-in-out), opacity 600ms var(--ease-out); }
+.tangle { stroke: var(--c-ink-2); stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: 0; opacity: .5; transition: stroke-dashoffset 1400ms var(--ease-in-out), opacity 600ms var(--ease-out); }
 .fig:not([data-state="0"]) .tangle { stroke-dashoffset: 1; opacity: 0; }
 
-.structure line { stroke: var(--c-rule-strong); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--ease-out); transition-delay: calc(var(--i) * 60ms); }
+.structure line { stroke: var(--c-ink-3); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 900ms var(--ease-out); transition-delay: calc(var(--i) * 60ms); }
 .fig[data-state="1"] .structure line { stroke-dashoffset: 0; transition-delay: calc(300ms + var(--i) * 60ms); }
 
 .interface > * { opacity: 0; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); }
-.window { fill: var(--c-raised); stroke: var(--c-rule-strong); stroke-width: 1; vector-effect: non-scaling-stroke; transform: scale(.96); transform-origin: 200px 154px; }
+.window { fill: var(--c-raised); stroke: var(--c-ink-3); stroke-width: 1.2; vector-effect: non-scaling-stroke; transform: scale(.96); transform-origin: 200px 154px; }
 .divider { stroke: var(--c-rule); stroke-width: 1; }
 .row { fill: color-mix(in srgb, var(--c-ink) 14%, var(--c-raised)); transform: translateX(-8px); }
 .action { fill: var(--c-accent); transform: scale(.6); transform-origin: 288px 224px; }
@@ -64,7 +66,7 @@
 
 /* Figma language (Ilse Moreno reference): selection with handles and size tag, named cursor. */
 .selection { opacity: 0; transform: scale(.96); transform-origin: 200px 150px; transition: opacity 600ms var(--ease-out), transform 900ms var(--ease-out); }
-.selectionBox { fill: color-mix(in srgb, var(--c-accent) 4%, transparent); stroke: var(--c-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.selectionBox { fill: color-mix(in srgb, var(--c-accent) 4%, transparent); stroke: var(--c-accent); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .handle { fill: var(--c-raised); stroke: var(--c-accent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .tag { fill: var(--c-accent); }
 .tagText, .cursor text { fill: var(--c-on-ink); font: 600 8px/1 var(--font-sans); letter-spacing: .02em; }
@@ -91,7 +93,10 @@
   .dot, .tangle, .structure line, .interface > *, .selection, .cursor, :global(.motion) .narrative .step { transition: none !important; }
   .ripple { animation: none !important; }
 }
+/* Mobile (point 4): the drawing becomes a sticky band at the top while the steps scroll under it. */
 @media (max-width: 760px) {
-  .narrative .step { min-height: 0; }
-  :global(.motion) .narrative .step:not(.stepActive) { opacity: 1; }
+  .visual { position: sticky; top: 0; z-index: 2; height: 42vh; margin: 0 calc(var(--gutter) * -1); padding: var(--space-4) var(--gutter) var(--space-6); background: linear-gradient(to bottom, var(--c-paper) 80%, transparent); grid-template-rows: minmax(0, 1fr); }
+  .frame { width: 100%; margin-left: 0; }
+  .visual figcaption { display: none; }
+  .narrative .step { min-height: 58vh; align-content: start; }
 }

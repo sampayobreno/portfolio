@@ -27,7 +27,7 @@ export function AboutContent({ lang = "en" }) {
           <div className={styles.inner}>
             <p className={styles.label} data-reveal style={{ "--d": 100 }}>{a.eyebrow} · {fr ? "Valence, Espagne" : "Valencia, Spain"}</p>
             <div className={styles.introGrid} data-lines="x" style={{ "--ld": 100 }}>
-              <h1 data-reveal="words" style={{ "--d": 200 }}><Words lines={[a.title]} /><br /><span><Words lines={[a.emphasis]} start={a.title.split(" ").length} /></span></h1>
+              <h1 data-reveal="words" style={{ "--d": 200 }}><Words lines={[a.title]} /><br /><span className={styles.emphasis}><Words lines={[a.emphasis]} start={a.title.split(" ").length} /></span></h1>
               <div data-reveal style={{ "--d": 450 }}><p className={styles.introLead}>{a.intro}</p><p className={styles.body}>{a.introSub}</p></div>
             </div>
             <div className={styles.introFoot} data-lines="x-rev" data-reveal style={{ "--ld": 500, "--d": 650 }}><span>Product Design · Frontend prototyping</span><a href="#perspective">{fr ? "Découvrir mon approche ↓" : "Explore my approach ↓"}</a></div>

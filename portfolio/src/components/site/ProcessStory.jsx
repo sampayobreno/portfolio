@@ -31,11 +31,8 @@ const HANDLES = [[94, 48], [306, 48], [94, 252], [306, 252]];
 const CURSOR_FROM = [352, 104];
 const CURSOR_TO = [300, 232];
 
-// Scroll progress (0–1 across the steps) → narrative position (0–2) with holds on each step.
-const SEGMENTS = [[0.24, 0.42], [0.58, 0.76]];
 const clamp = (v) => Math.min(1, Math.max(0, v));
 const smooth = (t) => t * t * (3 - 2 * t);
-const segment = (progress, [from, to]) => clamp((progress - from) / (to - from));
 const lerp = (a, b, t) => a + (b - a) * t;
 
 function ClarityFigure({ active, caption, figRef }) {
@@ -129,10 +126,15 @@ export function ProcessStory({ lang, showVisual = true }) {
     const ui = layer("interface");
     const cursor = layer("cursor");
     const ripple = layer("ripple");
+    const stepRows = [...steps.current.querySelectorAll("[data-step]")];
 
     const render = (progress) => {
-      const a = segment(progress, SEGMENTS[0]);
-      const b = segment(progress, SEGMENTS[1]);
+      // Each change is driven by where its step actually is: it plays while the step rises
+      // from 75% to 45% of the viewport, so timing holds whatever the section heights are.
+      const vh = window.innerHeight;
+      const rise = (row) => (row ? clamp((vh * 0.75 - row.getBoundingClientRect().top) / (vh * 0.3)) : 0);
+      const a = rise(stepRows[1]);
+      const b = rise(stepRows[2]);
       dots.forEach((dot, i) => {
         // A slight per-point offset turns the morph into a wave rather than a block move.
         const wave = i * 0.012;
@@ -141,8 +143,11 @@ export function ProcessStory({ lang, showVisual = true }) {
         const [x0, y0, s0, o0] = STATES[0][i];
         const [x1, y1, s1, o1] = STATES[1][i];
         const [x2, y2, s2, o2] = STATES[2][i];
-        const x = lerp(lerp(x0, x1, ta), x2, tb);
-        const y = lerp(lerp(y0, y1, ta), y2, tb);
+        // Complexity drifts; the drift calms as structure forms (Anthropic-style living drawing).
+        const calm = 1 - Math.max(ta, tb);
+        const drift = 7 * calm;
+        const x = lerp(lerp(x0, x1, ta), x2, tb) + Math.sin(progress * 9 + i * 1.7) * drift;
+        const y = lerp(lerp(y0, y1, ta), y2, tb) + Math.cos(progress * 7 + i * 2.3) * drift;
         const s = lerp(lerp(s0, s1, ta), s2, tb);
         dot.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
         dot.style.opacity = lerp(lerp(o0, o1, ta), o2, tb);
@@ -162,6 +167,8 @@ export function ProcessStory({ lang, showVisual = true }) {
       cursor.style.opacity = smooth(clamp((b - 0.45) / 0.2));
       cursor.style.transform = `translate(${lerp(CURSOR_FROM[0], CURSOR_TO[0], travel)}px, ${lerp(CURSOR_FROM[1], CURSOR_TO[1], travel)}px)`;
       ripple.classList.toggle(styles.rippleOn, b >= 0.98);
+      // The whole drawing travels with the reader: a slow lift, tilt and breath across the section.
+      svg.style.transform = `translate3d(0, ${(0.5 - progress) * 7}%, 0) rotate(${(progress - 0.5) * -5}deg) scale(${0.94 + 0.08 * Math.sin(progress * Math.PI)})`;
     };
 
     Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([{ gsap }, stModule]) => {
@@ -171,8 +178,8 @@ export function ProcessStory({ lang, showVisual = true }) {
       svg.classList.add(styles.scrubbed);
       trigger = ScrollTrigger.create({
         trigger: steps.current,
-        start: "top 55%",
-        end: "bottom 45%",
+        start: "top 85%",
+        end: "bottom 40%",
         onUpdate: (self) => render(self.progress),
         onRefresh: (self) => render(self.progress),
       });
@@ -184,6 +191,7 @@ export function ProcessStory({ lang, showVisual = true }) {
       cancelled = true;
       if (trigger) trigger.kill();
       svg.classList.remove(styles.scrubbed);
+      svg.style.transform = "";
     };
   }, [showVisual]);
 

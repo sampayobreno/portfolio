@@ -6,7 +6,7 @@
 .introGrid, .sectionGrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
 .introGrid { margin-top: var(--space-6); padding: var(--space-7) 0 var(--space-8); border-top: 1px solid var(--c-rule-strong); }
 .introGrid h1 { margin: 0; font-family: var(--font-display); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-size: var(--fs-display); line-height: var(--display-leading); }
-.introGrid h1 span { color: var(--c-ink-3); font-style: italic; }
+.introGrid h1 .emphasis { color: var(--c-ink-3); font-style: italic; }
 .introLead, .sectionLead { max-width: var(--measure); font-size: var(--fs-lead); line-height: 1.4; letter-spacing: var(--subhead-tracking); }
 .body { max-width: var(--measure); margin-top: var(--space-5); color: var(--c-ink-2); line-height: var(--body-leading); }
 .introFoot { display: flex; justify-content: space-between; gap: 1rem; padding-top: var(--space-4); border-top: 1px solid var(--c-rule-strong); color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
