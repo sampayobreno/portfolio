@@ -5,7 +5,7 @@ import styles from "./CasePage.module.css";
 
 // Reading guide for case studies: a side index on desktop and the TOC pill on mobile
 // (Sessions + TOC Pill references). Both mirror the section currently being read.
-export function CaseGuide({ sections, label }) {
+export function CaseGuide({ sections, label, variant = "inline" }) {
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -44,7 +44,7 @@ export function CaseGuide({ sections, label }) {
 
   return (
     <>
-      <nav className={styles.guide} aria-label={label}>
+      <nav className={variant === "floating" ? `${styles.guide} ${styles.guideFloating}` : styles.guide} aria-label={label}>
         <div className={styles.guideTrack} aria-hidden="true"><span style={{ transform: `scaleY(${(active + 1) / sections.length})` }} /></div>
         {list}
       </nav>

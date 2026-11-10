@@ -4,6 +4,7 @@ import { getT } from "@/lib/i18n";
 import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
 import shell from "./EditorialShell.module.css";
 import styles from "./AboutPage.module.css";
+import { CaseGuide } from "@/components/site/CaseGuide";
 import { RollText } from "@/components/site/RollText";
 import { Words } from "@/components/site/Words";
 
@@ -31,6 +32,9 @@ export function AboutContent({ lang = "en" }) {
     [fr ? "Pratique" : "Practice", fr ? "Prototypage frontend" : "Frontend prototyping"],
     [a.metaLangsLabel, fr ? "Portugais (natif) · Français C1 · Espagnol B2 · Anglais B2 · Italien B1" : "Portuguese (native) · French C1 · Spanish B2 · English B2 · Italian B1"],
   ];
+  const guide = fr
+    ? [["about-overview", "Profil"], ["perspective", "Perspective"], ["timeline", "Parcours"], ["practice", "Pratique"], ["about-closing", "Contact"]]
+    : [["about-overview", "Profile"], ["perspective", "Perspective"], ["timeline", "Trajectory"], ["practice", "Practice"], ["about-closing", "Contact"]];
   const principles = [
     ...a.pillars.map((pillar) => [pillar.title, pillar.body]),
     [a.collaboration, a.collaborationBody],
@@ -39,6 +43,7 @@ export function AboutContent({ lang = "en" }) {
   return (
     <article className={shell.shell}>
       <div className={styles.aboutPage}>
+        <CaseGuide variant="floating" sections={guide.map(([id, label]) => ({ id, label }))} label={fr ? "Sections de la page" : "Page sections"} />
         <header className={styles.intro} id="about-overview">
           <div className={styles.inner}>
             <p className={styles.label} data-reveal style={{ "--d": 100 }}>{a.eyebrow} · {a.title.replace(/\.$/, "")}</p>
@@ -108,7 +113,7 @@ export function AboutContent({ lang = "en" }) {
           </div>
         </section>
 
-        <section className={styles.closing} aria-labelledby="closing-title">
+        <section className={styles.closing} id="about-closing" aria-labelledby="closing-title">
           <div className={styles.inner}>
             <h2 id="closing-title" data-reveal="words"><Words lines={[a.closingTitle]} /></h2>
             <p data-reveal style={{ "--d": 200 }}>{a.closingLead}</p>
