@@ -1,0 +1,29 @@
+.section { background: #faf9f6; color: #191a18; padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem); }
+.content { max-width: 1540px; margin: 0 auto; }
+.heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; align-items: end; padding-bottom: clamp(3rem, 5vw, 5rem); }
+.eyebrow { color: #555751; font-size: .7rem; font-weight: 600; letter-spacing: .1em; margin: 0 0 2.25rem; }
+.heading h2 { font: 500 clamp(2.5rem, 4.6vw, 5rem)/1.04 var(--font-sans), sans-serif; letter-spacing: -.045em; margin: 0; }
+.heading > p { max-width: 27rem; margin: 0 0 .3rem auto; color: #555751; font-size: 1rem; line-height: 1.65; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid #cfcfc8; border-bottom: 1px solid #cfcfc8; }
+.grid article { display: flex; flex-direction: column; min-height: 19rem; padding: 1.7rem clamp(1.5rem, 2.8vw, 3rem) 1.7rem 0; }
+.grid article + article { padding-left: clamp(1.5rem, 2.8vw, 3rem); border-left: 1px solid #deded7; }
+.number, .detail { font-size: .68rem; font-weight: 600; line-height: 1.5; letter-spacing: .08em; color: #555751; }
+.grid h3 { font: 500 clamp(1.45rem, 2vw, 2rem)/1.15 var(--font-sans), sans-serif; letter-spacing: -.035em; margin: 3rem 0 1rem; }
+.grid article p { color: #555751; font-size: 1rem; line-height: 1.65; max-width: 27rem; margin: 0 0 2rem; }
+.detail { margin-top: auto; }
+@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .grid { display: block; } .grid article { min-height: 0; padding: 1.5rem 0; } .grid article + article { padding-left: 0; border-left: 0; border-top: 1px solid #deded7; } .grid h3 { margin-top: 1.5rem; } .grid article p { margin-bottom: 1.5rem; } }
+
+/* The content remains visible in browsers without scroll-driven animation. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .heading > div, .heading > p, .grid article {
+      animation: practice-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+  }
+}
+@keyframes practice-arrive {
+  from { opacity: .45; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}

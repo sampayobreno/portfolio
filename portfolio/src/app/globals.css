@@ -4386,3 +4386,14 @@ html {
   background: rgba(15, 15, 14, 0.80);
   border-color: rgba(255, 255, 255, 0.10);
 }
+
+/* The former left-hand home progress line is intentionally retired. */
+body:has(main #top) .rail { display: none !important; }
+
+/* Reserve room for the navigation dock on touch-sized screens. */
+@media (max-width: 640px) {
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  body:has(main #top) .case-dock { display: none !important; }
+  body:not(:has(main #top)) .case-dock { bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .to-top { bottom: calc(92px + env(safe-area-inset-bottom)); }
+}

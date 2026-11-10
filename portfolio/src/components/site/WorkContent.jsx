@@ -1,28 +1,27 @@
-import { TaskroomCard } from "@/components/taskroom/TaskroomCase";
-import { FeaturedCaseCard } from "@/components/site/FeaturedCaseCard";
-import { Reveal } from "@/components/site/Reveal";
-import { Scramble } from "@/components/site/Scramble";
-import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
-import styles from "./EditorialShell.module.css";
+import shell from "./EditorialShell.module.css";
+import styles from "./WorkPage.module.css";
 
 export function WorkContent({ lang = "en" }) {
-  const c = getPortfolioEditorial(lang);
+  const fr = lang === "fr";
   return (
-    <article className={styles.shell}>
-      <section className={`container ${styles.pageIntro}`} id="work-overview" data-label={c.labels.work} aria-labelledby="work-page-title">
-        <div className={styles.workHeader}>
-          <div>
-            <p className={styles.eyebrow}><Scramble text={c.work.label} /></p>
-            <Reveal mask>
-              <h1 id="work-page-title" className={styles.pageTitle}>{c.work.title}</h1>
-            </Reveal>
+    <article className={shell.shell}>
+      <div className={styles.page}>
+        <header className={styles.intro}>
+          <div className={styles.inner}>
+            <p className={styles.label}>{fr ? "PROJETS CHOISIS" : "SELECTED WORK"} · PRODUCT DESIGN</p>
+            <div className={styles.introGrid}>
+              <h1>{fr ? <>Le travail,<br />en pratique.</> : <>Selected work,<br />in practice.</>}</h1>
+              <p>{fr ? "La sélection de projets est en cours de préparation." : "The project selection is currently being prepared."}</p>
+            </div>
+            <div className={styles.introFoot}><span>{fr ? "SÉLECTION EN COURS" : "SELECTION IN PROGRESS"}</span></div>
           </div>
-          <p className={styles.sectionCaption}>{c.work.caption}</p>
-        </div>
-
-        <FeaturedCaseCard copy={c.work} lang={lang} headingLevel="h2" />
-        <TaskroomCard lang={lang} />
-      </section>
+        </header>
+        <section className={styles.projects} aria-labelledby="projects-title">
+          <div className={styles.inner}>
+            <h2 id="projects-title" className={styles.emptyTitle}>{fr ? "Les projets choisis seront présentés ici." : "Selected projects will appear here."}</h2>
+          </div>
+        </section>
+      </div>
     </article>
   );
 }

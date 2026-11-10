@@ -1,4 +1,5 @@
 import { TaskroomCase } from "@/components/taskroom/TaskroomCase";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Taskroom — From client request to actionable brief",
@@ -7,5 +8,6 @@ export const metadata = {
 };
 
 export default function TaskroomCasePage() {
+  if (process.env.ENABLE_DRAFT_CASES !== "true") notFound();
   return <TaskroomCase />;
 }

@@ -9,18 +9,23 @@ import {
 import { relayResearchSources } from "@/lib/relayResearch";
 
 describe("canonical portfolio case contract", () => {
-  it("links the published Relay case from the new work hub while leaving old simulations outside it", () => {
+  it("keeps draft projects out of the public home and work hub while preserving the case routes", () => {
     const workHub = readFileSync(resolve(process.cwd(), "src/components/site/WorkContent.jsx"), "utf8");
-    const featuredCard = readFileSync(resolve(process.cwd(), "src/components/site/FeaturedCaseCard.jsx"), "utf8");
-    const englishRoute = resolve(process.cwd(), "src/app/(en)/work/relay/page.jsx");
-    const frenchRoute = resolve(process.cwd(), "src/app/fr/work/relay/page.jsx");
+    const home = readFileSync(resolve(process.cwd(), "src/components/site/HomeContent.jsx"), "utf8");
+    const englishRoute = resolve(process.cwd(), "src/app/(en)/work/taskroom/page.jsx");
+    const frenchRoute = resolve(process.cwd(), "src/app/fr/work/taskroom/page.jsx");
 
-    expect(workHub).toContain("FeaturedCaseCard");
-    expect(featuredCard).toContain('getPortfolioCase("relay", lang)');
-    expect(featuredCard).toContain("href={project.href}");
+    expect(workHub).not.toContain("/work/taskroom");
+    expect(home).not.toContain("/work/taskroom");
+    expect(home).toContain("showVisual={false}");
+    expect(workHub).not.toContain("Clearflow");
+    expect(workHub).not.toContain("First Value");
+    expect(home).not.toContain("Clearflow");
+    expect(home).not.toContain("First Value");
+    expect(workHub).not.toContain("/work/relay");
     expect(existsSync(englishRoute)).toBe(true);
     expect(existsSync(frenchRoute)).toBe(true);
-    expect(readFileSync(englishRoute, "utf8")).toContain('lang="en"');
+    expect(readFileSync(englishRoute, "utf8")).toContain("TaskroomCase");
     expect(readFileSync(frenchRoute, "utf8")).toContain('lang="fr"');
   });
 

@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CaseHero } from "@/components/site/CaseHero";
-import { CaseSection } from "@/components/site/CaseSection";
-import { CaseSnapshot } from "@/components/site/CaseSnapshot";
 import styles from "@/components/site/EditorialShell.module.css";
 import proofStyles from "./TaskroomCase.module.css";
+import { CaseGuide } from "./CaseGuide";
 
 const copy = {
   en: {
@@ -19,7 +17,7 @@ const copy = {
     researchLabel: "Desk research · 2023",
     researchStat: "8.8",
     researchDescription: "apps used on average by surveyed knowledge workers, according to Asana’s 2023 Anatomy of Work study.",
-    researchContext: "The survey covered 9,615 knowledge workers in six countries. It provides broad context for fragmented work, not validation of Taskroom or evidence about small creative teams specifically.",
+    researchContext: "The survey covered more than 9,615 knowledge workers in six countries. It provides broad context for fragmented work, not validation of Taskroom or evidence about small creative teams specifically.",
     researchSource: "Read Asana’s methodology and findings",
     metricsHeading: "What we can measure",
     metricsIntro: "Measurement plan · No participant or product results yet",
@@ -48,7 +46,7 @@ const copy = {
     researchLabel: "Recherche documentaire · 2023",
     researchStat: "8,8",
     researchDescription: "applications utilisées en moyenne par les travailleurs du savoir interrogés dans l’étude Anatomy of Work 2023 d’Asana.",
-    researchContext: "L’enquête a porté sur 9 615 travailleurs du savoir dans six pays. Elle apporte un contexte général sur la fragmentation du travail et ne valide pas Taskroom ni les besoins propres aux petites équipes créatives.",
+    researchContext: "L’enquête a porté sur plus de 9 615 travailleurs du savoir dans six pays. Elle apporte un contexte général sur la fragmentation du travail et ne valide pas Taskroom ni les besoins propres aux petites équipes créatives.",
     researchSource: "Consulter la méthode et les résultats d’Asana",
     metricsHeading: "Ce que nous pourrons mesurer",
     metricsIntro: "Plan de mesure · Aucun résultat utilisateur ou produit à ce jour",
@@ -98,17 +96,24 @@ export function TaskroomCase({ lang = "en" }) {
   const demo = fr ? "/work/taskroom/demo?from=fr" : "/work/taskroom/demo";
   return (
     <article className={styles.shell}>
-      <CaseHero backHref={fr ? "/fr/work" : "/work"} backLabel={c.back}
-        title="Taskroom" lead={c.lead} tags={[c.stage, "2026"]}
-        visual={<figure className={proofStyles.proof}><TaskroomImage alt={c.alt} /><figcaption>{c.caption}</figcaption></figure>}>
-        <div className={proofStyles.cta}><Link className={styles.projectLink} href={demo}>{c.cta} <span aria-hidden="true">↗</span></Link></div>
-        <CaseSnapshot items={c.facts} />
-      </CaseHero>
-      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-choices">
+      <CaseGuide lang={lang} />
+      <header id="case-overview" className={proofStyles.caseOpening}>
+        <div className={proofStyles.openingInner}>
+          <Link className={proofStyles.backLink} href={fr ? "/fr/work" : "/work"}>← {c.back}</Link>
+          <div className={proofStyles.openingGrid}>
+            <div><p className={proofStyles.openingLabel}>{c.stage} · 2026</p><h1>Taskroom</h1></div>
+            <div className={proofStyles.openingSummary}><p>{c.lead}</p><Link href={demo}>{c.cta} <span aria-hidden="true">↗</span></Link></div>
+          </div>
+          <dl className={proofStyles.openingFacts}>{c.facts.map(({ label, value }) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <figure className={proofStyles.openingImage}><TaskroomImage alt={c.alt} /><figcaption>{c.caption}</figcaption></figure>
+        </div>
+      </header>
+      <section className={`${proofStyles.solutionStory}`} aria-labelledby="taskroom-choices">
+        <div className={proofStyles.solutionInner}>
         <div className={proofStyles.storyIntro}>
-          <p className="eyebrow eyebrow--accent">{fr ? "Décisions d’interaction" : "Interaction decisions"}</p>
-          <h2 id="taskroom-choices">{fr ? "Un brief incomplet reste visible" : "An incomplete brief stays visible"}</h2>
-          <p>{fr
+          <div><p className={proofStyles.solutionLabel}>{fr ? "01 / La solution" : "01 / The solution"}</p>
+          <h2 id="taskroom-choices">{fr ? "Un brief incomplet reste visible" : "An incomplete brief stays visible"}</h2></div>
+          <p className={proofStyles.solutionLead}>{fr
             ? "Deux vues du prototype montrent comment une demande bloquée garde son contexte et la prochaine action."
             : "Two views from the prototype show how a blocked request keeps its context and next action visible."}</p>
         </div>
@@ -118,18 +123,41 @@ export function TaskroomCase({ lang = "en" }) {
             <figcaption><span>01 / {fr ? "Contexte" : "Context"}</span><p>{fr ? "L’état Needs details indique qui agit ensuite, tandis que l’historique conserve les décisions." : "Needs details identifies what happens next while the activity log preserves the request’s history."}</p></figcaption>
           </figure>
           <figure>
-            <Image src="/images/taskroom/request-clarification.png" width={768} height={690} sizes="(max-width: 760px) 90vw, 48vw" alt={fr ? "Formulaire permettant de préciser les informations manquantes." : "Form for selecting missing information and adding a clarification note."} />
+            <div className={proofStyles.clarificationCrop}><Image src="/images/taskroom/request-clarification.png" width={768} height={690} sizes="(max-width: 760px) 90vw, 48vw" alt={fr ? "Formulaire permettant de préciser les informations manquantes." : "Form for selecting missing information and adding a clarification note."} /></div>
             <figcaption><span>02 / {fr ? "Clarification" : "Clarification"}</span><p>{fr ? "Une liste ciblée et une note indiquent ce qu’il faut fournir avant de commencer." : "A focused checklist and a note specify what needs to be provided before work can begin."}</p></figcaption>
           </figure>
         </div>
         <p className={proofStyles.visualNote}>{fr ? "Captures du prototype · données fictives" : "Prototype captures · fictional sample data"}</p>
+        </div>
       </section>
-      {c.sections.map(([id, label, heading, body], index) => (
-        <CaseSection id={id} label={label} number={`0${index + 1} · ${label}`} heading={heading} key={id}>
-          <p className={proofStyles.body}>{body}</p>
-        </CaseSection>
-      ))}
-      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-tradeoff">
+      {c.sections.map(([id, label, heading, body]) => id === "context" ? (
+        <section id={id} data-label={label} className={proofStyles.problemStory} aria-labelledby="context-heading" key={id}>
+          <div className={proofStyles.problemInner}>
+            <p className={proofStyles.problemLabel}>{fr ? "02 / Le problème" : "02 / The problem"}</p>
+            <div className={proofStyles.problemGrid}>
+              <h2 id="context-heading">{heading}</h2>
+              <div className={proofStyles.problemCopy}>
+                <p>{body}</p>
+                <div className={proofStyles.problemInsight}><span>{fr ? "Question du prototype" : "Prototype question"}</span><p>{fr ? "Comment garder la demande, le responsable et la prochaine action au même endroit ?" : "How can the request, its owner and the next action stay together?"}</p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : id === "decision" ? (
+        <section id={id} data-label={label} className={proofStyles.decisionStory} aria-labelledby="decision-heading" key={id}>
+          <div className={proofStyles.decisionInner}>
+            <p className={proofStyles.problemLabel}>{fr ? "03 / La décision" : "03 / The decision"}</p>
+            <div className={proofStyles.decisionIntro}>
+              <h2 id="decision-heading">{heading}</h2>
+              <p>{body}</p>
+            </div>
+            <div className={proofStyles.decisionSequence} aria-label={fr ? "Parcours proposé" : "Proposed flow"}>
+              <div><span>01 / {fr ? "Saisir" : "Capture"}</span><p>{fr ? "Enregistrer la demande même si le responsable n’est pas encore connu." : "Record the request even when its owner is not yet known."}</p></div>
+              <div><span>02 / {fr ? "Clarifier" : "Clarify"}</span><p>{fr ? "Rendre visibles les informations manquantes et la prochaine action." : "Make missing details and the next action visible."}</p></div>
+              <div><span>03 / Ready</span><p>{fr ? "Désigner un responsable et résoudre les informations manquantes avant Ready." : "Assign an owner and resolve missing details before marking the brief Ready."}</p></div>
+            </div>
+            <p className={proofStyles.decisionNote}>{fr ? "Décision du prototype · à valider avec des utilisateurs" : "Prototype decision · awaiting participant validation"}</p>
+      <section className={proofStyles.tradeoffBlock} aria-labelledby="taskroom-tradeoff">
         <p className="eyebrow eyebrow--accent">{fr ? "Une décision de conception" : "A design decision"}</p>
         <h2 id="taskroom-tradeoff">{fr ? "Quand un brief est-il prêt ?" : "When is a brief ready?"}</h2>
         <p className={proofStyles.storyLead}>{fr
@@ -145,8 +173,26 @@ export function TaskroomCase({ lang = "en" }) {
         </div>
         <p className={proofStyles.visualNote}>{fr ? "Comparaison conceptuelle · à valider avec des utilisateurs" : "Concept comparison · awaiting participant validation"}</p>
       </section>
-      <section className={`container section ${proofStyles.designStory}`} aria-labelledby="taskroom-alternatives">
-        <p className="eyebrow eyebrow--accent">{fr ? "Périmètre et alternatives" : "Scope and alternatives"}</p>
+          </div>
+        </section>
+      ) : (
+        <section id={id} data-label={label} className={id === "workflow" ? proofStyles.workflowStory : proofStyles.validationStory} aria-labelledby={`${id}-heading`} key={id}>
+          <div className={proofStyles.decisionInner}>
+            <p className={proofStyles.problemLabel}>{id === "workflow" ? (fr ? "04 / Le parcours" : "04 / The workflow") : (fr ? "05 / Validation" : "05 / Validation")}</p>
+            <div className={proofStyles.decisionIntro}>
+              <h2 id={`${id}-heading`}>{heading}</h2>
+              <div className={proofStyles.narrativeCopy}><p>{body}</p>
+                {id === "workflow" && <Link href={demo}>{c.cta} <span aria-hidden="true">↗</span></Link>}
+                {id === "validation" && <p className={proofStyles.validationNote}>{fr ? "Tests utilisateurs prévus · aucun résultat à ce jour" : "Participant testing planned · no results yet"}</p>}
+              </div>
+            </div>
+            {id === "workflow" && <figure className={proofStyles.workflowImage}><TaskroomImage alt={c.alt} /><figcaption>{c.caption}</figcaption></figure>}
+          </div>
+        </section>
+      ))}
+      <section className={proofStyles.analysisStory} aria-labelledby="taskroom-alternatives">
+        <div className={proofStyles.decisionInner}>
+        <p className={proofStyles.problemLabel}>{fr ? "Périmètre et alternatives" : "Scope and alternatives"}</p>
         <h2 id="taskroom-alternatives">{fr ? "Pourquoi un outil de plus ?" : "Why another tool?"}</h2>
         <div className={proofStyles.comparison}>
           <div><h3>{fr ? "Outils existants" : "Existing tools"}</h3><p>{fr
@@ -160,24 +206,40 @@ export function TaskroomCase({ lang = "en" }) {
             ? "Est-ce assez utile pour justifier un outil distinct ? Une comparaison avec le processus réel des équipes reste nécessaire."
             : "Is that useful enough to justify a separate tool? A comparison with teams’ existing workflows is still needed."}</p></div>
         </div>
+        </div>
       </section>
-      <section className="container section case-section" aria-labelledby="taskroom-research">
-        <p className="eyebrow eyebrow--accent">{c.researchLabel}</p>
+      <section className={`${proofStyles.analysisStory} ${proofStyles.researchStory}`} aria-labelledby="taskroom-research">
+        <div className={proofStyles.decisionInner}>
+        <p className={proofStyles.problemLabel}>{c.researchLabel}</p>
         <h2 id="taskroom-research">{fr ? "Le contexte plus large" : "The broader context"}</h2>
         <div className={proofStyles.research}>
           <strong>{c.researchStat}</strong>
           <div><p>{c.researchDescription}</p><p>{c.researchContext}</p>
-            <a href="https://asana.com/press/releases/pr/asana-anatomy-of-work-global-index-2023-smart-collaboration-and-clear-goals-integral-to-creating-positive-business-opportunities/5957f2bd-2a85-4ea1-93ed-6c507b478954">{c.researchSource} ↗</a></div>
+            <a href="https://investors.asana.com/news-releases/news-release-details/asana-anatomy-work-global-index-2023-smart-collaboration-and">{c.researchSource} ↗</a></div>
+        </div>
         </div>
       </section>
-      <section className="container section case-section" aria-labelledby="taskroom-measurement">
-        <p className="eyebrow eyebrow--accent">05 · {fr ? "Mesure" : "Measurement"}</p>
+      <section className={proofStyles.analysisStory} aria-labelledby="taskroom-measurement">
+        <div className={proofStyles.decisionInner}>
+        <p className={proofStyles.problemLabel}>{fr ? "Mesure" : "Measurement"}</p>
         <h2 id="taskroom-measurement">{c.metricsHeading}</h2>
         <p className={proofStyles.metricsIntro}>{c.metricsIntro}</p>
         <dl className={proofStyles.metrics}>
           {c.metrics.map(([name, definition]) => <div key={name}><dt>{name}</dt><dd>{definition}</dd></div>)}
         </dl>
         <p className={proofStyles.body}>{c.measuresNote}</p>
+        </div>
+      </section>
+      <section className={proofStyles.caseClosing} aria-labelledby="taskroom-closing">
+        <div className={proofStyles.decisionInner}>
+          <p className={proofStyles.problemLabel}>{fr ? "Explorer le prototype" : "Explore the prototype"}</p>
+          <div className={proofStyles.closingGrid}>
+            <h2 id="taskroom-closing">{fr ? "À vous d’explorer." : "See the flow for yourself."}</h2>
+            <div><p>{fr ? "Parcourez le prototype avec ses données fictives, ou revenez aux projets." : "Explore the prototype with fictional sample data, or return to the projects."}</p>
+              <div className={proofStyles.closingLinks}><Link href={demo}>{c.cta} ↗</Link><Link href={fr ? "/fr/work" : "/work"}>{fr ? "Retour aux projets" : "Back to work"} ↗</Link></div>
+            </div>
+          </div>
+        </div>
       </section>
     </article>
   );

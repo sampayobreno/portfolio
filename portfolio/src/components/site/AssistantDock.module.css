@@ -249,7 +249,7 @@
 .chatBackdrop {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 110;
   background: rgba(0, 0, 0, 0.50);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -265,7 +265,7 @@
 .modalWrapper {
   position: fixed;
   inset: 0;
-  z-index: 95;
+  z-index: 120;
   display: flex;
   align-items: center;
   justify-content: center;

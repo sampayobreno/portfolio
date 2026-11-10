@@ -5,8 +5,6 @@ export default function sitemap() {
     { en: "/", fr: "/fr", priority: 1 },
     { en: "/work", fr: "/fr/work", priority: 0.9 },
     { en: "/about", fr: "/fr/about", priority: 0.8 },
-    { en: "/work/relay", fr: "/fr/work/relay", priority: 0.8 },
-    { en: "/work/taskroom", fr: "/fr/work/taskroom", priority: 0.8 },
   ];
 
   return hubs.flatMap(({ en, fr, priority }) => {

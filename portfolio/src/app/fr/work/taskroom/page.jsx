@@ -1,4 +1,5 @@
 import { TaskroomCase } from "@/components/taskroom/TaskroomCase";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Taskroom — De la demande au brief",
@@ -7,5 +8,6 @@ export const metadata = {
 };
 
 export default function FrenchTaskroomCasePage() {
+  if (process.env.ENABLE_DRAFT_CASES !== "true") notFound();
   return <TaskroomCase lang="fr" />;
 }
