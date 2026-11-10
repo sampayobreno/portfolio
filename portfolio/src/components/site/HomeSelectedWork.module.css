@@ -1,25 +1,17 @@
 .section { background: var(--c-paper); color: var(--c-ink); padding: var(--space-section) var(--gutter); }
-.emptySelection { max-width: var(--container); margin: 0 auto; padding: 2rem 0; border-top: 1px solid var(--c-rule-strong); border-bottom: 1px solid var(--c-rule); color: var(--c-ink-2); line-height: 1.6; }
-.heading, .layout { max-width: var(--container); margin: 0 auto; }
-.heading { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; padding-bottom: 3.5rem; }
-.eyebrow { font-size: var(--fs-label); letter-spacing: var(--label-tracking); font-weight: 600; color: var(--c-ink-2); margin: 0 0 2.25rem; }
-.heading h2 { font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
-.heading > p { max-width: 28rem; color: var(--c-ink-2); font-size: 1rem; line-height: 1.65; margin: 0 0 .3rem auto; }
-.layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
-.list { border-top: 1px solid var(--c-rule-strong); }
-.row { display: grid; grid-template-columns: 2.3rem 1fr auto; align-items: start; gap: .75rem; padding: 1.45rem 0; border-bottom: 1px solid var(--c-rule); color: var(--c-ink); text-decoration: none; }
-.row strong { display: block; font-size: clamp(1.35rem, 1.8vw, 1.75rem); font-weight: 500; letter-spacing: -.03em; }
-.row small { display: block; color: var(--c-ink-2); font-size: .86rem; line-height: 1.5; margin-top: .5rem; }
-.number { color: var(--c-ink-3); font-size: var(--fs-label); padding-top: .35rem; }
-.active { transition: padding .2s ease; }
-.active:hover { padding-left: .5rem; }
-.active:focus-visible, .preview:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
-.note { color: var(--c-ink-2); font-size: .8rem; line-height: 1.5; padding-top: 1rem; }
-.preview { display: block; color: inherit; text-decoration: none; }
-.previewFrame { overflow: hidden; border-radius: var(--radius-md); background: var(--c-surface-2); border: 1px solid var(--c-rule); }
-.previewFrame img { display: block; width: 100%; height: auto; transition: transform .45s ease; }
-.preview:hover img { transform: scale(1.015); }
-.previewCaption { display: flex; justify-content: space-between; gap: 1rem; color: var(--c-ink-2); font-size: .75rem; padding-top: 1rem; }
-.previewCaption span:last-child { color: var(--c-ink); letter-spacing: .06em; font-size: var(--fs-label); font-weight: 600; }
-@media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; padding-bottom: 2rem; } .heading > p { margin: 0; } .layout { display: flex; flex-direction: column; gap: 2rem; } .list, .preview { width: 100%; } .row { padding: 1.1rem 0; } .previewFrame { border-radius: var(--radius-sm); } }
-@media (prefers-reduced-motion: reduce) { .active, .previewFrame img { transition: none; } .preview:hover img { transform: none; } }
+.inner { max-width: var(--container); margin: 0 auto; }
+.heading { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-7); align-items: end; padding-bottom: var(--space-heading); }
+.eyebrow { margin: 0 0 var(--space-6); color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; line-height: 1.5; letter-spacing: var(--label-tracking); }
+.heading h2 { margin: 0; font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); }
+.heading > div:last-child { display: grid; justify-items: start; gap: var(--space-5); max-width: 27rem; margin: 0 0 .3rem auto; }
+.heading > div:last-child p { margin: 0; color: var(--c-ink-2); font-size: var(--fs-body); line-height: var(--body-leading); }
+.all { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; color: var(--c-ink); font-size: var(--fs-small); font-weight: 600; text-decoration: none; }
+.all:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-9) var(--space-7); }
+.grid > :first-child { grid-column: 1 / -1; }
+.note { margin: var(--space-8) 0 0; padding-top: var(--space-4); border-top: 1px solid var(--c-rule); color: var(--c-ink-3); font-size: var(--fs-label); line-height: 1.6; }
+@media (max-width: 760px) {
+  .heading { grid-template-columns: 1fr; gap: var(--space-5); }
+  .heading > div:last-child { margin: 0; }
+  .grid { grid-template-columns: 1fr; gap: var(--space-8); }
+}

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ProcessStory } from "@/components/site/ProcessStory";
 import { Words } from "@/components/site/Words";
 import { RollText } from "@/components/site/RollText";
+import { ProjectCard } from "@/components/site/ProjectCard";
+import { getExampleProjects } from "@/lib/exampleProjects";
 import { ContactForm } from "@/components/site/ContactForm";
 import { getT } from "@/lib/i18n";
 import { getPortfolioEditorial } from "@/lib/portfolioEditorial";
@@ -14,14 +16,15 @@ import process from "./HomeProcess.module.css";
 import about from "./HomeAbout.module.css";
 import contact from "./HomeContact.module.css";
 
-// Selected work stays hidden until real projects are chosen; the section markup is kept for later.
-const SHOW_SELECTED_WORK = false;
+// Selected work shows example projects (design direction) until real projects are chosen.
+const SHOW_SELECTED_WORK = true;
 
 export function HomeContent({ lang = "en" }) {
   const c = getPortfolioEditorial(lang);
   const t = getT(lang);
   const prefix = lang === "fr" ? "/fr" : "";
   const { links } = portfolioProfileFacts;
+  const featured = getExampleProjects(lang).slice(0, 3);
   const order = (n) => String(SHOW_SELECTED_WORK ? n : n - 1).padStart(2, "0");
 
   return (
@@ -61,11 +64,19 @@ export function HomeContent({ lang = "en" }) {
           02 · SELECTED WORK (Approved Product Stage + Structured Context)
           ==================================================================== */}
       {SHOW_SELECTED_WORK && <section className={work.section} id="work" data-label={c.labels.work} aria-labelledby="home-work-title">
-        <div className={work.heading}>
-          <div><p className={work.eyebrow}>01 / {lang === "fr" ? "PROJETS CHOISIS" : "SELECTED WORK"}</p><h2 id="home-work-title">{lang === "fr" ? <>Le travail,<br />en pratique.</> : <>Selected work,<br />in practice.</>}</h2></div>
-          <p>{lang === "fr" ? "La sélection de projets est en cours de préparation." : "The project selection is currently being prepared."}</p>
+        <div className={work.inner}>
+          <div className={work.heading}>
+            <div><p className={work.eyebrow} data-reveal><span className="eyebrow-num">{order(1)}</span> / {lang === "fr" ? "PROJETS CHOISIS" : "SELECTED WORK"}</p><h2 id="home-work-title" data-reveal="words"><Words lines={lang === "fr" ? ["Le travail,", "en pratique."] : ["Selected work,", "in practice."]} /></h2></div>
+            <div data-reveal style={{ "--d": 250 }}>
+              <p>{lang === "fr" ? "Des produits complexes rendus clairs : le problème, les décisions et ce qui a changé." : "Complex products made clear: the problem, the decisions and what changed."}</p>
+              <Link href={`${prefix}/work`} className={work.all}><RollText>{lang === "fr" ? "Tous les projets" : "All work"}</RollText><span aria-hidden="true">↗</span></Link>
+            </div>
+          </div>
+          <div className={work.grid}>
+            {featured.map((project, i) => <ProjectCard key={project.slug} project={project} index={i} lang={lang} size={i === 0 ? "large" : "default"} />)}
+          </div>
+          <p className={work.note}>{lang === "fr" ? "Projets d’exemple pour la direction de design — produits, rôles et résultats fictifs." : "Example projects for design direction — fictional products, roles and outcomes."}</p>
         </div>
-        <div className={work.emptySelection}><p>{lang === "fr" ? "Les projets choisis seront présentés ici." : "Selected projects will appear here."}</p></div>
       </section>}
 
       {/* ====================================================================

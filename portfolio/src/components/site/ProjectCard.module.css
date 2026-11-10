@@ -1,0 +1,39 @@
+/* Project card — Leo Marlowe reference: masked entrance, slow photo zoom and text roll on hover. */
+.card { display: grid; gap: var(--space-5); color: var(--c-ink); text-decoration: none; }
+.card:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 6px; border-radius: var(--radius-md); }
+
+.media { position: relative; }
+.badge { position: absolute; z-index: 2; top: var(--space-4); left: var(--space-4); padding: 5px 10px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--c-paper) 88%, transparent); backdrop-filter: blur(8px); color: var(--c-ink); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+
+.meta { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; gap: var(--space-4); align-items: start; padding-top: var(--space-4); border-top: 1px solid var(--c-rule-strong); }
+.number { padding-top: .45rem; color: var(--c-ink-3); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+.title { margin: 0; font: var(--display-weight) var(--fs-h3)/1.15 var(--font-display); letter-spacing: var(--subhead-tracking); }
+.headline { max-width: var(--measure); margin: var(--space-2) 0 0; color: var(--c-ink-2); font-size: var(--fs-body); line-height: 1.5; }
+.side { display: grid; justify-items: end; gap: var(--space-3); padding-top: .4rem; text-align: right; }
+.sector { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+.cta { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--fs-small); font-weight: 600; }
+.arrow { display: inline-block; transition: transform var(--dur-base) var(--ease-out); }
+
+.large .title { font-size: var(--fs-h2); line-height: var(--display-leading); letter-spacing: var(--display-tracking); }
+.large .media > div:first-child { aspect-ratio: 21 / 10; }
+/* Smaller cards: meta stacks under the text so the headline keeps a comfortable measure. */
+.card:not(.large) .meta { grid-template-columns: 2.5rem minmax(0, 1fr); }
+.card:not(.large) .side { grid-column: 2; display: flex; justify-content: space-between; align-items: center; padding-top: 0; text-align: left; }
+
+@media (hover: hover) {
+  .card:hover :global(img) { transform: scale(1.04); }
+  .card:hover .media div[aria-hidden="true"] { transform: translateY(-6px); }
+  .card:hover .arrow { transform: translate(2px, -2px); }
+}
+/* Beat the entrance mask's resting transform while hovered. */
+@media (hover: hover) { :global(.motion) .card:hover .media[data-reveal] :global(img) { transform: scale(1.04); } }
+
+@media (max-width: 760px) {
+  .large .media > div:first-child { aspect-ratio: 16 / 10; }
+  .meta, .card:not(.large) .meta { grid-template-columns: 2rem minmax(0, 1fr); }
+  .side { grid-column: 2; justify-items: start; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrow { transition: none; }
+  .card:hover :global(img), .card:hover .media div[aria-hidden="true"], .card:hover .arrow { transform: none !important; }
+}
