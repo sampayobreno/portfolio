@@ -48,7 +48,7 @@ export function CaseGuide({ sections, label, variant = "inline" }) {
         <div className={styles.guideTrack} aria-hidden="true"><span style={{ transform: `scaleY(${(active + 1) / sections.length})` }} /></div>
         {list}
       </nav>
-      <div className={styles.pillWrap} data-open={open || undefined}>
+      <div className={variant === "floating" ? `${styles.pillWrap} ${styles.pillWrapWide}` : styles.pillWrap} data-open={open || undefined}>
         {open && <div className={styles.pillPanel} id="case-guide-panel">{list}</div>}
         <button type="button" className={styles.pill} aria-expanded={open} aria-controls="case-guide-panel" aria-label={`${label}: ${current.label}`} onClick={() => setOpen((value) => !value)}>
           <span className={styles.pillCount}>{String(active + 1).padStart(2, "0")} / {count}</span>

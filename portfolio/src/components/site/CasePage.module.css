@@ -57,9 +57,9 @@
 
 /* Floating variant (About page): a slim index pinned to the left edge — numbers and progress;
    full names open in a glass panel on hover or keyboard focus. */
-.guideFloating { position: fixed; z-index: 40; top: 50%; left: clamp(8px, 1.2vw, 28px); transform: translateY(-50%); gap: var(--space-2); padding: var(--space-2) var(--space-1) var(--space-2) 0; }
+.guideFloating { position: fixed; z-index: 40; top: 50%; left: clamp(24px, 2.6vw, 48px); transform: translateY(-50%); gap: var(--space-2); padding: var(--space-2) var(--space-1) var(--space-2) 0; }
 .guideFloating .guideList a { min-height: 32px; gap: 0; padding: 0 6px; }
-@media (max-width: 999px) { .guideFloating { display: none; } }
+@media (max-width: 1199px) { .guideFloating { display: none; } }
 .guideFloating .guideList a { font-size: 0; }
 .guideFloating .guideList a span { font-size: var(--fs-label); }
 .guideFloating:hover, .guideFloating:focus-within { padding-right: var(--space-4); border-radius: var(--radius); background: color-mix(in srgb, var(--c-paper) 80%, transparent); backdrop-filter: blur(16px) saturate(1.5); box-shadow: var(--shadow-1); }
@@ -68,6 +68,18 @@
 /* Mobile TOC pill (hidden on desktop, where the side guide is visible). */
 .pillWrap { display: none; }
 
+.pillWrap { display: none; justify-items: center; gap: var(--space-2); position: fixed; z-index: 95; left: 50%; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 76px); width: min(calc(100vw - 32px), 360px); transform: translateX(-50%); }
+.pill { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: 8px 16px 10px; border: 1px solid color-mix(in srgb, var(--c-ink) 14%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--c-paper) 92%, transparent); box-shadow: var(--shadow-1); backdrop-filter: blur(16px); color: var(--c-ink); font: 500 var(--fs-small)/1.2 var(--font-sans); text-align: left; cursor: pointer; }
+.pill:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
+.pillCount { color: var(--c-accent); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+.pillLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pillProgress { grid-column: 1 / -1; height: 2px; border-radius: 2px; background: var(--c-rule); overflow: hidden; }
+.pillProgress span { display: block; height: 100%; background: var(--c-accent); transform-origin: left; transition: transform var(--dur-slow) var(--ease-out); }
+.pillPanel { width: 100%; padding: var(--space-2); border: 1px solid var(--c-rule); border-radius: var(--radius-lg); background: var(--c-paper); box-shadow: var(--shadow-2); animation: pillIn var(--dur-base) var(--ease-out); }
+.pillPanel .guideList a { min-height: 44px; }
+
+@media (max-width: 900px) { .pillWrap { display: grid; } }
+@media (max-width: 1199px) { .pillWrapWide { display: grid; } }
 @media (max-width: 900px) {
   .introGrid { grid-template-columns: 1fr; gap: var(--space-5); }
   .snapshot { grid-template-columns: 1fr 1fr; }
@@ -75,15 +87,6 @@
   .snapshot div:nth-child(n + 3) { border-top: 1px solid var(--c-rule); }
   .body { display: block; }
   .guide { display: none; }
-  .pillWrap { display: grid; justify-items: center; gap: var(--space-2); position: fixed; z-index: 95; left: 50%; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 76px); width: min(calc(100vw - 32px), 360px); transform: translateX(-50%); }
-  .pill { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: var(--space-3); width: 100%; min-height: 44px; padding: 8px 16px 10px; border: 1px solid color-mix(in srgb, var(--c-ink) 14%, transparent); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--c-paper) 92%, transparent); box-shadow: var(--shadow-1); backdrop-filter: blur(16px); color: var(--c-ink); font: 500 var(--fs-small)/1.2 var(--font-sans); text-align: left; cursor: pointer; }
-  .pill:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 3px; }
-  .pillCount { color: var(--c-accent); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
-  .pillLabel { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .pillProgress { grid-column: 1 / -1; height: 2px; border-radius: 2px; background: var(--c-rule); overflow: hidden; }
-  .pillProgress span { display: block; height: 100%; background: var(--c-accent); transform-origin: left; transition: transform var(--dur-slow) var(--ease-out); }
-  .pillPanel { width: 100%; padding: var(--space-2); border: 1px solid var(--c-rule); border-radius: var(--radius-lg); background: var(--c-paper); box-shadow: var(--shadow-2); animation: pillIn var(--dur-base) var(--ease-out); }
-  .pillPanel .guideList a { min-height: 44px; }
   .nextHead { flex-direction: column; align-items: start; }
 }
 @media (max-width: 560px) { .snapshot { grid-template-columns: 1fr; } .snapshot div { padding-left: 0 !important; border-left: 0 !important; } .snapshot div + div { border-top: 1px solid var(--c-rule); } }

@@ -115,6 +115,21 @@
   color-scheme: dark;
 }
 
+/* ── Paper study (10 Nov 2026): lighter, less yellow backgrounds for the light theme.
+   Compared live via data-paper on <html>; removed once one is chosen. */
+:root[data-paper="pedra"]:not([data-theme="dark"]) {
+  --c-paper: #f6f6f4; --c-surface: #eeeeeb; --c-surface-2: #e5e5e1; --c-hover: #ebebe8;
+  --c-rule: #dededa; --c-rule-strong: #c6c6c1; --c-field-border: #b1b1ab; --c-on-ink: #f6f6f4;
+}
+:root[data-paper="gelo"]:not([data-theme="dark"]) {
+  --c-paper: #f6f7f8; --c-surface: #eef0f2; --c-surface-2: #e4e7ea; --c-hover: #eaecee;
+  --c-rule: #dcdfe3; --c-rule-strong: #c3c7cc; --c-field-border: #adb2b8; --c-on-ink: #f6f7f8;
+}
+:root[data-paper="branco"]:not([data-theme="dark"]) {
+  --c-paper: #ffffff; --c-surface: #f5f5f5; --c-surface-2: #ececec; --c-hover: #f2f2f2;
+  --c-rule: #e4e4e4; --c-rule-strong: #cdcdcd; --c-field-border: #b5b5b5; --c-on-ink: #ffffff;
+}
+
 /* ── Legacy design-system bridge ────────────────────────────────────────────
    Older components (form, dock, menus, assistant, case pages) read the original
    design-system primitives. Re-pointing those primitives at palette A makes every
