@@ -1,44 +1,44 @@
-.section { --ink: #191a18; --stone: #555751; --muted: #555751; --pebble: #666861; --rule: #cfcfc8; --clay: #191a18; --clay-dark: #454740; --paper: #faf9f6; --on-accent: #faf9f6; background: #faf9f6; color: #191a18; padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 5vw, 5rem); }
-.inner { max-width: 1540px; margin: auto; }
+.section { --ink: var(--c-ink); --stone: var(--c-ink-2); --muted: var(--c-ink-2); --pebble: var(--c-ink-3); --rule: var(--c-rule-strong); --clay: var(--c-ink); --clay-dark: var(--c-ink-hover); --paper: var(--c-paper); --on-accent: var(--c-paper); background: var(--c-paper); color: var(--c-ink); padding: var(--space-section) var(--gutter); }
+.inner { max-width: var(--container); margin: auto; }
 .heading { display: grid; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 3rem; padding-bottom: clamp(3rem, 5vw, 5rem); }
-.eyebrow, .label { color: #555751; font-size: .7rem; font-weight: 600; line-height: 1.5; letter-spacing: .1em; text-transform: uppercase; }
+.eyebrow, .label { color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; line-height: 1.5; letter-spacing: var(--label-tracking); text-transform: uppercase; }
 .eyebrow { margin: 0 0 2.25rem; }
-.heading h2 { font: 500 clamp(2.5rem, 4.6vw, 5rem)/1.04 var(--font-sans), sans-serif; letter-spacing: -.045em; margin: 0; }
-.heading > p { max-width: 27rem; margin: 0 0 .3rem auto; color: #555751; font-size: 1rem; line-height: 1.65; }
-.grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2.5rem, 6vw, 6rem); border-top: 1px solid #cfcfc8; }
+.heading h2 { font: var(--display-weight) var(--fs-h2)/var(--display-leading) var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
+.heading > p { max-width: 27rem; margin: 0 0 .3rem auto; color: var(--c-ink-2); font-size: 1rem; line-height: 1.65; }
+.grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2.5rem, 6vw, 6rem); border-top: 1px solid var(--c-rule-strong); }
 .details { display: flex; flex-direction: column; gap: 2.5rem; padding: 2.5rem 0; }
 .label { display: block; margin-bottom: .8rem; }
-.email { display: inline-flex; align-items: center; gap: 1rem; font-size: clamp(1.2rem, 2vw, 1.8rem); letter-spacing: -.03em; color: #191a18; text-decoration: none; border-bottom: 1px solid #191a18; overflow-wrap: anywhere; }
-.links a { display: inline-block; color: #191a18; font-size: .9rem; margin: 0 1.4rem .75rem 0; text-decoration: none; }
-.details p { color: #555751; margin: 0; font-size: .95rem; line-height: 1.6; }
+.email { display: inline-flex; align-items: center; gap: 1rem; font-size: clamp(1.2rem, 2vw, 1.8rem); letter-spacing: -.03em; color: var(--c-ink); text-decoration: none; border-bottom: 1px solid var(--c-ink); overflow-wrap: anywhere; }
+.links a { display: inline-block; color: var(--c-ink); font-size: .9rem; margin: 0 1.4rem .75rem 0; text-decoration: none; }
+.details p { color: var(--c-ink-2); margin: 0; font-size: .95rem; line-height: 1.6; }
 .links a:hover, .email:hover { opacity: .65; }
-.links a:focus-visible, .email:focus-visible { outline: 3px solid #8b4a33; outline-offset: 4px; }
-.form { border-left: 1px solid #deded7; padding: 2.5rem 0 1rem clamp(2rem, 4vw, 4rem); }
-.formHead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid #deded7; margin-bottom: 1.5rem; }
-.formHead h3 { font: 500 clamp(1.3rem, 2vw, 1.7rem)/1.2 var(--font-sans), sans-serif; margin: 0; letter-spacing: -.03em; }
+.links a:focus-visible, .email:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 4px; }
+.form { border-left: 1px solid var(--c-rule); padding: 2.5rem 0 1rem clamp(2rem, 4vw, 4rem); }
+.formHead { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--c-rule); margin-bottom: 1.5rem; }
+.formHead h3 { font: var(--display-weight) clamp(1.3rem, 2vw, 1.7rem)/1.2 var(--font-display); margin: 0; letter-spacing: var(--subhead-tracking); }
 .form :global(.contact-form) { border: 0; padding: 0; }
 .form :global(.contact-form__grid) { gap: 1.2rem 1rem; }
 .form :global(.contact-field) { gap: .5rem; padding: 0; border: 0; }
 .form :global(.contact-field:focus-within) { box-shadow: none; padding: 0; }
-.form :global(.contact-field label) { font-family: var(--font-sans), sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: #383a35; }
+.form :global(.contact-field label) { font-family: var(--font-sans), sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--c-ink-2); }
 .form :global(.contact-field input),
 .form :global(.contact-field select),
-.form :global(.contact-field textarea) { box-sizing: border-box; min-height: 48px; padding: .75rem 1rem; border: 1px solid #b9bbb3; border-radius: 7px; background: #fff; color: #191a18; font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
+.form :global(.contact-field textarea) { box-sizing: border-box; min-height: 48px; padding: .75rem 1rem; border: 1px solid var(--c-field-border); border-radius: var(--radius-sm); background: var(--c-raised); color: var(--c-ink); font-size: 1rem; transition: border-color 160ms ease, box-shadow 160ms ease; }
 .form :global(.contact-field textarea) { min-height: 136px; resize: vertical; }
 .form :global(.contact-field input:hover),
 .form :global(.contact-field select:hover),
-.form :global(.contact-field textarea:hover) { border-color: #6d7068; }
+.form :global(.contact-field textarea:hover) { border-color: var(--c-ink-3); }
 .form :global(.contact-field input:focus),
 .form :global(.contact-field select:focus),
-.form :global(.contact-field textarea:focus) { border-color: #191a18; outline: 2px solid #191a18; outline-offset: 2px; box-shadow: none; }
+.form :global(.contact-field textarea:focus) { border-color: var(--c-ink); outline: 2px solid var(--c-focus); outline-offset: 2px; box-shadow: none; }
 .form :global(.contact-field input:focus-visible),
 .form :global(.contact-field select:focus-visible),
-.form :global(.contact-field textarea:focus-visible) { outline: 2px solid #191a18; outline-offset: 3px; }
+.form :global(.contact-field textarea:focus-visible) { outline: 2px solid var(--c-focus); outline-offset: 3px; }
 .form :global(.contact-field input::placeholder),
-.form :global(.contact-field textarea::placeholder) { color: #666861; opacity: 1; }
+.form :global(.contact-field textarea::placeholder) { color: var(--c-ink-3); opacity: 1; }
 .form :global(.contact-select select) { padding-right: 3rem; }
 .form :global(.contact-select > span) { right: 1rem; }
-.form :global(.contact-field__hint), .form :global(.contact-form__privacy) { color: #555751; }
-.form :global(.contact-form__submit) { border-radius: 999px; min-height: 48px; }
+.form :global(.contact-field__hint), .form :global(.contact-form__privacy) { color: var(--c-ink-2); }
+.form :global(.contact-form__submit) { border-radius: var(--radius-pill); min-height: 48px; }
 @media (prefers-reduced-motion: reduce) { .form :global(.contact-field input), .form :global(.contact-field select), .form :global(.contact-field textarea) { transition: none; } }
-@media (max-width: 760px) { .heading, .grid { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .details { padding: 1.75rem 0; gap: 1.75rem; } .form { border-left: 0; border-top: 1px solid #deded7; padding: 1.75rem 0 0; } }
+@media (max-width: 760px) { .heading, .grid { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .details { padding: 1.75rem 0; gap: 1.75rem; } .form { border-left: 0; border-top: 1px solid var(--c-rule); padding: 1.75rem 0 0; } }

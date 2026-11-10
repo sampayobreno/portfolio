@@ -30,18 +30,37 @@ function contrastRatio(foreground, background) {
 }
 
 describe("portfolio visual foundation", () => {
-  it("loads the original DM Sans and Cormorant families at the document boundary", () => {
+  it("loads the remodel Newsreader + Inter Tight pairing at the document boundary", () => {
     const fontsPath = pathFor("src/lib/fonts.js");
     expect(existsSync(fontsPath)).toBe(true);
 
     const loader = read("src/lib/fonts.js");
     const document = read("src/components/site/SiteDocument.jsx");
-    expect(loader).toContain("DM_Sans");
-    expect(loader).toContain("Cormorant_Garamond");
-    expect(loader).toContain("--font-dm-sans");
-    expect(loader).toContain("--font-cormorant");
-    expect(document).toContain("dmSans.variable");
-    expect(document).toContain("cormorant.variable");
+    const foundation = read("src/app/foundation.css");
+    expect(loader).toContain("Newsreader");
+    expect(loader).toContain("Inter_Tight");
+    expect(loader).toContain("--font-newsreader");
+    expect(loader).toContain("--font-inter-tight");
+    expect(document).toContain("fontVariables");
+    expect(document).toContain("foundation.css");
+    expect(foundation).toMatch(/--font-display:\s*var\(--font-newsreader\)/);
+    expect(foundation).toMatch(/--font-sans:\s*var\(--font-inter-tight\)/);
+  });
+
+  it("keeps remodel foundation text colours at WCAG AA in light and dark", () => {
+    const foundation = read("src/app/foundation.css");
+    for (const selector of [":root", ':root[data-theme="dark"]']) {
+      const block = cssBlock(foundation, selector);
+      const paper = cssVariable(block, "c-paper");
+      const surface = cssVariable(block, "c-surface");
+      for (const token of ["c-ink", "c-ink-2", "c-ink-3"]) {
+        const ink = cssVariable(block, token);
+        expect(contrastRatio(ink, paper), `${selector} ${token} on paper`).toBeGreaterThanOrEqual(4.5);
+        expect(contrastRatio(ink, surface), `${selector} ${token} on surface`).toBeGreaterThanOrEqual(4.5);
+      }
+      expect(contrastRatio(cssVariable(block, "c-on-ink"), cssVariable(block, "c-ink"))).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(cssVariable(block, "c-focus"), paper), `${selector} focus`).toBeGreaterThanOrEqual(3);
+    }
   });
 
   it("does not duplicate font loading through remote stylesheets", () => {

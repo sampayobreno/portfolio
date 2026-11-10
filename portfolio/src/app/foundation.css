@@ -1,0 +1,115 @@
+/* Remodel 2026 — foundation tokens.
+   One source for colour, type, spacing, radius and motion used by the new sections.
+   Type: Newsreader (display) + Inter Tight (text), chosen by Breno on 10 Nov 2026.
+   Colour atmosphere: warm editorial neutrals (Anthropic + meln direction). */
+
+:root {
+  /* Type families */
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter-tight), -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  /* Type scale — fluid, 360px → 1440px */
+  --fs-display: clamp(2.75rem, 1.7rem + 4.4vw, 5.5rem);
+  --fs-h2: clamp(2.375rem, 1.6rem + 3.3vw, 4.5rem);
+  --fs-h3: clamp(1.375rem, 1.15rem + 0.95vw, 1.875rem);
+  --fs-lead: clamp(1.25rem, 1.05rem + 0.85vw, 1.75rem);
+  --fs-body-lg: 1.125rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-label: 0.75rem;
+
+  --display-weight: 400;
+  --display-leading: 1.02;
+  --display-tracking: -0.03em;
+  --subhead-tracking: -0.015em;
+  --body-leading: 1.65;
+  --label-tracking: 0.08em;
+
+  /* Spacing — 4px base */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-section: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --gutter: clamp(1.25rem, 0.5rem + 4vw, 5rem);
+  --container: 1540px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 600ms;
+  --dur-reveal: 900ms;
+
+  /* Colour — light */
+  --c-paper: #f8f7f3;
+  --c-surface: #f0eee7;
+  --c-surface-2: #e8e5dc;
+  --c-raised: #ffffff;
+  --c-ink: #1b1a17;
+  --c-ink-hover: #3a3833;
+  --c-ink-2: #4d4b45;
+  --c-ink-3: #686660;
+  --c-rule: #dedbd2;
+  --c-rule-strong: #c6c2b7;
+  --c-field-border: #b4b0a5;
+  --c-hover: #e9e6dd;
+  --c-on-ink: #f8f7f3;
+  --c-accent: #b0532f;
+  --c-accent-soft: #f1e3d9;
+  --c-focus: #b0532f;
+  --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
+  --shadow-2: 0 14px 36px rgb(27 26 23 / 0.14);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --c-paper: #151513;
+  --c-surface: #1c1b19;
+  --c-surface-2: #24231f;
+  --c-raised: #22211e;
+  --c-ink: #efede6;
+  --c-ink-hover: #d6d3ca;
+  --c-ink-2: #bdb9af;
+  --c-ink-3: #959188;
+  --c-rule: #2e2d29;
+  --c-rule-strong: #43413b;
+  --c-field-border: #57554e;
+  --c-hover: #2a2925;
+  --c-on-ink: #151513;
+  --c-accent: #e3916b;
+  --c-accent-soft: #3a2a22;
+  --c-focus: #e3916b;
+  --shadow-1: 0 10px 36px rgb(0 0 0 / 0.35);
+  --shadow-2: 0 14px 36px rgb(0 0 0 / 0.45);
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--c-paper);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--c-ink);
+}
+
+::selection {
+  background: var(--c-accent-soft);
+  color: var(--c-ink);
+}

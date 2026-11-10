@@ -1,6 +1,7 @@
 import "../../../design-system/styles.css";
 import "../../app/globals.css";
 import "../../app/signature.css";
+import "../../app/foundation.css";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
@@ -13,7 +14,7 @@ import { ToTop } from "@/components/site/ToTop";
 import { AssistantDock } from "@/components/site/AssistantDock";
 import { Providers } from "@/context/AppContext";
 import { profile } from "@/lib/content";
-import { cormorant, dmSans } from "@/lib/fonts";
+import { fontVariables } from "@/lib/fonts";
 import { getPortfolioV2 } from "@/lib/portfolioV2";
 
 export function SiteDocument({ children, lang }) {
@@ -24,7 +25,7 @@ export function SiteDocument({ children, lang }) {
     <html
       lang={htmlLang}
       data-lang={lang}
-      className={`${dmSans.variable} ${cormorant.variable}`}
+      className={fontVariables}
       suppressHydrationWarning
     >
       {/* The two locale root layouts delegate their complete document shell here. */}
