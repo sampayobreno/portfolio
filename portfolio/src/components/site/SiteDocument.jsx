@@ -7,7 +7,6 @@ import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { CodeVeil } from "@/components/site/CodeVeil";
 import { LocaleMetadata } from "@/components/site/LocaleMetadata";
-import { ScrollProgress } from "@/components/site/ScrollProgress";
 import { SkipLink } from "@/components/site/SkipLink";
 import { SmoothScroll } from "@/components/site/SmoothScroll";
 import { ToTop } from "@/components/site/ToTop";
@@ -51,7 +50,6 @@ export function SiteDocument({ children, lang }) {
           <LocaleMetadata />
           <CodeVeil />
           <SmoothScroll />
-          <ScrollProgress />
           <SkipLink />
           <Header />
           <main id="main">{children}</main>

@@ -1,7 +1,7 @@
 /* Remodel 2026 — foundation tokens.
    One source for colour, type, spacing, radius and motion used by the new sections.
    Type: Newsreader (display) + Inter Tight (text), chosen by Breno on 10 Nov 2026.
-   Colour atmosphere: warm editorial neutrals (Anthropic + meln direction). */
+   Colour: palette A "Marfim & argila" (ivory paper, terracotta accent), chosen by Breno on 10 Nov 2026. */
 
 :root {
   /* Type families */
@@ -67,9 +67,9 @@
   --c-field-border: #b4b0a5;
   --c-hover: #e9e6dd;
   --c-on-ink: #f8f7f3;
-  --c-accent: #b0532f;
+  --c-accent: #a44a28;
   --c-accent-soft: #f1e3d9;
-  --c-focus: #b0532f;
+  --c-focus: #a44a28;
   --shadow-1: 0 10px 36px rgb(27 26 23 / 0.10);
   --shadow-2: 0 14px 36px rgb(27 26 23 / 0.14);
 
@@ -99,8 +99,11 @@
   color-scheme: dark;
 }
 
-html,
-body {
+/* Accent moments: section numbers and step kickers. */
+.eyebrow-num { color: var(--c-accent); }
+
+html:root,
+html:root body {
   background: var(--c-paper);
 }
 
@@ -113,3 +116,13 @@ body {
   background: var(--c-accent-soft);
   color: var(--c-ink);
 }
+
+/* Back-to-top button on foundation tokens */
+.to-top {
+  border-color: var(--c-rule-strong);
+  background: color-mix(in srgb, var(--c-paper) 90%, transparent);
+  color: var(--c-ink);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.to-top:hover { border-color: var(--c-ink); background: var(--c-paper); }
+.to-top:focus-visible { outline-color: var(--c-focus); }

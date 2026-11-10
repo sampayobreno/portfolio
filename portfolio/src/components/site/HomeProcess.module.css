@@ -19,3 +19,14 @@
 .mobileVisual { display: none; }
 @media (max-width: 760px) { .heading { grid-template-columns: 1fr; gap: 1.5rem; } .heading > p { margin: 0; } .story { display: block; } .visual { display: none; } .step { min-height: 0; padding: 1.5rem 0; } .mobileVisual { display: block; margin: 1.5rem 0 0; } .mobileVisual img { display: block; width: 100%; height: auto; border: 1px solid var(--c-rule); border-radius: var(--radius-sm); } .mobileVisual figcaption { color: var(--c-ink-2); font-size: .75rem; margin-top: .65rem; } }
 @media (prefers-reduced-motion: reduce) { .screen { transition: none; } }
+/* The heading is a <header>; keep the eyebrow rhythm against global header rules. */
+.heading .eyebrow { margin: 0 0 2.25rem; }
+/* Text-only story: editorial rows — number · kicker + title · description + tags. */
+.kicker, .tags { display: block; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; line-height: 1.5; letter-spacing: var(--label-tracking); text-transform: uppercase; }
+.kicker { margin-bottom: var(--space-3); color: var(--c-accent); }
+.tags { margin-top: var(--space-5); }
+.textOnly .step { grid-template-columns: 4rem 1fr; min-height: 0; padding: var(--space-7) 0; }
+.textOnly .step > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--space-6); align-items: start; }
+.textOnly .step h3 { font-size: var(--fs-h3); }
+.textOnly .step p { margin: 0; }
+@media (max-width: 760px) { .textOnly .step { grid-template-columns: 2rem 1fr; padding: var(--space-6) 0; } .textOnly .step > div { display: block; } .textOnly .step p { margin-top: var(--space-4); } }

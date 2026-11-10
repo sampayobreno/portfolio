@@ -59,6 +59,9 @@ describe("portfolio visual foundation", () => {
         expect(contrastRatio(ink, surface), `${selector} ${token} on surface`).toBeGreaterThanOrEqual(4.5);
       }
       expect(contrastRatio(cssVariable(block, "c-on-ink"), cssVariable(block, "c-ink"))).toBeGreaterThanOrEqual(4.5);
+      const accent = cssVariable(block, "c-accent");
+      expect(contrastRatio(accent, paper), `${selector} accent on paper`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(accent, surface), `${selector} accent on surface`).toBeGreaterThanOrEqual(4.5);
       expect(contrastRatio(cssVariable(block, "c-focus"), paper), `${selector} focus`).toBeGreaterThanOrEqual(3);
     }
   });

@@ -29,14 +29,14 @@
   background: rgba(255, 255, 255, 0.88);
   -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(105%);
   backdrop-filter: blur(28px) saturate(200%) brightness(105%);
-  border: 1px solid rgba(207, 92, 54, 0.30);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 30%, transparent);
   box-shadow:
     0 16px 40px rgba(28, 26, 24, 0.08),
     0 4px 12px rgba(28, 26, 24, 0.04),
-    0 0 0 1px rgba(207, 92, 54, 0.18),
-    0 0 12px rgba(207, 92, 54, 0.14),
+    0 0 0 1px color-mix(in srgb, var(--c-accent) 18%, transparent),
+    0 0 12px color-mix(in srgb, var(--c-accent) 14%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  color: #1c1a18;
+  color: var(--c-ink);
   animation: appleClayPulseLight 3s ease-in-out infinite;
 }
 
@@ -57,21 +57,21 @@
 /* Light Mode: Visibly pulsing borders in contrast color with Apple elegance */
 @keyframes appleClayPulseLight {
   0%, 100% {
-    border-color: rgba(207, 92, 54, 0.26);
+    border-color: color-mix(in srgb, var(--c-accent) 26%, transparent);
     box-shadow:
       0 16px 40px rgba(28, 26, 24, 0.08),
       0 4px 12px rgba(28, 26, 24, 0.04),
-      0 0 0 1px rgba(207, 92, 54, 0.18),
-      0 0 10px rgba(207, 92, 54, 0.12),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 18%, transparent),
+      0 0 10px color-mix(in srgb, var(--c-accent) 12%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.90);
   }
   50% {
-    border-color: rgba(207, 92, 54, 0.72);
+    border-color: color-mix(in srgb, var(--c-accent) 72%, transparent);
     box-shadow:
       0 18px 44px rgba(28, 26, 24, 0.11),
       0 5px 14px rgba(28, 26, 24, 0.05),
-      0 0 0 1px rgba(207, 92, 54, 0.45),
-      0 0 16px rgba(207, 92, 54, 0.28),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 45%, transparent),
+      0 0 16px color-mix(in srgb, var(--c-accent) 28%, transparent),
       inset 0 1px 0 #ffffff;
   }
 }
@@ -81,14 +81,14 @@
   background: rgba(22, 21, 20, 0.82);
   -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(102%);
   backdrop-filter: blur(28px) saturate(190%) brightness(102%);
-  border: 1px solid rgba(224, 109, 72, 0.34);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 34%, transparent);
   box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.45),
     0 4px 12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(224, 109, 72, 0.22),
-    0 0 14px rgba(224, 109, 72, 0.18),
+    0 0 0 1px color-mix(in srgb, var(--c-accent) 22%, transparent),
+    0 0 14px color-mix(in srgb, var(--c-accent) 18%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  color: #f4f3ee;
+  color: var(--c-ink);
   animation: appleClayPulseDark 3s ease-in-out infinite;
 }
 
@@ -104,21 +104,21 @@
 /* Dark Mode: Visibly pulsing borders in contrast color with Apple elegance */
 @keyframes appleClayPulseDark {
   0%, 100% {
-    border-color: rgba(224, 109, 72, 0.30);
+    border-color: color-mix(in srgb, var(--c-accent) 30%, transparent);
     box-shadow:
       0 16px 40px rgba(0, 0, 0, 0.45),
       0 4px 12px rgba(0, 0, 0, 0.25),
-      0 0 0 1px rgba(224, 109, 72, 0.20),
-      0 0 12px rgba(224, 109, 72, 0.15),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 20%, transparent),
+      0 0 12px color-mix(in srgb, var(--c-accent) 15%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
   50% {
-    border-color: rgba(224, 109, 72, 0.78);
+    border-color: color-mix(in srgb, var(--c-accent) 78%, transparent);
     box-shadow:
       0 20px 48px rgba(0, 0, 0, 0.52),
       0 5px 16px rgba(0, 0, 0, 0.28),
-      0 0 0 1px rgba(224, 109, 72, 0.50),
-      0 0 18px rgba(224, 109, 72, 0.32),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 50%, transparent),
+      0 0 18px color-mix(in srgb, var(--c-accent) 32%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.28);
   }
 }
@@ -126,40 +126,40 @@
 .dockPill:hover {
   animation-play-state: paused;
   transform: translateX(-50%) translateY(-2px);
-  border-color: rgba(207, 92, 54, 0.90);
+  border-color: color-mix(in srgb, var(--c-accent) 90%, transparent);
   box-shadow:
     0 22px 50px rgba(28, 26, 24, 0.14),
     0 6px 16px rgba(28, 26, 24, 0.08),
-    0 0 0 2px rgba(207, 92, 54, 0.55),
-    0 0 28px rgba(207, 92, 54, 0.42),
+    0 0 0 2px color-mix(in srgb, var(--c-accent) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--c-accent) 42%, transparent),
     inset 0 1px 0 #ffffff;
 }
 
 .dockPillDark:hover {
   animation-play-state: paused;
   transform: translateX(-50%) translateY(-2px);
-  border-color: rgba(224, 109, 72, 0.98);
+  border-color: color-mix(in srgb, var(--c-accent) 98%, transparent);
   box-shadow:
     0 22px 52px rgba(0, 0, 0, 0.60),
     0 6px 16px rgba(0, 0, 0, 0.35),
-    0 0 0 2px rgba(224, 109, 72, 0.65),
-    0 0 30px rgba(224, 109, 72, 0.50),
+    0 0 0 2px color-mix(in srgb, var(--c-accent) 65%, transparent),
+    0 0 30px color-mix(in srgb, var(--c-accent) 50%, transparent),
     inset 0 1px 0 rgba(255, 255, 255, 0.34);
 }
 
 .dockPill:focus-visible {
   outline: none;
-  border-color: rgba(207, 92, 54, 0.95);
+  border-color: color-mix(in srgb, var(--c-accent) 95%, transparent);
   box-shadow:
-    0 0 0 3px rgba(207, 92, 54, 0.32),
+    0 0 0 3px color-mix(in srgb, var(--c-accent) 32%, transparent),
     0 16px 40px rgba(28, 26, 24, 0.12);
 }
 
 .dockPillDark:focus-visible {
   outline: none;
-  border-color: rgba(224, 109, 72, 0.98);
+  border-color: color-mix(in srgb, var(--c-accent) 98%, transparent);
   box-shadow:
-    0 0 0 3px rgba(224, 109, 72, 0.35),
+    0 0 0 3px color-mix(in srgb, var(--c-accent) 35%, transparent),
     0 16px 40px rgba(0, 0, 0, 0.55);
 }
 
@@ -182,24 +182,24 @@
   width: 28px;
   height: 28px;
   border-radius: 9999px;
-  background: rgba(207, 92, 54, 0.12);
-  color: #cf5c36;
+  background: color-mix(in srgb, var(--c-accent) 12%, transparent);
+  color: var(--c-accent);
   flex-shrink: 0;
   transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background 200ms ease;
 }
 
 .dockPillDark .iconWrapper {
-  background: rgba(224, 109, 72, 0.18);
-  color: #e06d48;
+  background: color-mix(in srgb, var(--c-accent) 18%, transparent);
+  color: var(--c-accent);
 }
 
 .dockPill:hover .iconWrapper {
   transform: scale(1.08);
-  background: rgba(207, 92, 54, 0.20);
+  background: color-mix(in srgb, var(--c-accent) 20%, transparent);
 }
 
 .dockPillDark:hover .iconWrapper {
-  background: rgba(224, 109, 72, 0.28);
+  background: color-mix(in srgb, var(--c-accent) 28%, transparent);
 }
 
 .sparkleIcon {
@@ -242,7 +242,7 @@
 .dockPillDark .shortcutBadge {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.12);
-  color: #d5d4cc;
+  color: var(--c-ink-2);
 }
 
 /* ── MODAL BACKDROP ──────────────────────────────────────────────── */
@@ -291,7 +291,7 @@
   animation: modalPop 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   /* Default Light Glass */
-  background: rgba(255, 255, 255, 0.94);
+  background: color-mix(in srgb, var(--c-raised) 94%, transparent);
   -webkit-backdrop-filter: blur(36px) saturate(200%) brightness(104%);
   backdrop-filter: blur(36px) saturate(200%) brightness(104%);
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -299,7 +299,7 @@
     0 32px 80px rgba(28, 26, 24, 0.18),
     0 12px 28px rgba(28, 26, 24, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 1);
-  color: #1c1a18;
+  color: var(--c-ink);
 }
 
 @keyframes modalPop {
@@ -315,7 +315,7 @@
 
 /* Modal Dark Glass */
 .chatPanelDark {
-  background: rgba(20, 19, 18, 0.92);
+  background: color-mix(in srgb, var(--c-paper) 92%, transparent);
   -webkit-backdrop-filter: blur(36px) saturate(190%) brightness(108%);
   backdrop-filter: blur(36px) saturate(190%) brightness(108%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -323,7 +323,7 @@
     0 32px 80px rgba(0, 0, 0, 0.65),
     0 12px 32px rgba(0, 0, 0, 0.40),
     inset 0 1px 0 rgba(255, 255, 255, 0.20);
-  color: #f4f3ee;
+  color: var(--c-ink);
 }
 
 /* Mobile Sheet Grab Handle (hidden on desktop) */
@@ -356,11 +356,11 @@
   font-weight: 600;
   letter-spacing: -0.01em;
   margin: 0;
-  color: #1c1a18;
+  color: var(--c-ink);
 }
 
 .chatPanelDark .headerTitle {
-  color: #f4f3ee;
+  color: var(--c-ink);
 }
 
 .headerBadge {
@@ -369,12 +369,12 @@
   padding: 2px 8px;
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.05);
-  color: #55524e;
+  color: var(--c-ink-2);
 }
 
 .chatPanelDark .headerBadge {
   background: rgba(255, 255, 255, 0.10);
-  color: #d5d4cc;
+  color: var(--c-ink-2);
 }
 
 .headerActions {
@@ -392,7 +392,7 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 12px;
   font-weight: 500;
-  color: #55524e;
+  color: var(--c-ink-2);
   cursor: pointer;
   padding: 6px 12px;
   min-height: 32px;
@@ -403,7 +403,7 @@
 
 .newQuestionButton:hover {
   background: rgba(0, 0, 0, 0.08);
-  color: #1c1a18;
+  color: var(--c-ink);
 }
 
 .newQuestionButton:active {
@@ -413,18 +413,18 @@
 .chatPanelDark .newQuestionButton {
   background: rgba(255, 255, 255, 0.07);
   border-color: rgba(255, 255, 255, 0.12);
-  color: #d5d4cc;
+  color: var(--c-ink-2);
 }
 
 .chatPanelDark .newQuestionButton:hover {
   background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  color: var(--c-ink);
 }
 
 .closeButton {
   background: none;
   border: none;
-  color: #55524e;
+  color: var(--c-ink-2);
   cursor: pointer;
   width: 34px;
   height: 34px;
@@ -437,7 +437,7 @@
 }
 
 .closeButton:hover {
-  color: #1c1a18;
+  color: var(--c-ink);
   background: rgba(0, 0, 0, 0.05);
 }
 
@@ -446,11 +446,11 @@
 }
 
 .chatPanelDark .closeButton {
-  color: #b8b7af;
+  color: var(--c-ink-2);
 }
 
 .chatPanelDark .closeButton:hover {
-  color: #ffffff;
+  color: var(--c-ink);
   background: rgba(255, 255, 255, 0.10);
 }
 
@@ -469,7 +469,7 @@
   flex-direction: column;
   gap: 16px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(207, 92, 54, 0.40) transparent;
+  scrollbar-color: color-mix(in srgb, var(--c-accent) 40%, transparent) transparent;
 }
 
 /* Sleek Translucent Apple Scrollbar */
@@ -488,11 +488,11 @@
 }
 
 .panelBody::-webkit-scrollbar-thumb:hover {
-  background: rgba(207, 92, 54, 0.65);
+  background: color-mix(in srgb, var(--c-accent) 65%, transparent);
 }
 
 .chatPanelDark .panelBody {
-  scrollbar-color: rgba(224, 109, 72, 0.45) transparent;
+  scrollbar-color: color-mix(in srgb, var(--c-accent) 45%, transparent) transparent;
 }
 
 .chatPanelDark .panelBody::-webkit-scrollbar-thumb {
@@ -500,7 +500,7 @@
 }
 
 .chatPanelDark .panelBody::-webkit-scrollbar-thumb:hover {
-  background: rgba(224, 109, 72, 0.75);
+  background: color-mix(in srgb, var(--c-accent) 75%, transparent);
 }
 
 /* Empty State / Welcome */
@@ -522,24 +522,24 @@
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.05);
-  color: #1c1a18;
+  color: var(--c-ink);
 }
 
 .chatPanelDark .emptyStateIcon {
   background: rgba(255, 255, 255, 0.10);
-  color: #f4f3ee;
+  color: var(--c-ink);
 }
 
 .emptyStateText {
   font-size: 14px;
   line-height: 1.55;
   max-width: 440px;
-  color: #55524e;
+  color: var(--c-ink-2);
   margin: 0;
 }
 
 .chatPanelDark .emptyStateText {
-  color: #d5d4cc;
+  color: var(--c-ink-2);
 }
 
 /* Suggested chips */
@@ -555,13 +555,13 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #857f79;
+  color: var(--c-ink-3);
   text-align: center;
   margin: 0;
 }
 
 .chatPanelDark .suggestionsTitle {
-  color: #9f9e96;
+  color: var(--c-ink-3);
 }
 
 .chipsContainer {
@@ -574,7 +574,7 @@
 .chipButton {
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.09);
-  color: #1c1a18;
+  color: var(--c-ink);
   border-radius: 9999px;
   padding: 8px 14px;
   font-size: 13px;
@@ -607,13 +607,13 @@
 .chatPanelDark .chipButton {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.12);
-  color: #e2e0d8;
+  color: var(--c-ink-2);
 }
 
 .chatPanelDark .chipButton:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  color: var(--c-ink);
   transform: translateY(-1px);
 }
 
@@ -648,27 +648,27 @@
 }
 
 .userBubble {
-  background: #242522;
-  color: #ffffff;
+  background: var(--c-ink);
+  color: var(--c-on-ink);
   border-bottom-right-radius: 4px;
 }
 
 .chatPanelDark .userBubble {
-  background: #f4f3ee;
-  color: #161514;
+  background: var(--c-ink);
+  color: var(--c-on-ink);
 }
 
 .assistantBubble {
   background: rgba(0, 0, 0, 0.035);
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-bottom-left-radius: 4px;
-  color: #1c1a18;
+  color: var(--c-ink);
 }
 
 .chatPanelDark .assistantBubble {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.10);
-  color: #f4f3ee;
+  color: var(--c-ink);
 }
 
 .assistantBubble p {
@@ -692,12 +692,12 @@
   margin-left: 4px;
   vertical-align: -2px;
   border-radius: 1px;
-  background-color: #1c1a18;
+  background-color: var(--c-ink);
   animation: caretBlink 0.75s infinite ease-in-out;
 }
 
 .chatPanelDark .cursorCaret {
-  background-color: #f4f3ee;
+  background-color: var(--c-ink);
 }
 
 @keyframes caretBlink {
@@ -746,8 +746,8 @@
   text-decoration: none;
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.10);
-  background: #ffffff;
-  color: #1c1a18;
+  background: var(--c-raised);
+  color: var(--c-ink);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   transition: all 140ms cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
@@ -756,7 +756,7 @@
 
 .actionPill:hover {
   transform: translateY(-1px);
-  background: #f7f6f2;
+  background: var(--c-hover);
   border-color: rgba(0, 0, 0, 0.20);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
@@ -768,14 +768,14 @@
 .chatPanelDark .actionPill {
   background: rgba(255, 255, 255, 0.09);
   border-color: rgba(255, 255, 255, 0.16);
-  color: #f4f3ee;
+  color: var(--c-ink);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.20);
 }
 
 .chatPanelDark .actionPill:hover {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.26);
-  color: #ffffff;
+  color: var(--c-ink);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
@@ -807,11 +807,11 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #857f79;
+  color: var(--c-ink-3);
 }
 
 .chatPanelDark .followUpsHeader {
-  color: #9f9e96;
+  color: var(--c-ink-3);
 }
 
 .followUpsRow {
@@ -827,7 +827,7 @@
   padding: 6px 12px;
   font-size: 12.5px;
   font-weight: 500;
-  color: #3d3b37;
+  color: var(--c-ink-2);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -845,7 +845,7 @@
 .followUpChip:hover {
   background: rgba(0, 0, 0, 0.07);
   border-color: rgba(0, 0, 0, 0.16);
-  color: #1c1a18;
+  color: var(--c-ink);
   transform: translateY(-1px);
 }
 
@@ -856,13 +856,13 @@
 .chatPanelDark .followUpChip {
   background: rgba(255, 255, 255, 0.055);
   border-color: rgba(255, 255, 255, 0.11);
-  color: #d5d4cc;
+  color: var(--c-ink-2);
 }
 
 .chatPanelDark .followUpChip:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  color: var(--c-ink);
   transform: translateY(-1px);
 }
 
@@ -929,8 +929,8 @@
   padding: 0 18px;
   border-radius: 9999px;
   border: 1px solid rgba(0, 0, 0, 0.10);
-  background: #ffffff;
-  color: #1c1a18;
+  background: var(--c-raised);
+  color: var(--c-ink);
   font-size: 16px; /* Prevents auto-zoom on iOS Safari */
   outline: none;
   transition: all 140ms ease;
@@ -943,11 +943,11 @@
 .chatPanelDark .textInput {
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.32);
-  color: #ffffff;
+  color: var(--c-ink);
 }
 
 .chatPanelDark .textInput::placeholder {
-  color: rgba(244, 243, 238, 0.45);
+  color: color-mix(in srgb, var(--c-ink) 45%, transparent);
 }
 
 .textInput:focus {
@@ -965,8 +965,8 @@
   height: 44px;
   border-radius: 9999px;
   border: none;
-  background: #242522;
-  color: #ffffff;
+  background: var(--c-ink);
+  color: var(--c-on-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -977,8 +977,8 @@
 }
 
 .chatPanelDark .sendButton {
-  background: #f4f3ee;
-  color: #161514;
+  background: var(--c-ink);
+  color: var(--c-on-ink);
 }
 
 .sendButton:hover:not(:disabled) {
@@ -997,12 +997,12 @@
 .sourcesDisclaimer {
   margin: 8px 0 0 6px;
   font-size: 11px;
-  color: #857f79;
+  color: var(--c-ink-3);
   letter-spacing: -0.01em;
 }
 
 .chatPanelDark .sourcesDisclaimer {
-  color: #9f9e96;
+  color: var(--c-ink-3);
 }
 
 /* ── TABLET BREAKPOINT (641px - 1024px) ─────────────────────────── */
@@ -1028,7 +1028,7 @@
     gap: 8px;
     justify-content: center;
     border-radius: 9999px;
-    border: 1px solid rgba(207, 92, 54, 0.28);
+    border: 1px solid color-mix(in srgb, var(--c-accent) 28%, transparent);
     box-shadow:
       0 8px 20px rgba(28, 26, 24, 0.08),
       0 2px 6px rgba(28, 26, 24, 0.03),
@@ -1037,7 +1037,7 @@
   }
 
   .dockPillDark {
-    border-color: rgba(224, 109, 72, 0.32);
+    border-color: color-mix(in srgb, var(--c-accent) 32%, transparent);
     box-shadow:
       0 10px 24px rgba(0, 0, 0, 0.40),
       0 2px 6px rgba(0, 0, 0, 0.20),
@@ -1172,36 +1172,36 @@
 
 @keyframes appleClayPulseLightMobile {
   0%, 100% {
-    border-color: rgba(207, 92, 54, 0.24);
+    border-color: color-mix(in srgb, var(--c-accent) 24%, transparent);
     box-shadow:
       0 8px 20px rgba(28, 26, 24, 0.08),
       0 2px 6px rgba(28, 26, 24, 0.03),
       inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
   50% {
-    border-color: rgba(207, 92, 54, 0.58);
+    border-color: color-mix(in srgb, var(--c-accent) 58%, transparent);
     box-shadow:
       0 10px 24px rgba(28, 26, 24, 0.10),
-      0 0 0 1px rgba(207, 92, 54, 0.28),
-      0 0 10px rgba(207, 92, 54, 0.16),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 28%, transparent),
+      0 0 10px color-mix(in srgb, var(--c-accent) 16%, transparent),
       inset 0 1px 0 #ffffff;
   }
 }
 
 @keyframes appleClayPulseDarkMobile {
   0%, 100% {
-    border-color: rgba(224, 109, 72, 0.26);
+    border-color: color-mix(in srgb, var(--c-accent) 26%, transparent);
     box-shadow:
       0 10px 24px rgba(0, 0, 0, 0.40),
       0 2px 6px rgba(0, 0, 0, 0.20),
       inset 0 1px 0 rgba(255, 255, 255, 0.16);
   }
   50% {
-    border-color: rgba(224, 109, 72, 0.68);
+    border-color: color-mix(in srgb, var(--c-accent) 68%, transparent);
     box-shadow:
       0 12px 28px rgba(0, 0, 0, 0.48),
-      0 0 0 1px rgba(224, 109, 72, 0.32),
-      0 0 12px rgba(224, 109, 72, 0.18),
+      0 0 0 1px color-mix(in srgb, var(--c-accent) 32%, transparent),
+      0 0 12px color-mix(in srgb, var(--c-accent) 18%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.26);
   }
 }
