@@ -1,0 +1,53 @@
+/* The thread — strokes draw themselves per step; earlier stages fade back to pencil. */
+.figure { position: sticky; top: 6.5rem; display: grid; gap: var(--space-4); align-content: start; margin: 0; }
+.svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 11rem); overflow: visible; }
+.caption { display: flex; justify-content: space-between; color: var(--c-ink-2); font-size: var(--fs-label); font-weight: 600; letter-spacing: var(--label-tracking); }
+
+.stage { opacity: 0; transition: opacity 700ms var(--ease-out); }
+.pencil, .tick, .ink { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.pencil { stroke: var(--c-ink-2); stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1800ms var(--ease-in-out); }
+.tick { stroke: var(--c-ink-3); stroke-width: 1; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 700ms var(--ease-out) 1200ms; }
+.notes text { fill: var(--c-ink-2); font: italic 400 15px var(--font-display); opacity: 0; transition: opacity 600ms var(--ease-out) 1500ms; }
+
+.screen { fill: var(--c-raised); stroke: var(--c-ink); stroke-width: 1.6; }
+.ink { stroke: var(--c-ink); stroke-width: 1.4; }
+.dot { fill: var(--c-ink-3); }
+.line { fill: color-mix(in srgb, var(--c-ink) 14%, var(--c-raised)); }
+.button { fill: var(--c-accent); }
+.cursor { fill: var(--c-ink); stroke: var(--c-paper); stroke-width: 1; stroke-linejoin: round; }
+.ripple { fill: none; stroke: var(--c-accent); stroke-width: 1.5; opacity: 0; transform-origin: 342px 281px; }
+.prototype > * { opacity: 0; transform: translateY(6px); transition: opacity 600ms var(--ease-out), transform 800ms var(--ease-out); }
+
+/* The thread: one path, drawn further at each step. */
+.thread { fill: none; stroke: var(--c-accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: .93; transition: stroke-dashoffset 1800ms var(--ease-in-out); }
+.threadEnd { fill: var(--c-accent); animation: breathe 2.8s var(--ease-in-out) infinite; transform-origin: 118px 226px; }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+
+/* Step states — cumulative */
+.svg .understand { opacity: 1; }
+.svg .understand .pencil, .svg .understand .tick { stroke-dashoffset: 0; }
+.svg .understand .notes text { opacity: 1; }
+
+.svg[data-step="design"] .understand, .svg[data-step="prototype"] .understand { opacity: .32; }
+.svg[data-step="design"] .thread { stroke-dashoffset: .26; }
+.svg[data-step="design"] .design, .svg[data-step="prototype"] .design { opacity: 1; }
+.svg[data-step="design"] .design .pencil, .svg[data-step="prototype"] .design .pencil { stroke-dashoffset: 0; transition-delay: 900ms; }
+
+.svg[data-step="prototype"] .design { opacity: .25; }
+.svg[data-step="prototype"] .thread { stroke-dashoffset: 0; }
+.svg[data-step="prototype"] .prototype { opacity: 1; }
+.svg[data-step="prototype"] .prototype > * { opacity: 1; transform: none; transition-delay: 1000ms; }
+.svg[data-step="prototype"] .prototype .button { transition-delay: 1500ms; }
+.svg[data-step="prototype"] .prototype .cursor { transition-delay: 1900ms; }
+.svg[data-step="prototype"] .prototype .ripple { animation: click 1.6s var(--ease-out) 2.4s infinite; }
+@keyframes click { 0% { opacity: .7; transform: scale(.4); } 70%, 100% { opacity: 0; transform: scale(1.6); } }
+
+@media (max-width: 760px) {
+  .figure { top: 0; z-index: 2; height: auto; padding: var(--space-4) 0 var(--space-6); background: linear-gradient(to bottom, var(--c-paper) 82%, transparent); }
+  .svg { max-height: 36vh; }
+  .caption { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage, .pencil, .tick, .notes text, .prototype > *, .thread { transition: none !important; }
+  .threadEnd, .ripple { animation: none !important; }
+}

@@ -1,27 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styles from "./HomeProcess.module.css";
+import { ThreadStory } from "./ThreadStory";
 
 /*
- * "From complexity to clarity" — How I work. A sticky hand-drawn illustration follows the steps:
- * Understand → the tangle, Design → the hands untangling, Prototype → the woven grid.
+ * "From complexity to clarity" — How I work. "The thread" draws itself beside the steps:
+ * tangle → pulled into a sketch → inked into a finished screen (see ThreadStory).
  */
-
-// Hand-drawn thread illustration (style test, 10 Nov 2026): tangle → hands → weave. Each step
-// reveals its third of the drawing; the rest stays as a faint pencil hint of what comes next.
-function ThreadFigure({ active, caption }) {
-  return (
-    <figure className={styles.visual} aria-hidden="true">
-      <div className={styles.threadFrame} data-step={active}>
-        <div className={`illustration ${styles.threadGhost}`}><Image src="/images/illustrations/thread.webp" alt="" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 50vw" /></div>
-        <div className={`illustration ${styles.threadInk}`}><Image src="/images/illustrations/thread.webp" alt="" width={1536} height={1024} sizes="(max-width: 760px) 100vw, 50vw" /></div>
-      </div>
-      <figcaption><span>{caption}</span><span>0{active + 1} / 03</span></figcaption>
-    </figure>
-  );
-}
 
 export function ProcessStory({ lang, showVisual = true }) {
   const [active, setActive] = useState(0);
@@ -53,7 +39,7 @@ export function ProcessStory({ lang, showVisual = true }) {
 
   return (
     <div className={`${styles.story} ${showVisual ? styles.narrative : styles.textOnly}`}>
-      {showVisual && <ThreadFigure active={active} caption={content[active][0].toUpperCase()} />}
+      {showVisual && <ThreadStory active={active} caption={content[active][0].toUpperCase()} labels={french ? { people: "personnes", tasks: "tâches", constraints: "contraintes" } : { people: "people", tasks: "tasks", constraints: "constraints" }} />}
       <div className={styles.steps} ref={steps}>
         {content.map(([kicker, title, description, tags], i) => (
           <article className={`${styles.step} ${active === i ? styles.stepActive : ""}`} data-step={i} key={title} ref={(element) => { rows.current[i] = element; }}>

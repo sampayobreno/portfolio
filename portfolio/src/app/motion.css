@@ -67,16 +67,6 @@
 .motion [data-lines] { transition: --lp 1600ms var(--ease-out); transition-delay: calc(var(--ld, 120) * 1ms); }
 .motion [data-lines]:not(.is-revealed) { --lp: 0%; }
 
-/* Hand-drawn illustrations: drawn in left→right, then a gentle line "boil" (hand-made life). */
-.illustration { margin: 0; }
-.illustration img { display: block; width: 100%; height: auto; animation: boil 900ms steps(1) infinite; }
-@keyframes boil { 0% { filter: url(#boil-1); } 33% { filter: url(#boil-2); } 66% { filter: url(#boil-3); } }
-@keyframes boil-dark { 0% { filter: url(#boil-1) invert(1) hue-rotate(180deg); } 33% { filter: url(#boil-2) invert(1) hue-rotate(180deg); } 66% { filter: url(#boil-3) invert(1) hue-rotate(180deg); } }
-:root[data-theme="dark"] .illustration img { animation-name: boil-dark; filter: invert(1) hue-rotate(180deg); }
-.motion [data-reveal="draw"] { opacity: 1; transform: none; }
-.motion [data-reveal="draw"] img { clip-path: inset(0 100% 0 0); transition: clip-path 1800ms var(--ease-out); transition-delay: calc(var(--d, 0) * 1ms); }
-.motion [data-reveal="draw"].is-revealed img { clip-path: inset(0 0 0 0); }
-
 /* Images open behind a mask and settle from a slight zoom (cinematic entrance). */
 .motion [data-reveal="mask"] {
   opacity: 1;
@@ -120,8 +110,5 @@ a[href^="#"]:hover > span[aria-hidden="true"]:last-child { transform: translateY
   a:hover .roll__char > span, a:focus-visible .roll__char > span { transform: none; }
   .motion [data-reveal="mask"], .motion [data-reveal="mask"] img { clip-path: none !important; }
   .motion [data-lines] { --lp: 100% !important; transition: none !important; }
-  .illustration img { animation: none !important; }
-  :root[data-theme="dark"] .illustration img { filter: invert(1) hue-rotate(180deg); }
-  .motion [data-reveal="draw"] img { clip-path: none !important; }
   a:hover > span[aria-hidden="true"]:last-child { transform: none; }
 }
