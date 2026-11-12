@@ -23,14 +23,14 @@
     "simple-icons": "^16.23.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.63.0",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "eslint": "^9",
     "eslint-config-next": "^16.2.11",
     "jsdom": "^30.1.1",
-    "vitest": "^5.0.1"
+    "vitest": "^5.1.0"
   },
   "overrides": {
     "nanoid": "3.3.18",
